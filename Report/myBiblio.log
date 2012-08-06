@@ -1,0 +1,25 @@
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdftex 2011.12.7)  11 MAY 2012 01:53
+entering extended mode
+**C:/Users/Boris/Dropbox/p-CTM/Traffic*estimation/Report/myBiblio.bib
+("C:/Users/Boris/Dropbox/p-CTM/Traffic estimation/Report/myBiblio.bib" [1{C:/Pr
+ogramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Missing character: There is no ä in font cmr10!
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.288 @comment{jabref-meta: selector_
+                                     review:}
+? 
+! Emergency stop.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.288 @comment{jabref-meta: selector_
+                                     review:}
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

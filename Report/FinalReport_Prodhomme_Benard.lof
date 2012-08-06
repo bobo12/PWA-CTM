@@ -1,0 +1,45 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Common Fundamental Diagrams}}{7}
+\contentsline {figure}{\numberline {2}{\ignorespaces Speed of shock.\relax }}{9}
+\contentsline {figure}{\numberline {3}{\ignorespaces Flow chart describing the main algorithm\relax }}{17}
+\contentsline {figure}{\numberline {4}{\ignorespaces Analytical solution of the Riemann problem given by Eq.(50\hbox {}) and (51\hbox {})\relax }}{19}
+\contentsline {figure}{\numberline {5}{\ignorespaces Numerical results for the Riemann problem given by Eq.(50\hbox {}) and (51\hbox {})\relax }}{19}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{19}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{19}
+\contentsline {figure}{\numberline {6}{\ignorespaces Numerical error of the $\rho -$CTM model for the Riemann problem given by Eq.(50\hbox {}) and (51\hbox {})\relax }}{20}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{20}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{20}
+\contentsline {figure}{\numberline {7}{\ignorespaces Propagation of the initial condition Eq.(51\hbox {}) with Daganzo flow for $\rho _c=1$.\relax }}{21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{21}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{21}
+\contentsline {figure}{\numberline {8}{\ignorespaces Propagation of the initial condition Eq.(51\hbox {}) with Daganzo flow for $\rho _c=2$.\relax }}{21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{21}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{21}
+\contentsline {figure}{\numberline {9}{\ignorespaces Test EnKF, influence of the state noise : 1\%\relax }}{22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{22}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{22}
+\contentsline {figure}{\numberline {10}{\ignorespaces Test EnKF, influence of the state noise : 5\%\relax }}{22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{22}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{22}
+\contentsline {figure}{\numberline {11}{\ignorespaces Test EnKF, influence of the state noise : 10\%\relax }}{23}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{23}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{23}
+\contentsline {figure}{\numberline {12}{\ignorespaces Test EnKF modified, influence of the state noise : 1\%\relax }}{24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{24}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{24}
+\contentsline {figure}{\numberline {13}{\ignorespaces Test EnKF modified, influence of the state noise : 5\%\relax }}{24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{24}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{24}
+\contentsline {figure}{\numberline {14}{\ignorespaces Test EnKF modified, influence of the state noise : 10\%\relax }}{24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{24}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{24}
+\contentsline {figure}{\numberline {15}{\ignorespaces Test EnKF influence of the quantity of measurements : 10\% in t and x\relax }}{25}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {time-space plot}}}{25}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {3D plot}}}{25}
+\contentsline {figure}{\numberline {16}{\ignorespaces Data Validation Framework\relax }}{26}
+\contentsline {figure}{\numberline {17}{\ignorespaces Map of Bluetooth sensors in Highway I-880\relax }}{27}
+\contentsline {figure}{\numberline {18}{\ignorespaces Comparison of the output for two fundamental diagrams\relax }}{29}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Density output for Greenshields fundamental diagram}}}{29}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Density output for Daganzo fundamental diagram}}}{29}
+\contentsline {figure}{\numberline {19}{\ignorespaces Comparison of model output with Bluetooth output\relax }}{30}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Velocity output for Greenshields fundamental diagram}}}{30}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Velocity output for Bluetooth data}}}{30}

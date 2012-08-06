@@ -1,0 +1,201 @@
+\relax 
+\citation{Lighthill1955}
+\citation{Richards1956}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Literature review}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Traffic theory}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.1}Macroscopic model of traffic}{5}}
+\newlabel{eq:density}{{1}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.2}The LWR equation}{5}}
+\newlabel{normalLWR}{{2}{5}}
+\newlabel{eq:LWRmodel3}{{3}{5}}
+\citation{Greenshields1934}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.3}Fundamental diagram}{6}}
+\newlabel{FD}{{1.1.3}{6}}
+\newlabel{eq:greenshieldsVelocity}{{5}{6}}
+\newlabel{eq:greenshieldsFlux}{{6}{6}}
+\newlabel{eq:dnVelocity}{{7}{6}}
+\newlabel{eq:dnFlux}{{8}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Common Fundamental Diagrams}}{7}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:fundamentalDiagram}{{1}{7}}
+\citation{Lighthill1955}
+\citation{Whitham1999}
+\citation{Whitham1999}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Analytical solution of the LWR PDE}{8}}
+\newlabel{characteristics}{{1.2}{8}}
+\newlabel{eq:LWRmodelIntegral}{{9}{8}}
+\newlabel{eq:csCalculus}{{10}{8}}
+\newlabel{eq:speedShock}{{11}{8}}
+\citation{Garavello2006}
+\citation{Ansorge1990}
+\citation{Godunov1959}
+\newlabel{eq:shocksCondition}{{12}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Speed of shock.\relax }}{9}}
+\newlabel{fig:speedShock}{{2}{9}}
+\newlabel{eq:speedRelation}{{13}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}The Cell Transmission Model}{9}}
+\citation{Strub2006}
+\citation{LeVeque1992}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.1}Godunov Scheme}{10}}
+\newlabel{godunov}{{1.3.1}{10}}
+\newlabel{eq:rhoGodunov}{{14}{10}}
+\newlabel{eq:rhoGodunovFluxGeneral}{{15}{10}}
+\newlabel{eq:rhoGodunovleft}{{16}{10}}
+\newlabel{eq:rhoGodunovright}{{17}{10}}
+\newlabel{eq:ghostleft}{{18}{10}}
+\newlabel{eq:ghostright}{{19}{10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.2}CFL condition}{10}}
+\newlabel{cfl}{{1.3.2}{10}}
+\newlabel{eq:cfl}{{20}{10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.3}Our specific case}{10}}
+\newlabel{SpecificCase}{{1.3.3}{10}}
+\citation{Evensen2007}
+\citation{Work2010}
+\newlabel{eq:rhoGodunovFlux1}{{21}{11}}
+\newlabel{eq:sendingFlow1}{{22}{11}}
+\newlabel{eq:receivingFlow1}{{23}{11}}
+\newlabel{eq:rhoGodunovFlux2}{{24}{11}}
+\newlabel{eq:cfl_Gr}{{25}{11}}
+\newlabel{eq:cfl_D}{{26}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Density data assimilation}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.4.1}Linear case : Kalman filter}{11}}
+\newlabel{KF_lin}{{27}{11}}
+\citation{}
+\newlabel{KF_conditions}{{28}{12}}
+\newlabel{KF_lin_hyp}{{1.4.1}{12}}
+\newlabel{eq:kf2}{{30}{12}}
+\newlabel{ eq:kalmangain}{{33}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.4.2}Extended Kalman filter}{12}}
+\newlabel{Ext_Kal_v}{{1.4.2}{12}}
+\newlabel{eq:ekf1}{{34}{12}}
+\newlabel{eq:ekf2}{{35}{12}}
+\citation{Evensen2007}
+\newlabel{ eq:kalmangain}{{38}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.4.3}Ensemble Kalman filter}{13}}
+\newlabel{eq:enkf1}{{39}{13}}
+\newlabel{eq:enkf2}{{40}{13}}
+\newlabel{eq:enkf3}{{41}{13}}
+\newlabel{eq:enkf4}{{42}{13}}
+\newlabel{eq:enkf5}{{43}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Extension to networks}{14}}
+\newlabel{eq:rhoJunctionLP}{{44}{14}}
+\newlabel{eq:rhoUpperBound1}{{45}{14}}
+\newlabel{eq:rhoUpperBound2}{{46}{14}}
+\newlabel{eq:rhoUpdateBound1}{{47}{14}}
+\newlabel{eq:rhoUpdateBound2}{{48}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Implementation}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Density measurements}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Constructing the EnKF observation matrix}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Initialization}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Description of the main algorithm}{16}}
+\newlabel{cfl_var_cell}{{49}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Flow chart describing the main algorithm\relax }}{17}}
+\newlabel{main_algo}{{3}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Analytical Results}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Verification of the CTM script}{18}}
+\newlabel{verif_ctm}{{3.1}{18}}
+\newlabel{analytical}{{3.1}{18}}
+\@writefile{toc}{\contentsline {paragraph}{Problem description and analytical solution}{18}}
+\newlabel{analytical_pb}{{50}{18}}
+\newlabel{analytical_pb_bc_ic}{{51}{18}}
+\newlabel{analytical_pb_sol}{{52}{18}}
+\@writefile{toc}{\contentsline {paragraph}{Numerical solution}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Analytical solution of the Riemann problem given by Eq.(50\hbox {}) and (51\hbox {})\relax }}{19}}
+\newlabel{analytical_solution_plot}{{4}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Numerical results for the Riemann problem given by Eq.(50\hbox {}) and (51\hbox {})\relax }}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{19}}
+\newlabel{Numerical_Sol}{{5}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Numerical error of the $\rho -$CTM model for the Riemann problem given by Eq.(50\hbox {}) and (51\hbox {})\relax }}{20}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{20}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{20}}
+\newlabel{Numerical_err}{{6}{20}}
+\@writefile{toc}{\contentsline {paragraph}{Verification of the CTM for Daganzo flow:}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}EnKF-implementation verification}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Propagation of the initial condition Eq.(51\hbox {}) with Daganzo flow for $\rho _c=1$.\relax }}{21}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{21}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{21}}
+\newlabel{Daganzo_test1}{{7}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Propagation of the initial condition Eq.(51\hbox {}) with Daganzo flow for $\rho _c=2$.\relax }}{21}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{21}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{21}}
+\newlabel{Daganzo_test2}{{8}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Test EnKF, influence of the state noise : 1\%\relax }}{22}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{22}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{22}}
+\newlabel{influence_stateNoise1}{{9}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Test EnKF, influence of the state noise : 5\%\relax }}{22}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{22}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{22}}
+\newlabel{influence_stateNoise2}{{10}{22}}
+\@writefile{toc}{\contentsline {paragraph}{Influence of the state noise: }{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Test EnKF, influence of the state noise : 10\%\relax }}{23}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{23}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{23}}
+\newlabel{influence_stateNoise3}{{11}{23}}
+\@writefile{toc}{\contentsline {paragraph}{Modified Forecast}{23}}
+\newlabel{eq:enkf1_modif}{{53}{23}}
+\@writefile{toc}{\contentsline {paragraph}{Conclusion on the implementation of the EnKF}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Test EnKF modified, influence of the state noise : 1\%\relax }}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{24}}
+\newlabel{influence_stateNoise1bis}{{12}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Test EnKF modified, influence of the state noise : 5\%\relax }}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{24}}
+\newlabel{influence_stateNoise2bis}{{13}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Test EnKF modified, influence of the state noise : 10\%\relax }}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{24}}
+\newlabel{influence_stateNoise3bis}{{14}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Test EnKF influence of the quantity of measurements : 10\% in t and x\relax }}{25}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {time-space plot}}}{25}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {3D plot}}}{25}}
+\newlabel{influence_change_percent}{{15}{25}}
+\newlabel{sec:val}{{4}{25}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Bluetooth Validation and Empirical Results }{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Methodology}{25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Data Validation Framework\relax }}{26}}
+\newlabel{fig:dataValFrame}{{16}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Bluetooth data extraction}{26}}
+\newlabel{sec:datafeed}{{4.2.1}{26}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Data feed}{26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Map of Bluetooth sensors in Highway I-880\relax }}{27}}
+\newlabel{fig:btMap}{{17}{27}}
+\newlabel{sec:filter}{{4.2.2}{27}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Filter }{27}}
+\newlabel{sec:comparison}{{4.2.3}{27}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Travel time comparison}{27}}
+\newlabel{sec:btResults}{{4.3}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Results }{28}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Test on I880}{28}}
+\newlabel{fig:rhoGreenFD}{{18a}{29}}
+\newlabel{sub@fig:rhoGreenFD}{{(a)}{a}}
+\newlabel{fig:rhoDagFD}{{18b}{29}}
+\newlabel{sub@fig:rhoDagFD}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Comparison of the output for two fundamental diagrams\relax }}{29}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Density output for Greenshields fundamental diagram}}}{29}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Density output for Daganzo fundamental diagram}}}{29}}
+\newlabel{fig:comp2FD}{{18}{29}}
+\newlabel{fig:rhoGreenFD}{{19a}{30}}
+\newlabel{sub@fig:rhoGreenFD}{{(a)}{a}}
+\newlabel{fig:rhoDagFD}{{19b}{30}}
+\newlabel{sub@fig:rhoDagFD}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Comparison of model output with Bluetooth output\relax }}{30}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Velocity output for Greenshields fundamental diagram}}}{30}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Velocity output for Bluetooth data}}}{30}}
+\newlabel{fig:compModelBT}{{19}{30}}
+\bibdata{myBiblio}
+\bibcite{Ansorge1990}{1}
+\bibcite{Evensen2007}{2}
+\bibcite{Garavello2006}{3}
+\bibcite{Godunov1959}{4}
+\bibcite{Greenshields1934}{5}
+\bibcite{LeVeque1992}{6}
+\bibcite{Lighthill1955}{7}
+\bibcite{Richards1956}{8}
+\bibcite{Strub2006}{9}
+\bibcite{Whitham1999}{10}
+\bibcite{Work2010}{11}
+\bibstyle{plain}
+\@writefile{toc}{\contentsline {section}{References}{32}}

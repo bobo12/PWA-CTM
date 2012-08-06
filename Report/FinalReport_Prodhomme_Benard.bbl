@@ -1,0 +1,63 @@
+\begin{thebibliography}{10}
+
+\bibitem{Ansorge1990}
+R.~Ansorge.
+\newblock What does the entropy condition mean in traffic flow theory?
+\newblock {\em Transportation Research Part B: Methodological}, 1990.
+
+\bibitem{Evensen2007}
+G.~Evensen.
+\newblock {\em Data Assimilation: The Ensemble Kalman Filter ()}.
+\newblock Springer, 2007.
+
+\bibitem{Garavello2006}
+Mauro Garavello and Benedetto Piccoli.
+\newblock {\em Traffic Flow on Networks}.
+\newblock American Institute of Mathematical Sciences, 2006.
+
+\bibitem{Godunov1959}
+S.K. Godunov.
+\newblock A finite difference method for the numerical computation of
+  discontinuous solutions of the equations of fluid dynamics.
+\newblock 1959.
+
+\bibitem{Greenshields1934}
+B.~D. Greenshields.
+\newblock A study of traffic capacity.
+\newblock {\em Proceedings of the 14th annual meeting of the Highway Research
+  Board}, 1934.
+
+\bibitem{LeVeque1992}
+R.~J. LeVeque.
+\newblock {\em Numerical Methods for Conservation Laws}.
+\newblock Birkhuser Basel, 1992.
+
+\bibitem{Lighthill1955}
+M.~J. Lighthill and G.~B. Whitham.
+\newblock On kinematic waves. ii. a theory of traffic flow on long crowded
+  roads.
+\newblock {\em Proceedings of the Royal Society of London. Series A,
+  Mathematical and Physical Sciences}, pages 317--345, 1955.
+
+\bibitem{Richards1956}
+P.~I. Richards.
+\newblock Shock waves on the highway.
+\newblock {\em Operations Research}, 4:42--51, 1956.
+
+\bibitem{Strub2006}
+I.~S. Strub and A.~M. Bayen.
+\newblock Weak formulation of boundary conditions for scalar conservation laws:
+  an application to highway traffic modeling.
+\newblock {\em Int. J. Robust Nonlinear Control}, 2006.
+
+\bibitem{Whitham1999}
+G.~B. Whitham.
+\newblock {\em Linear and nonlinear waves}.
+\newblock Wiley-Interscience, 1999.
+
+\bibitem{Work2010}
+D.~B. Work, S.~Blandin, O.~Tossavainen, B.~Piccoli, and A.~M. Bayen.
+\newblock A traffic model for velocity data assimilation.
+\newblock {\em Applied Mathematics Research eXpress}, 2010.
+
+\end{thebibliography}
