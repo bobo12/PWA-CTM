@@ -1,0 +1,138 @@
+\begin{thebibliography}{10}
+
+\bibitem{Agyemang-Duah1991}
+K.~Agyemang-Duah and F.~Hall.
+\newblock Some issues regarding the numerical value of freeway capacity.
+\newblock {\em International Symposium on Highway Capacity}, 1991.
+
+\bibitem{Anderson2005}
+B.~D.~O. Anderson and J.~B. Moore.
+\newblock {\em Optimal Filtering}.
+\newblock Dover Publications, Inc., 2005.
+
+\bibitem{Cassidy1999}
+M.~Cassidy and R.~Bertini.
+\newblock Some traffic features at freeway bottlenecks.
+\newblock {\em Transportation Research}, 1999.
+
+\bibitem{Chen2005}
+C.~Chen, P.~Varaiya, and J.~Kwon.
+\newblock An empirical assessment of traffic operations.
+\newblock {\em International Symposium on Transportation and Traffic Theory},
+  2005.
+
+\bibitem{Chen2000}
+Rong Chen and Jun~S. Liu.
+\newblock Mixture kalman filters.
+\newblock {\em Royal Statistical Society}, 2000.
+
+\bibitem{Daganzo1994}
+C.~F. Daganzo.
+\newblock The cell transmission model: a dynamic representation of highway
+  traffic consistent with the hydrodynamic theory.
+\newblock {\em Transportation Research Part B 28, no. 4}, 1994.
+
+\bibitem{Daganzo1995}
+C.~F. Daganzo.
+\newblock The cell transmission model, part ii: network traffic.
+\newblock {\em Transportation Research Part B 29, no. 2}, 1995.
+
+\bibitem{Dervisoglu2008}
+G.~Dervisoglu, G.~Gomes, J.~Kwon, A.~Muralidharan, Pravin Varaiya, and
+  R.~Horowitz.
+\newblock Automatic calibration of the fundamental diagram and empirical
+  observations on capacity.
+\newblock {\em 88th Annual Meeting, January 2009, Transportation Research
+  Board}, 2008.
+
+\bibitem{Godlewski1996}
+Edwige Godlewski and Pierre-Arnaud Raviart.
+\newblock {\em Numerical approximation of hyperbolic systems of conservation
+  laws}.
+\newblock Applied Mathematical Sciences, 1996.
+
+\bibitem{Godunov1959}
+S.K. Godunov.
+\newblock A finite difference method for the numerical computation of
+  discontinuous solutions of the equations of fluid dynamics.
+\newblock 1959.
+
+\bibitem{Greenshields1934}
+B.~D. Greenshields.
+\newblock A study of traffic capacity.
+\newblock {\em Proceedings of the 14th annual meeting of the Highway Research
+  Board}, 1934.
+
+\bibitem{Hall1991}
+F.~Hall and K.~Agyemang-Duah.
+\newblock Freeway capacity drop and the definition of capacity.
+\newblock {\em Transportation Research Record}, 1991.
+
+\bibitem{Herrera2009}
+J.-C. Herrera, D.~B. Work, R.~Herring, J.~Ban, Q.~Jacobson, and A.~M. Bayen.
+\newblock Evaluation of traffic data obtained via gps-enabled mobile phones:
+  the mobile century experiment.
+\newblock {\em Transportation Research Part C}, 2009.
+
+\bibitem{Hoh2008}
+B.~Hoh, M.~Gruteser, R.~Herring, J.~Ban, D.~Work, J.-C. Herrera, A.~M. Bayen,
+  M.~Annavaram, and Q.~Jacobson.
+\newblock Virtual trip lines for distributed privacy-preserving traffic
+  monitoring.
+\newblock {\em 6th International Conference on Mobile Systems, Applications,
+  and Services}, 2008.
+
+\bibitem{Lebacque1996}
+J.~P. Lebacque.
+\newblock The godunov scheme and what it means for first order traffic flow
+  models.
+\newblock {\em 13th International Symposium on Transportation and Traffic
+  Theory}, 1996.
+
+\bibitem{LeVeque1992}
+R.~J. LeVeque.
+\newblock {\em Numerical Methods for Conservation Laws}.
+\newblock Birkhäuser Basel, 1992.
+
+\bibitem{Lighthill1955}
+M.~J. Lighthill and G.~B. Whitham.
+\newblock On kinematic waves. ii. a theory of traffic flow on long crowded
+  roads.
+\newblock {\em Proceedings of the Royal Society of London. Series A,
+  Mathematical and Physical Sciences}, pages 317--345, 1955.
+
+\bibitem{Munoz2003}
+Laura Munoz, Xiaotian Sun, Roberto Horowitz, and Luis Alvarez.
+\newblock Traffic density estimation with the cell transmission model.
+\newblock {\em Proceedings of the American Control Conference}, 2003.
+
+\bibitem{Richards1956}
+P.~I. Richards.
+\newblock Shock waves on the highway.
+\newblock {\em Operations Research}, 4:42--51, 1956.
+
+\bibitem{Strub2006}
+I.~S. Strub and A.~M. Bayen.
+\newblock Weak formulation of boundary conditions for scalar conservation laws:
+  an application to highway traffic modeling.
+\newblock {\em Int. J. Robust Nonlinear Control}, 2006.
+
+\bibitem{Work2008}
+D.~B. Work and A.~M. Bayen.
+\newblock Impacts of the mobile internet on transportation cyber-physical
+  systems: Traffic monitoring using smartphones.
+\newblock {\em National Workshop for Research on High-Confidence Transportation
+  Cyber-Physical Systems: Automotive, Aviation, \& Rail}, 2008.
+
+\bibitem{Work2008a}
+D.~B. Work, A.~M. Bayen, and Q.~Jacobson.
+\newblock Automotive cyber-physical systems in the context of human mobility.
+\newblock {\em National Workshop on High-Confidence Automotive Cyber-Physical
+  Systems}, 2008.
+
+\bibitem{Work2010}
+D.~B. Work, S.~Blandin, O.~Tossavainen, B.~Piccoli, and A.~M. Bayen.
+\newblock A traffic model for velocity data assimilation.
+\newblock {\em Applied Mathematics Research eXpress}, 2010.
+
+\end{thebibliography}

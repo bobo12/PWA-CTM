@@ -1,0 +1,30 @@
+\BOOKMARK [1][-]{section.1}{1 Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{2 Traffic flow modelling}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{2.1 The LWR Model}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{2.2 Numerical Discretization}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{3 A polyhedral piecewise affine model}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{3.1 Decomposition in different ''modes''}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{3.2 Polyhedral piecewise affine formulation}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{4 Extended Kalman filter}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{4.1 Mode detection}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{4.2 Kalman filter algorithm}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.3}{4.3 Implementation and complexity}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.4}{4.4 Analysis}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{5 Reduced Multiple Mode Kalman filter}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{5.1 Motivation and definitions}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{5.2 Neighbor modes search}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{5.3 Prior gaussian distribution}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.4}{5.4 Analysis}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{6 Conclusion and Future Work}{}% 18
+\BOOKMARK [1][-]{section.7}{7 Acknowledgement}{}% 19
+\BOOKMARK [1][-]{appendix.A}{A Polyhedral partition of modes}{}% 20
+\BOOKMARK [2][-]{subsection.A.1}{A.1 H-representation of a polyhedron}{appendix.A}% 21
+\BOOKMARK [2][-]{subsection.A.2}{A.2 Algorithm to find the minimal H-representation}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.3}{A.3 Proof of the exclusivity of all \(n+1\)-adjcacencies}{appendix.A}% 23
+\BOOKMARK [2][-]{subsection.A.4}{A.4 Number of modes and intractibility}{appendix.A}% 24
+\BOOKMARK [1][-]{appendix.B}{B The heterogeneous case}{}% 25
+\BOOKMARK [1][-]{appendix.C}{C Kalman filtering-DRAFT}{}% 26
+\BOOKMARK [1][-]{appendix.D}{D Implementation-DRAFT}{}% 27
+\BOOKMARK [2][-]{subsection.D.1}{D.1 Algorithm for the prediction step}{appendix.D}% 28
+\BOOKMARK [2][-]{subsection.D.2}{D.2 Accuracy}{appendix.D}% 29
+\BOOKMARK [2][-]{subsection.D.3}{D.3 Complexity}{appendix.D}% 30

@@ -1,0 +1,7359 @@
+#LyX file created by tex2lyx 2.0.4
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+%--------------------   start of the 'preamble'
+%
+\usepackage{fullpage}\usepackage{amsfonts}\usepackage{picinpar}\usepackage{array}\usepackage{multirow}\usepackage{hhline}\usepackage{tabularx}
+
+\usepackage{cite}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+\title{State estimation for polyhedral hybrid systems and applications to the Cell Transmission Model - DRAFT}
+\date{\today}
+\author{
+        %\large
+        \textsc{Jerome Thai}
+        \thanks{Corresponding Author, Department of Electrical Engineering and Computer Science, University of California, Berkeley, jerome.thai@berkeley.edu}
+}
+
+
+\end_preamble
+\use_default_options false
+\language english
+\language_package none
+\inputencoding latin1
+\fontencoding T1
+\font_roman lmodern
+\font_sans default
+\font_typewriter lmodern
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize 11
+\spacing single
+\use_hyperref 1
+\pdf_bookmarks 1
+\pdf_bookmarksnumbered 1
+\pdf_bookmarksopen 0
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks 0
+\pdf_pdfborder 1
+\pdf_colorlinks 0
+\pdf_backref section
+\pdf_pdfusetitle 1
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+maketitle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+
+abstract
+\end_layout
+
+\begin_layout Section
+
+Introduction
+\end_layout
+
+\begin_layout Standard
+
+Numerous traffic estimation techniques developed in the literature rely on density based traffic models such as the Lighthill-Whitham-Richards (LWR) partial differential equation (PDE) 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lighthill1955,Richards1956"
+
+\end_inset
+
+ and its discretization using the Godunov scheme 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lebacque1996,LeVeque1992,Strub2006"
+
+\end_inset
+
+ (also known as the Cell Transmission Model (CTM) 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Daganzo1994,Daganzo1995"
+
+\end_inset
+
+ in the transportation literature). These highway traffic monitoring systems rely on large amounts of data from different sources. These include 
+\shape italic
+inductive loop detectors
+\shape default
+ (ILD) used in the PeMS system 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Chen2005"
+
+\end_inset
+
+ and 
+\shape italic
+in-vehicle transponders
+\shape default
+ (IVTs) such as FasTrak. Recently, the available data on traffic has increased tremendously since the development of cellular phone based highway traffic monitoring. With the cellular phone communication infrastructure in place and privacy aware smartphone sensing technology in full expansion 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Hoh2008"
+
+\end_inset
+
+, a large volume of data from mobile devices is now available 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Herrera2009"
+
+\end_inset
+
+. Large scale Applications include traffic flow estimation to assimilate velocity measurements 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Work2008,Work2008a"
+
+\end_inset
+
+, which is a rapidly expanding field at the heart of mobile internet services. This points out on the necessity of powerful statistical filters and algorithms to efficiently assimilate the measurements.
+\end_layout
+
+\begin_layout Standard
+
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Work2008,Work2008a"
+
+\end_inset
+
+ the 
+\shape italic
+Ensemble Kalman Filter
+\shape default
+ is used to assimilate velocity measurements. In 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Munoz2003"
+
+\end_inset
+
+, a switching-mode model (SMM) has been derived from the CTM, which is a nonlinear discrete time dynamical system. This consists in switching among different sets of linear difference equations, defined as linear state-space model (SSM) or modes, combined with a hidden Markov model to describe the transitions from one mode to another. The Mixture Kalman filter algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Chen2000"
+
+\end_inset
+
+ is employed to assimilate data in a switching state-space model. In this paper, we show that for a Daganzo-Newell fundamental diagram, the Godunov scheme applied to the LWR model (described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Daganzo1995"
+
+\end_inset
+
+) is a piecewise affine (PWA) dynamic system, where each affine component is a linear mode. Contrary to the SMM, where an additional statistical model, namely the hidden Markov model, is introduced, we unravel the PWA character of the original CTM.
+\end_layout
+
+\begin_layout Section
+
+Traffic flow modelling
+\end_layout
+
+\begin_layout Subsection
+
+The LWR Model
+\end_layout
+
+\begin_layout Standard
+
+Lighthill and Whitham in 1955 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lighthill1955"
+
+\end_inset
+
+ introduce a macroscopic dynamic model of traffic based on conservation of cars (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LWRmodel1"
+
+\end_inset
+
+), using Greenshields' hypothesis 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Greenshields1934"
+
+\end_inset
+
+ of a static flow/density relationship (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LWRmodel2"
+
+\end_inset
+
+), known as the 
+\shape italic
+fundamental diagram
+\shape default
+. The model consists of the following two equations:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:LWRmodel1}
+\frac{\partial \rho(x,t)}{\partial t} + \frac{\partial q(x,t)}{\partial x} = 0
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:LWRmodel2}
+q(x,t) = Q(\rho(x,t))
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $\rho(x,t)$
+\end_inset
+
+ and 
+\begin_inset Formula $q(x,t)$
+\end_inset
+
+ denote the density and the flow of vehicles at location x and time t respectively, and 
+\begin_inset Formula $Q$
+\end_inset
+
+ is the flux function which is assumed to be a function of the density only.
+\end_layout
+
+\begin_layout Standard
+
+Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LWRmodel1"
+
+\end_inset
+
+) is the principle of conservation of mass, or in this case conservation of vehicles, from fluid dynamics. These equations can be written more compactly as:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:LWRmodel3}
+\frac{\partial \rho(x,t)}{\partial t} + Q'(\rho(x,t))\frac{\partial \rho(x,t)}{\partial x} = 0
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+This equation is commonly known as the 
+\shape italic
+Lighthill-Whitham-Richards
+\shape default
+, or LWR, model. Different fundamental diagrams have been suggested. Greenshields 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Greenshields1934"
+
+\end_inset
+
+ found that freeway speed and density could be reasonably well approximated by a straight line. The expression of the velocity and the flux are then:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:greenshieldsVelocity}
+v = V_{G}(\rho) = v_{f}(1-\frac{\rho}{\rho_{j}})
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:greenshieldsFlux}
+Q_{G}(\rho) = \rho V_{G}(\rho) = v_{f}(\rho-\frac{\rho^{2}}{\rho_{j}})
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+where 
+\begin_inset Formula $v_{f}$
+\end_inset
+
+ is the free flow (or maximum) velocity, and 
+\begin_inset Formula $\rho_{j}$
+\end_inset
+
+ is the jam (or maximum) density. In this case, the flow is a quadratic function of the density.
+\end_layout
+
+\begin_layout Standard
+
+Many researchers have later suggested alternative shapes that provide a better fit to the measured data. They all share the same characteristics 
+\series bold
+LWR1-6
+\series default
+:
+\end_layout
+
+\begin_layout Standard
+
+LWR1. Greenshields' hypothesis of a static flow/density relationship: 
+\begin_inset Formula $q = Q(\rho(x,t))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+LWR2. 
+\begin_inset Formula $Q(0)=Q(\rho_{j})$
+\end_inset
+
+=0
+\end_layout
+
+\begin_layout Standard
+
+LWR3. The continuous portions of 
+\begin_inset Formula $Q(\rho)$
+\end_inset
+
+ are concave.
+\end_layout
+
+\begin_layout Standard
+
+LWR4. 
+\begin_inset Formula $V(0) = v_{f}$
+\end_inset
+
+, and 
+\begin_inset Formula $V(\rho_{j}) = 0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+LWR5. A critical density 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+ can be defined where the maximum flow 
+\begin_inset Formula $q_{c}$
+\end_inset
+
+ is attained. Then, 
+\begin_inset Formula $Q(\rho)$
+\end_inset
+
+ is increasing for 
+\begin_inset Formula $\rho \leq \rho_{c}$
+\end_inset
+
+ and decrasing for 
+\begin_inset Formula $\rho > \rho_{c}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+LWR6. The critical density 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+ separates the fundamental diagram into two regimes: 
+\shape italic
+free flow
+\shape default
+ when 
+\begin_inset Formula $\rho \leq \rho_{c}$
+\end_inset
+
+ and 
+\shape italic
+congestion
+\shape default
+ when 
+\begin_inset Formula $\rho > \rho_{c}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename fundamentalDiagram2.pdf
+	width 12cm
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Standard
+
+Speed and flow relationships (fundamental diagrams) for Greenshields (a), Daganzo-Newell (b), and discontinuous (c).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fundamentalDiagram"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Many researchers have later suggested alternative shapes that provide a better fit to the measured data. For instance, the widely used Daganzo-Newell velocity function assumes a constant velocity in free-flow and a hyperbolic velocity in congestion as shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fundamentalDiagram"
+
+\end_inset
+
+: 
+\begin_inset Formula \begin{equation}\label{eq:dnVelocity}
+v = V_{DN}(\rho) = \begin{cases}
+v_{f} & \text{if } \rho \leq \rho_{c} \\
+-\omega_{f} \left( 1 - \frac{\rho_{j}}{\rho} \right) & \text{if } \rho > \rho_{c}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+and the corresponding flux function is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}\label{eq:dnFlux}
+Q_{DN}(\rho) = \rho V_{DN}(\rho) = \begin{cases}
+v_{f} \rho & \text{if } \rho \leq \rho_{c} \\
+-\omega_{f} \left( \rho - \rho_{j} \right) & \text{if } \rho > \rho_{c}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $\omega_{f}$
+\end_inset
+
+ is the backwards propagation wave speed.
+\end_layout
+
+\begin_layout Standard
+
+Measurements on the free-flow side are usually well represented by a straight line, whereas measurements in congestion tend to be more scattered. Some authors claim that there is a difference in the maximum measured flow 
+\begin_inset Formula $Q(\rho_{c})$
+\end_inset
+
+, depending on whether the freeway is in free-flow or congestion, and contend that a 
+\shape italic
+discontinuity
+\shape default
+ exists at 
+\begin_inset Formula $\rho=\rho_{c}$
+\end_inset
+
+ as in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fundamentalDiagram"
+
+\end_inset
+
+. This is described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Agyemang-Duah1991,Cassidy1999,Hall1991"
+
+\end_inset
+
+ as a 
+\shape italic
+capacity drop
+\shape default
+, on the order of 4-10% in peak flow, as the freeway transitions into congestion.
+\end_layout
+
+\begin_layout Subsection
+
+Numerical Discretization
+\end_layout
+
+\begin_layout Standard
+
+A good numerical method to solve the equations along roads is represented by the Godunov scheme, which is based on exact solutions to Riemann problems 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Godlewski1996,Godunov1959"
+
+\end_inset
+
+. This leads to the construction of a nonlinear discrete time dynamical system.
+\end_layout
+
+\begin_layout Standard
+
+The Godunov discretization scheme is applied on the LWR PDE, where the discrete time step 
+\begin_inset Formula $\Delta T$
+\end_inset
+
+ is indexed by 
+\begin_inset Formula $t$
+\end_inset
+
+, and the discrete space step is indexed by 
+\begin_inset Formula $i$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:rhoGodunov}
+\rho^{t+1}_{i} = \rho^{t}_{i} - \frac{\Delta T}{\Delta X}\left(G(\rho^{t}_{i},\rho^{t}_{i+1})-G(\rho^{t}_{i-1},\rho^{t}_{i})\right)
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+In order to ensure numerical stability, the time and space steps are coupled by the CFL condition 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "LeVeque1992"
+
+\end_inset
+
+: 
+\begin_inset Formula $c_{max}\frac{\Delta T}{\Delta X} \leq 1$
+\end_inset
+
+ where 
+\begin_inset Formula $c_{max}$
+\end_inset
+
+ denotes the maximal characteristic speed.
+\end_layout
+
+\begin_layout Standard
+
+For a family of flux functions 
+\begin_inset Formula $Q(\rho)$
+\end_inset
+
+ that share the same characteristics 
+\series bold
+LWR1-6
+\series default
+ listed above, the Godunov flux can be expressed as the minimum of the 
+\shape italic
+sending flow
+\shape default
+ from the upstream cell and the 
+\shape italic
+receiving flow
+\shape default
+ from the downstream cell through a boundary connecting two cells of a homogeneous road (i.e. the upstream and downstream cells have the same characteristics) 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotemark
+\end_layout
+
+\end_inset
+
+. The 
+\shape italic
+sending flow
+\shape default
+ 
+\begin_inset Formula $S(\rho)$
+\end_inset
+
+ is equal to the upstream flow if the upstream traffic is in free flow (
+\begin_inset Formula $\rho \leq \rho_{c}$
+\end_inset
+
+) or the capacity of the upstream section 
+\begin_inset Formula $q_{c}$
+\end_inset
+
+ if the upstream traffic is in congestion (
+\begin_inset Formula $\rho > \rho_{c}$
+\end_inset
+
+); on the other hand, the 
+\shape italic
+receiving flow
+\shape default
+ 
+\begin_inset Formula $R(\rho)$
+\end_inset
+
+ is equal to the capacity of the downstream section if the downstream traffic is in free flow or the downstream flow if the downstream traffic is in congestion. For this model, we note that for an heterogeneous segment (for instance due to a change in the number of lanes) a fundamental diagram with different parameters is defined at each cell 
+\begin_inset Formula $i$
+\end_inset
+
+, consequently we add a subscript: 
+\begin_inset Formula $Q_{i}(\rho)$
+\end_inset
+
+, 
+\begin_inset Formula $S_{i}(\rho)$
+\end_inset
+
+, 
+\begin_inset Formula $R_{i}(\rho)$
+\end_inset
+
+ and there is an implicit subscript for 
+\begin_inset Formula $G(\rho_{i},\rho_{i+1})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotetext{
+\end_layout
+
+\end_inset
+
+ There are various definitions of the Godunov flux 
+\begin_inset Formula $G(\rho_{1},\rho_{2})$
+\end_inset
+
+ in the literature, notably in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Garavello2006"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:rhoGodunovFluxGeneral}
+G(\rho_{1},\rho_{2}) = \begin{cases}
+\text{min}_{\rho \in [\rho_{1},\rho_{2}]} Q(\rho) & \text{if } \rho_{1} \leq \rho_{2}\\
+\text{max}_{\rho \in [\rho_{2},\rho_{1}]} Q(\rho) & \text{if } \rho_{2} \leq \rho_{1}
+\end{cases}
+\end{equation}
+\end_inset
+
+This assumes that a fundamental diagram is defined at each boundary between two cells, which differs from the CTM. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\begin_inset Formula \begin{equation} \label{eq:rhoGodunovFlux1}
+G(\rho_{1},\rho_{2}) = \text{min}(S_{1}(\rho_{1}),R_{2}(\rho_{2}))
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:sendingFlow1}
+S_{1}(\rho) = \begin{cases}
+Q_{1}(\rho) & \text{if } \rho \leq \rho_{c1} \\
+q_{c1} &  \text{if } \rho > \rho_{c1}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:receivingFlow1}
+R_{2}(\rho) = \begin{cases}
+q_{c2} & \text{if } \rho \leq \rho_{c2} \\
+Q_{2}(\rho) &  \text{if } \rho > \rho_{c2}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $\rho_{1}$
+\end_inset
+
+ is the density of the cell upstream and 
+\begin_inset Formula $\rho_{2}$
+\end_inset
+
+ is the density of the cell downstream. Then sending and receiving flows for the Daganzo-Newell fundamental diagram is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:sendingFlow2}
+S_{1}(\rho) = \begin{cases}
+v_{f1}\rho & \text{if } \rho \leq \rho_{c1} \\
+q_{c1} &  \text{if } \rho > \rho_{c1}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:receivingFlow2}
+R_{2}(\rho) = \begin{cases}
+q_{c2} & \text{if } \rho \leq \rho_{c2} \\
+-\omega_{f2} \left( \rho - \rho_{j2} \right) & \text{if } \rho > \rho_{c2}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename fundamentalDiagramSR.pdf
+	width 12cm
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Standard
+
+Sending and receiving flows for Greenshields (a), Daganzo-Newell (b), and discontinous (c) velocity functions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fundamentalDiagramSR"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+As shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fundamentalDiagramSR"
+
+\end_inset
+
+, the application of the Godunov scheme to the fundamental diagrams introduces intuitive concepts of 
+\shape italic
+supply
+\shape default
+ and 
+\shape italic
+demand
+\shape default
+ at the boundary connecting two cells. The upstream cell supplies the flow at the boundary up to capicity. We can note that in the discontinuous case, there is a drop in supply capacity when the upstream traffic is in congestion, as described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Agyemang-Duah1991,Cassidy1999,Hall1991"
+
+\end_inset
+
+. As a result, the flow through the boundary is smaller, even if the downstream cell can receive more flow. On the other hand, when the downstream traffic is congested, there is a decrease in demand from the downstream cell, limiting the flow through the boundary.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Important remark:
+\series default
+ For the rest of the paper, the widely-used 
+\shape italic
+Cell Transmission Model
+\shape default
+ (CTM) described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Daganzo1994"
+
+\end_inset
+
+ is chosen for our dynamic model and results are derived from it. We also suppose for simplicity and clarity that the segment of road we are modelling is homogeneous, i.e. the parameters of the fundamental diagram 
+\begin_inset Formula $\omega_{f}$
+\end_inset
+
+, 
+\begin_inset Formula $v_{f}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{j}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{c}$
+\end_inset
+
+ are constant along the cells of the discretized road. And they are also time invariant because they are only related to the geometry of the highway, independently of the current traffic on it. All the results derived in the rest of the paper still remain for an heterogeneous road, in particular the piecewise affine character of the model and the tractibility of the Kalman filter algorithm, but the number of modes and the complexity increase. For more details on the heterogeneous case, see Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CDFD"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram"
+
+\end_inset
+
+ shows the explicit values taken by 
+\begin_inset Formula $G(\rho_{1},\rho_{2})$
+\end_inset
+
+ for a partition of the space in different regions of the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+. We will denote by 
+\series bold
+W
+\series default
+, 
+\series bold
+L
+\series default
+, and 
+\series bold
+D
+\series default
+ the 
+\shape italic
+white region
+\shape default
+, 
+\shape italic
+light region
+\shape default
+, and 
+\shape italic
+dark region
+\shape default
+ of the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ respectively.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+G(\rho_{1},\rho_{2}) = \begin{cases}
+R(\rho_{2}) & \text{if } (\rho_{1},\rho_{2}) \in \textbf{W}\\
+q_{c} & \text{if } (\rho_{1},\rho_{2}) \in \textbf{L}\\
+S(\rho_{1}) & \text{if } (\rho_{1},\rho_{2}) \in \textbf{D}
+\end{cases}
+\label{eq:rhoGodunovFlux}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\textbf{W} & = \{(\rho_{1},\rho_{2}) \mid \rho_{2} > F(\rho_{1}) \text{ ,   } \rho_{2} > \rho_{c}\}\\
+\textbf{L} & = \{(\rho_{1},\rho_{2}) \mid \rho_{1} > \rho_{c} \text{ ,   } \rho_{2} \leq \rho_{c}\}\\
+\textbf{D} & = \{(\rho_{1},\rho_{2}) \mid \rho_{2} \leq F(\rho_{1}) \text{ ,   } \rho_{1} \leq \rho_{c}\}
+\end{array}
+\label{eq:regions}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where the boundary between the white and grey regions follows the 
+\begin_inset Formula $(\rho_{1},\rho_{2})=(\rho_{1},F(\rho_{1}))$
+\end_inset
+
+ trajectory with 
+\begin_inset Formula $F(\rho_{1})= \bar{R}^{-1}(\bar{S}(\rho_{1}))$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotemark
+\end_layout
+
+\end_inset
+
+ for 
+\begin_inset Formula $\rho_{1} \leq \rho_{c}$
+\end_inset
+
+. 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{R}$
+\end_inset
+
+ denote the restrictions of the sending and receiving flows to the sub-regions 
+\begin_inset Formula $[0,\rho_{c})$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho_{c},\rho_{j}]$
+\end_inset
+
+ respectively, which also correspond to the left and right parts (w.r.t. 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+) of the fundamental diagram, as shown in the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotetext{
+\end_layout
+
+\end_inset
+
+Here, we formulate the more general case for equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rhoGodunovFlux"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:regions"
+
+\end_inset
+
+ and we suppose that 
+\begin_inset Formula $\bar{R}$
+\end_inset
+
+ is a strictly monotonic function on 
+\begin_inset Formula $(\rho_{c},\rho_{j}]$
+\end_inset
+
+, hence invertible, and 
+\begin_inset Formula $\bar{R}^{-1}$
+\end_inset
+
+ denotes its inverse, which is the case for the Daganzo-Newell fundamental diagram.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename godunovDiagram.pdf
+	width 15cm
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Standard
+
+Values of 
+\begin_inset Formula $G(\rho_{1},\rho_{2})$
+\end_inset
+
+ in the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:godunovDiagram"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+When the velocity is the Daganzo-Newell function (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dnVelocity"
+
+\end_inset
+
+), the Godunov Flux becomes: 
+\begin_inset Formula \begin{equation} \label{eq:rhoGodunovFlux3}
+G_{DN}(\rho_{1},\rho_{2}) = \begin{cases}
+-\omega_{f} \left( \rho_{2} - \rho_{j} \right) & \text{if } (\rho_{1},\rho_{2}) \in \textbf{W}\\
+q_{c} & \text{if } (\rho_{1},\rho_{2}) \in \textbf{L}\\
+v_{f} \rho_{1} & \text{if } (\rho_{1},\rho_{2}) \in \textbf{D}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+and the boundary between 
+\series bold
+W
+\series default
+ and 
+\series bold
+D
+\series default
+ regions is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:boundary}
+(\rho_{1},\rho_{2})=(\rho_{1},-\frac{v_{f}}{\omega_{f}}\rho_{1}+\rho_{j})
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+And 
+\series bold
+W
+\series default
+, 
+\series bold
+L
+\series default
+, 
+\series bold
+D
+\series default
+ form a 
+\shape italic
+polyhedral partition
+\shape default
+ of the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\textbf{W} & = \{(\rho_{1},\rho_{2}) \mid \rho_{2} + \frac{v_{f}}{\omega_{f}}\rho_{1} > \rho_{j} \text{ ,   } \rho_{2} > \rho_{c}\}\\
+\textbf{L} & = \{(\rho_{1},\rho_{2}) \mid \rho_{1} > \rho_{c} \text{ ,   } \rho_{2} \leq \rho_{c}\}\\
+\textbf{D} & = \{(\rho_{1},\rho_{2}) \mid \rho_{2} + \frac{v_{f}}{\omega_{f}}\rho_{1} \leq \rho_{j} \text{ ,   } \rho_{1} \leq \rho_{c}\}\end{array}
+\label{eq:regions2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+A polyhedral piecewise affine model
+\end_layout
+
+\begin_layout Standard
+
+In the Godunov scheme (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rhoGodunov"
+
+\end_inset
+
+), the update of the density 
+\begin_inset Formula $\rho^{t+1}_{i}$
+\end_inset
+
+ at cell 
+\begin_inset Formula $i$
+\end_inset
+
+ depends on the triplet 
+\begin_inset Formula $(\rho^{t}_{i-1}, \rho^{t}_{i}, \rho^{t}_{i+1})$
+\end_inset
+
+. In this section, we will refer to this triplet as 
+\begin_inset Formula $(\rho_{-}, \rho, \rho_{+})$
+\end_inset
+
+, 
+\begin_inset Formula $\rho^{t+1}_{i}$
+\end_inset
+
+ as 
+\begin_inset Formula $\rho^{t+1}$
+\end_inset
+
+, and the fraction 
+\begin_inset Formula $\frac{\Delta T}{\Delta X}$
+\end_inset
+
+ as 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ to ease the notations. Then the Godunov scheme reads as:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:rhoGodunov2}
+\rho^{t+1} = f(\rho_{-},\rho,\rho_{+}) = \rho - \alpha\left(G(\rho,\rho_{+})-G(\rho_{-},\rho)\right)
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+Decomposition in different 
+\begin_inset Quotes erd
+\end_inset
+
+modes
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:decompositionModes"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho^{t+1}$
+\end_inset
+
+ depends on whether both pairs 
+\begin_inset Formula $(\rho_{-}, \rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho, \rho_{+})$
+\end_inset
+
+ are in 
+\series bold
+W
+\series default
+, 
+\series bold
+L
+\series default
+, or 
+\series bold
+D
+\series default
+ via 
+\begin_inset Formula $G(\rho_{-},\rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $G(\rho,\rho_{+})$
+\end_inset
+
+. So there are nine possible combinations at cell 
+\begin_inset Formula $i$
+\end_inset
+
+, which can be reduced to seven 
+\begin_inset Quotes erd
+\end_inset
+
+modes
+\begin_inset Quotes erd
+\end_inset
+
+ since the pairs 
+\begin_inset Formula $(\rho_{-}, \rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho, \rho_{+})$
+\end_inset
+
+ have 
+\begin_inset Formula $\rho$
+\end_inset
+
+ in common. Let's denote by 
+\begin_inset Formula $f(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{DN}(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+ the vector functions for 
+\begin_inset Formula $\rho^{n+1}$
+\end_inset
+
+ for the general and the Danganzo-Newell cases respectively, which variables are 
+\begin_inset Formula $\rho_{-}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho$
+\end_inset
+
+, and 
+\begin_inset Formula $\rho_{+}$
+\end_inset
+
+. Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:modes"
+
+\end_inset
+
+ list these seven possibilities, which can be easily derived from Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float table
+placement here
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% used for centering table
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="9" columns="6">
+<features tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% centered columns (4 columns)
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%inserts double horizontal lines
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+Mode 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(\rho_{-}, \rho)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(\rho, \rho_{+})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $f(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $f_{DN}(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+State 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[0.5ex]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% inserts table
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%heading
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% inserts single horizontal line
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(R_{+}(\rho_{+})-R(\rho))$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(1 - \alpha \omega_{f})\rho + \alpha \omega_{f} \rho_{+}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+congestion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex] 2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(q_{c}-R(\rho))$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(1 - \alpha \omega_{f})\rho + \alpha \omega_{f} \rho_{c}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+congestion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex] 3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(R_{+}(\rho_{+})-q_{c})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho + \alpha \omega_{f}\rho_{+} - \alpha \omega_{f}\rho_{c}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+congestion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex] 4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(S(\rho)-q_{c})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(1 - \alpha v_{f})\rho + \alpha v_{f} \rho_{c}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+free flow
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex] 5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(R_{+}(\rho_{+})-S_{-}(\rho_{-}))$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\alpha v_{f} \rho_{-} + \rho + \alpha \omega_{f} \rho_{+} - \alpha \omega_{f} \rho_{j}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+critical
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex] 6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(q_{c}-S_{-}(\rho_{-}))$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\alpha v_{f} \rho_{-} + \rho - \alpha v_{f} \rho_{c}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+free flow
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex] 7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\rho - \alpha(S(\rho)-S_{-}(\rho_{-}))$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\alpha v_{f} \rho_{-} + (1 - \alpha v_{f})\rho$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+free flow
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+[1ex]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% [1ex] adds vertical space
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%inserts single line
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "table:modes"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% is used to refer this table in the text
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+Different values of 
+\begin_inset Formula $\rho^{t+1} = f(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+ depending on the values of 
+\begin_inset Formula $G(\rho_{-},\rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $G(\rho,\rho_{+})$
+\end_inset
+
+ in the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+For instance, for the first mode, 
+\begin_inset Formula $(\rho_{-}, \rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho, \rho_{+})$
+\end_inset
+
+ are both in 
+\series bold
+W
+\series default
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram"
+
+\end_inset
+
+), thus 
+\begin_inset Formula $G(\rho_{-}, \rho) = R(\rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $G(\rho, \rho_{+}) = R_{+}(\rho_{+})$
+\end_inset
+
+, and then 
+\begin_inset Formula $\rho^{t+1} = f_{1}(\rho_{-},\rho,\rho_{+}) = \rho - \alpha(R_{+}(\rho_{+})-R(\rho))$
+\end_inset
+
+, where 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ is the first entry of 
+\begin_inset Formula $f$
+\end_inset
+
+. By extending this result to an entire link with discrete state space indexed by 
+\begin_inset Formula $i = 1,...,n$
+\end_inset
+
+, where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of space steps, we have a whole description of the space of 
+\begin_inset Quotes erd
+\end_inset
+
+modes
+\begin_inset Quotes erd
+\end_inset
+
+ along the link. Since there is a correlation between two consecutive indexes 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $i+1$
+\end_inset
+
+, the number of modes for the entire link reduces from 
+\begin_inset Formula $3^{n}$
+\end_inset
+
+ to an expression in the form of 
+\begin_inset Formula $a.\beta^{n} + b.\gamma^{n} + c.\delta^{n}$
+\end_inset
+
+ which lower and upper bounds are proved to be 
+\begin_inset Formula $3.2^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $3.(2.5)^{n}$
+\end_inset
+
+ respectively (for full details, see Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:modes"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+
+We define 
+\begin_inset Formula $J$
+\end_inset
+
+, the Jacobian matrix of 
+\begin_inset Formula $f$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}\label{eq:jacobian}
+J = \left(\frac{\partial f_{i}}{\partial \rho_{j}}\right)_{i,j}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+Where 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ is the ith entry of the vector function 
+\begin_inset Formula $f$
+\end_inset
+
+ defined in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:modes"
+
+\end_inset
+
+. It is useful to make explicit the Jacobian matrix 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+ of the vector function 
+\begin_inset Formula $f_{DN}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+, and the constant term 
+\begin_inset Formula $f_{0}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:jacobianDN}
+J_{DN} = \left( \begin{array}{ccc}
+0 & 1 - \alpha \omega_{f} & \alpha \omega_{f} \\
+0 & 1 - \alpha \omega_{f} & 0 \\
+0 & 1 & \alpha \omega_{f} \\
+0 &  1 - \alpha v_{f} & 0 \\
+\alpha v_{f} & 1 & \alpha \omega_{f} \\
+\alpha v_{f} & 1 & 0 \\
+\alpha v_{f} & 1 - \alpha v_{f} & 0
+\end{array} \right)
+\text{ ,   }
+f_{0} = \left( \begin{array}{c}
+0 \\
+\alpha \omega_{f} \rho_{c}\\
+-\alpha \omega_{f} \rho_{c}\\
+\alpha v_{f} \rho_{c}\\
+-\alpha \omega_{f} \rho_{j}\\
+-\alpha v_{f} \rho_{c}\\
+0
+\end{array} \right)
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Since 
+\begin_inset Formula $f_{DN}$
+\end_inset
+
+ is a 
+\shape italic
+linear function
+\shape default
+ of 
+\begin_inset Formula $(\rho_{-},\rho,\rho_{+})$
+\end_inset
+
+ as shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:modes"
+
+\end_inset
+
+, we can notice that 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+ is constant. More notably, the vector function 
+\begin_inset Formula $f_{DN}$
+\end_inset
+
+ can be rewritten as:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\rho^{t+1} = f_{DN}(\rho_{-},\rho,\rho_{+}) = J_{DN}\left( \begin{array}{c}
+\rho_{-}\\
+\rho\\
+\rho_{+}
+\end{array} \right)
++ f_{0}
+\label{eq:fDN}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+We will see in the next section that the decomposition in 
+\begin_inset Quotes erd
+\end_inset
+
+modes
+\begin_inset Quotes erd
+\end_inset
+
+ as shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:modes"
+
+\end_inset
+
+ leads to a piecewise affine formulation of the Godunov Scheme in the case of the Daganzo-Newell fundamental diagram.
+\end_layout
+
+\begin_layout Subsection
+
+Polyhedral piecewise affine formulation
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:formulation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Let's consider a link with discrete time step indexed by 
+\begin_inset Formula $t\geq 0$
+\end_inset
+
+ and discrete space step indexed by 
+\begin_inset Formula $i = 1,...,n$
+\end_inset
+
+, and let's denote 
+\begin_inset Formula $\boldsymbol\rho^{t} = (\rho^{t}_{0},\rho^{t}_{1},...,\rho^{t}_{n},\rho^{t}_{n+1})$
+\end_inset
+
+ a n+2 dimensional vector which describes the state of the link at time 
+\begin_inset Formula $t$
+\end_inset
+
+ in the space 
+\begin_inset Formula $\mathcal{S} = [0,\rho_{j}]^{n+2}$
+\end_inset
+
+. 
+\begin_inset Formula $\rho^{t}_{i}$
+\end_inset
+
+ is the density at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and cell 
+\begin_inset Formula $i$
+\end_inset
+
+. We can note that the ghost cells 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $n+1$
+\end_inset
+
+ are included in the state of the link.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Definition of the space of modes:
+\series default
+ Let's denote by 
+\begin_inset Formula $\mathcal{M}_{n}$
+\end_inset
+
+ the space of modes (
+\begin_inset Formula $\mathcal{M}_{n}\subset\{1,...,7\}^{n}$
+\end_inset
+
+). For 
+\begin_inset Formula $\boldsymbol m \in \mathcal{M}_{n}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol m$
+\end_inset
+
+ is a vector of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ for which the 
+\begin_inset Formula $i-th$
+\end_inset
+
+ entry 
+\begin_inset Formula $m_{i}\in\{1,...,7\}$
+\end_inset
+
+ is the mode at cell 
+\begin_inset Formula $i$
+\end_inset
+
+. Equivalently, each element of 
+\begin_inset Formula $\mathcal{M}_{n}$
+\end_inset
+
+ can be equivalently described as a sequence of regions in which the pair 
+\begin_inset Formula $(\rho_{i},\rho_{i+1})$
+\end_inset
+
+ is, for 
+\begin_inset Formula $i=0,...,n$
+\end_inset
+
+. Hence, for 
+\begin_inset Formula $\boldsymbol s \in \mathcal{M}_{n}\subset\{\text{w,l,d}\}^{n+1}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol s$
+\end_inset
+
+ is a vector of dimension 
+\begin_inset Formula $n+1$
+\end_inset
+
+ for which the 
+\begin_inset Formula $i-th$
+\end_inset
+
+ entry 
+\begin_inset Formula $s_{i}\in\{\text{w,l,d}\}$
+\end_inset
+
+ is the region of the pair 
+\begin_inset Formula $(\rho_{i},\rho_{i+1})$
+\end_inset
+
+, for 
+\begin_inset Formula $i=0,...,n$
+\end_inset
+
+. This second definition gives a description of the minimal partition of the space 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ in polyhedra.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula $\boldsymbol m^{t}\in\mathcal{M}_{n}$
+\end_inset
+
+ is the mode of the link at time 
+\begin_inset Formula $t$
+\end_inset
+
+, as defined in the previous section. At each time increment, the state of the link is updated through:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\boldsymbol\rho^{t+1} = F[\boldsymbol\rho^{t}]
+\label{eq:underlyingSystem1}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+with 
+\begin_inset Formula $F[.]$
+\end_inset
+
+ a n+2 dimensional function vector such that the ith entry 
+\begin_inset Formula $F_{i}[\boldsymbol\rho^{t}]$
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+F_{i}[\boldsymbol\rho^{t}] = \begin{cases}
+f_{m_{i}}(\rho^{t}_{i_{-},i,i_{+}}) + \alpha(q^{t+1}_{in,i}-q^{t+1}_{out,i}) & \text{for}\quad i=1,...,n\\
+u^{t+1} & \text{for}\quad i=0\\
+d^{t+1} & \text{for}\quad i=n+1
+\end{cases}
+\label{eq:underlyingSystem2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ denotes the ith entry of 
+\begin_inset Formula $\boldsymbol m^{t} \in\mathcal{M}_{n}$
+\end_inset
+
+, i.e. the mode of cell 
+\begin_inset Formula $i$
+\end_inset
+
+ at time step 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $u^{t+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $d^{t+1}$
+\end_inset
+
+ the boundary conditions upstream and downstream at time step 
+\begin_inset Formula $t+1$
+\end_inset
+
+, and 
+\begin_inset Formula $q^{t+1}_{in,i}$
+\end_inset
+
+ and 
+\begin_inset Formula $q^{t+1}_{out,i}$
+\end_inset
+
+ the on-ramp and off-ramp flows respectively at cell 
+\begin_inset Formula $i$
+\end_inset
+
+ and time step 
+\begin_inset Formula $t+1$
+\end_inset
+
+. 
+\begin_inset Formula $f_{m_{i}}(\rho^{t}_{i_{-},i,i_{+}})$
+\end_inset
+
+ is the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+-th entry of the function vector 
+\begin_inset Formula $f$
+\end_inset
+
+ evaluated in 
+\begin_inset Formula $(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$
+\end_inset
+
+. We note that 
+\begin_inset Formula $\rho^{t+1}_{0}=u^{t+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho^{t+1}_{n+1}=d^{t+1}$
+\end_inset
+
+, which means that the ghost cells are the boundary conditions of the CTM. For a Daganzo-Newell fundamental diagram the update operator of the dynamic system, namely 
+\begin_inset Formula $F_{DN}[.]$
+\end_inset
+
+, is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+F_{DN,i}[\boldsymbol\rho^{t}] =
+L_{m_{i}}.\left( \begin{array}{c}
+\rho^{t}_{i-1}\\
+\rho^{t}_{i}\\
+\rho^{t}_{i+1}
+\end{array} \right)
++ f_{0,m_{i}} + \alpha(q^{t+1}_{in,i}-q^{t+1}_{out,i}) \quad\text{for}\quad i=1,...,n
+\label{eq:underlyingSystemDN}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+Where 
+\begin_inset Formula $L_{m_{i}}$
+\end_inset
+
+ is the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+-th line of 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{0,m_{i}}$
+\end_inset
+
+ the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+-th entry of 
+\begin_inset Formula $f_{0}$
+\end_inset
+
+. With matrix notations:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\boldsymbol\rho^{t+1} = A_{\boldsymbol m} \boldsymbol\rho^{t} + b_{\boldsymbol m} + c_{t+1} \quad\text{if}\quad\boldsymbol\rho^{t}\in\textbf{P}_{\boldsymbol m}
+\label{eq:underlyingSystemDN2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+Where 
+\begin_inset Formula $A_{\boldsymbol m}$
+\end_inset
+
+ is a tridiagonal matrix of size 
+\begin_inset Formula $(n+2)\times(n+2)$
+\end_inset
+
+, such that the diagonal elements are 
+\begin_inset Formula $\{0, J_{m_{1},2},...,J_{m_{n},2},0\}$
+\end_inset
+
+, the lower diagonal elements are 
+\begin_inset Formula $\{J_{m_{1},1},J_{m_{2},1},...,J_{m_{n},1},0\}$
+\end_inset
+
+, and the upper diagonal elements are 
+\begin_inset Formula $\{0,J_{m_{1},3},J_{m_{2},3},...,J_{m_{n},3}\}$
+\end_inset
+
+ where 
+\begin_inset Formula $J$
+\end_inset
+
+ (or 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+) are defined in equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:jacobian"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:jacobianDN"
+
+\end_inset
+
+). Equivalently:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}\label{eq:matrixA}
+ A_{\boldsymbol m} =
+ \begin{pmatrix}
+0 & \cdots & 0 \\
+L_{m_{1}} & & \\
+& \ddots & \\
+& & L_{m_{n}}\\
+0 & \cdots & 0
+\end{pmatrix}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\begin_inset Formula $b_{\boldsymbol m}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{t+1}$
+\end_inset
+
+ are two vectors of dimension 
+\begin_inset Formula $(n+2)$
+\end_inset
+
+ with entries 
+\begin_inset Formula $\{0, f_{0,m_{1}}$
+\end_inset
+
+, ..., 
+\begin_inset Formula $f_{0,m_{n}}, 0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{u^{t+1}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha (q^{t+1}_{in,1}-q^{t+1}_{out,1})$
+\end_inset
+
+, ..., 
+\begin_inset Formula $\alpha(q^{t+1}_{in,n}-q^{t+1}_{out,n})$
+\end_inset
+
+, 
+\begin_inset Formula $d^{t+1}\}$
+\end_inset
+
+ repectively, and 
+\begin_inset Formula $\textbf{P}_{\boldsymbol m}$
+\end_inset
+
+ is the subset of space 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ where the mode is 
+\begin_inset Formula $\boldsymbol m$
+\end_inset
+
+. We provide now a description of the partition of the space into the polyhedra 
+\begin_inset Formula $\textbf{P}_{\boldsymbol m}$
+\end_inset
+
+ in which the mode is 
+\begin_inset Formula $\boldsymbol m$
+\end_inset
+
+. See appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:polytope"
+
+\end_inset
+
+ for details on polyhedra and their representation.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Polyhedral partition of the space:
+\series default
+ For a discretization into 
+\begin_inset Formula $n$
+\end_inset
+
+ cells, we chose to describe the ensemble of modes 
+\begin_inset Formula $\mathcal{M}_{n}$
+\end_inset
+
+ in sequences 
+\begin_inset Formula $\boldsymbol s \in \{w,l,d\}^{n+1}$
+\end_inset
+
+ and define 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}$
+\end_inset
+
+ the corresponding polyhedron for each sequence. Let's define 
+\begin_inset Formula $3^{n+1}$
+\end_inset
+
+ polyhedra 
+\begin_inset Formula $\textbf{W}_{i}, \textbf{L}_{i}, \textbf{D}_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=0,...,n$
+\end_inset
+
+ in the space 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\textbf{W}_{i} & = \{(\rho_{i},\rho_{i+1}) \mid \rho_{i+1} + \frac{v_{f}}{\omega_{f}}\rho_{i} > \rho_{j} \text{ ,   } \rho_{i+1} > \rho_{c}\}\\
+\textbf{L}_{i} & = \{(\rho_{i},\rho_{i+1}) \mid \rho_{i} > \rho_{c} \text{ ,   } \rho_{i+1} \leq \rho_{c}\}\\
+\textbf{D}_{i} & = \{(\rho_{i},\rho_{i+1}) \mid \rho_{i+1} + \frac{v_{f}}{\omega_{f}}\rho_{i} \leq \rho_{j} \text{ ,   } \rho_{i} \leq \rho_{c}\}
+\end{array}
+\label{eq:regions3}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+Each mode or possible sequence of regions 
+\begin_inset Formula $\boldsymbol s \in \mathcal{M}_{n}$
+\end_inset
+
+ is valid in a polyhedron 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}$
+\end_inset
+
+ that is the intersection of 
+\begin_inset Formula $n+1$
+\end_inset
+
+ polyhedra 
+\begin_inset Formula $\bigcap_{i=0}^{n} \textbf{Q}_{i}$
+\end_inset
+
+ where the polyhedron 
+\begin_inset Formula $\textbf{Q}_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula $\textbf{W}_{i}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}=w$
+\end_inset
+
+, 
+\begin_inset Formula $\textbf{L}_{i}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}=l$
+\end_inset
+
+, and 
+\begin_inset Formula $\textbf{D}_{i}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}=d$
+\end_inset
+
+. Moreover, for two different modes 
+\begin_inset Formula $\boldsymbol s$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol s'$
+\end_inset
+
+, and corresponding polyhedra 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}=\bigcap_{i=0}^{n} \textbf{Q}_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s'}=\bigcap_{i=0}^{n} \textbf{Q}'_{i}$
+\end_inset
+
+, we can find an index 
+\begin_inset Formula $i$
+\end_inset
+
+ for which 
+\begin_inset Formula $\textbf{Q}_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{Q}'_{i}$
+\end_inset
+
+ are disjoint. For instance, suppose without loss of generality that 
+\begin_inset Formula $\textbf{Q}_{i}=\textbf{W}_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{Q}'_{i}=\textbf{D}_{i}$
+\end_inset
+
+, and we know that 
+\begin_inset Formula $\textbf{W}_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{D}_{i}$
+\end_inset
+
+ are disjoint. Then in this case, the hyperplan 
+\begin_inset Formula $\{\boldsymbol \rho\mid\rho_{i+1} + \frac{v_{f}}{\omega_{f}}\rho_{i} = \rho_{j}\}$
+\end_inset
+
+ is a seperating hyperplan between 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s'}$
+\end_inset
+
+. Hence, 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s'}$
+\end_inset
+
+ are disjoint and the family 
+\begin_inset Formula $\{\textbf{P}_{\boldsymbol s}\}_{\boldsymbol s \in \mathcal{M}_{n}}$
+\end_inset
+
+ is a partition of 
+\begin_inset Formula $\mathcal{M}_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+
+Extended Kalman filter
+\end_layout
+
+\begin_layout Standard
+
+The Extended Kalman filter provides the state estimate 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t}$
+\end_inset
+
+ as a gaussian distribution with mean 
+\begin_inset Formula $\boldsymbol\mu^{t}$
+\end_inset
+
+ and covariance 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ given the sequence of observations 
+\begin_inset Formula $\boldsymbol z^{0:t}$
+\end_inset
+
+, and sequence of control parameters 
+\begin_inset Formula $c^{0:t}$
+\end_inset
+
+. We present here an algorithm for the implementation of the Extended Kalman filter to the Cell Transmission Model with 
+\begin_inset Formula $n$
+\end_inset
+
+ cells, which is a piecewise affine model we have seen earlier. Note that the state at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is 
+\begin_inset Formula $\boldsymbol\rho^{t} = (\rho^{t}_{0},\rho^{t}_{1},...,\rho^{t}_{n},\rho^{t}_{n+1})$
+\end_inset
+
+, a vector of dimension 
+\begin_inset Formula $n+2$
+\end_inset
+
+ that includes the two ghost cells 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $n+1$
+\end_inset
+
+ which are the boundary conditions. When the state is in mode 
+\begin_inset Formula $\boldsymbol m^{t}$
+\end_inset
+
+, this boils down to applying the coresponding Kalman filter with the update matrix 
+\begin_inset Formula $A_{\boldsymbol m}$
+\end_inset
+
+ defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:matrixA"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Mode detection
+\end_layout
+
+\begin_layout Standard
+
+We present here a simple procedure to detect the mode of the state 
+\begin_inset Formula $\boldsymbol\rho$
+\end_inset
+
+. It relies on the definition of polyhedra as a finite number of half-spaces (see Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:polytope"
+
+\end_inset
+
+). For a state 
+\begin_inset Formula $\boldsymbol\rho = (\rho_{0},\rho_{1},...,\rho_{n},\rho_{n+1})$
+\end_inset
+
+, a n+2 dimensional vector which describes the state of the link in the space 
+\begin_inset Formula $\mathcal{S} = [0,\rho_{j}]^{n+2}$
+\end_inset
+
+, we present an algorithm that detects the mode of the state 
+\begin_inset Formula $\boldsymbol m$
+\end_inset
+
+ (or 
+\begin_inset Formula $\boldsymbol s$
+\end_inset
+
+) and provides a minimal H-representation of the polyhedron 
+\begin_inset Formula $P_{\boldsymbol m}$
+\end_inset
+
+ (or 
+\begin_inset Formula $P_{\boldsymbol s}$
+\end_inset
+
+). We first introduce the following indicator functions:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{l}
+\alpha_{i}(\boldsymbol\rho)=1_{\{\rho_{i+1} + \frac{v_{f}}{\omega_{f}}\rho_{i}>\rho_{j}\}}\\
+\beta_{i}(\boldsymbol\rho)=1_{\{\rho_{i}>\rho_{c}\}}\\
+\gamma_{i}(\boldsymbol\rho)=1_{\{\rho_{i+1}>\rho_{c}\}}
+\end{array}
+\text{for }i=0,1,...,n
+\label{eq:indicators}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+and we note 
+\begin_inset Formula $H_{\alpha_{i}}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{\beta_{i}}$
+\end_inset
+
+, and 
+\begin_inset Formula $H_{\gamma_{i}}$
+\end_inset
+
+ the corresponding half-spaces. The dual half-spaces are denoted by 
+\begin_inset Formula $\bar{H}_{\alpha_{i}}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{H}_{\beta_{i}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\bar{H}_{\gamma_{i}}$
+\end_inset
+
+ and the corresponding indicator functions are 
+\begin_inset Formula $1-\alpha_{i}(\boldsymbol\rho)$
+\end_inset
+
+, 
+\begin_inset Formula $1-\beta_{i}(\boldsymbol\rho)$
+\end_inset
+
+, and 
+\begin_inset Formula $1-\gamma_{i}(\boldsymbol\rho)$
+\end_inset
+
+. We can notice that 
+\begin_inset Formula $\beta_{i+1}(\boldsymbol\rho)=\gamma_{i}(\boldsymbol\rho)$
+\end_inset
+
+. Since we have 
+\begin_inset Formula $\textbf{W}_{i}=H_{\alpha_{i}}\cap H_{\gamma_{i}}$
+\end_inset
+
+, 
+\begin_inset Formula $\textbf{L}_{i}=H_{\beta_{i}}\cap \bar{H}_{\gamma_{i}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\textbf{D}_{i}=\bar{H}_{\alpha_{i}}\cap\bar{H}_{\beta_{i}}$
+\end_inset
+
+ for the polyhedra defined in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:regions3"
+
+\end_inset
+
+), their indicator functions are:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{l}
+w_{i}(\boldsymbol\rho)=\alpha_{i}(\boldsymbol\rho)\gamma_{i}(\boldsymbol\rho)\\
+l_{i}(\boldsymbol\rho)=\beta_{i}(\boldsymbol\rho)(1-\gamma_{i}(\boldsymbol\rho))\\
+d_{i}(\boldsymbol\rho)=(1-\alpha_{i}(\boldsymbol\rho))(1-\beta_{i}(\boldsymbol\rho))
+\end{array}
+\text{for }i=0,1,...,n
+\label{eq:indicators2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Hence, evaluating the indicator functions 
+\begin_inset Formula $\alpha_{i}(\boldsymbol\rho)$
+\end_inset
+
+, 
+\begin_inset Formula $\beta_{i}(\boldsymbol\rho)$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma_{i}(\boldsymbol\rho)$
+\end_inset
+
+ for 
+\begin_inset Formula $i=0,...,n$
+\end_inset
+
+ gives the mode 
+\begin_inset Formula $\boldsymbol m$
+\end_inset
+
+ of state 
+\begin_inset Formula $\boldsymbol\rho$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Kalman filter algorithm
+\end_layout
+
+\begin_layout Standard
+
+In order to use the 
+\shape italic
+Kalman filter
+\shape default
+ to estimate the state of the link given a sequence of noisy observations, we model the process by adding a white noise to the underlying dynamic system model. The 
+\begin_inset Quotes erd
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ state 
+\begin_inset Formula $\boldsymbol\rho^{t}$
+\end_inset
+
+ is then:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\boldsymbol\rho^{t} = A_{\boldsymbol m} \boldsymbol\rho^{t-1} + b_{\boldsymbol m} + c_{t} + \boldsymbol\eta^{t} \quad\text{if}\quad\boldsymbol\rho^{t-1}\in\textbf{P}_{\boldsymbol m}
+\label{eq:underlyingSystemDN3}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $\boldsymbol\eta^{t}\sim N(0,Q_{t})$
+\end_inset
+
+ is the Gaussian zero-mean, white state noise with covariance 
+\begin_inset Formula $Q_{t}$
+\end_inset
+
+. To apply the 
+\shape italic
+control update
+\shape default
+ of the Kalman filter, it is necessary to know the mode 
+\begin_inset Formula $\boldsymbol m^{t-1}$
+\end_inset
+
+ of the state 
+\begin_inset Formula $\boldsymbol\rho^{t-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+Additionally, the observation model for the link is given by:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\boldsymbol y^{t} = H_{t}\boldsymbol\rho^{t} + \boldsymbol\chi^{t}
+\label{eq:observation}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $H_{t}\in \{ 0,1 \}^{p_{t}\times n}$
+\end_inset
+
+ is the linear observation observation matrix which encodes the 
+\begin_inset Formula $p_{t}$
+\end_inset
+
+ observations (each one of them being at a discrete cell on the highway) for which the density is observed during discrete time step 
+\begin_inset Formula $t$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of cells along the link. The last term in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:observation"
+
+\end_inset
+
+) is the white, zero mean observation noise 
+\begin_inset Formula $\boldsymbol\chi^{t} \sim N(0,R_{t})$
+\end_inset
+
+ with covariance matrix 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+The 
+\shape italic
+prediction
+\shape default
+ step is: 
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\text{Predicted state estimate: } & \boldsymbol\mu^{t:t-1} = A_{\boldsymbol m} \boldsymbol\mu^{t-1} + b_{\boldsymbol m} + c_{t}
+\quad\text{if}\quad\boldsymbol\rho^{t-1}\in\textbf{P}_{\boldsymbol m}\\
+\text{Predicted covariance estimate: } & P_{t:t-1} = A_{\boldsymbol m}P_{t-1}(A_{\boldsymbol m})^{T} + Q_{t-1}
+\end{array}
+\label{eq:predict}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+The 
+\shape italic
+update
+\shape default
+ step is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\text{Measurement residual: } & \boldsymbol r_{t} = \boldsymbol z^{t} - H_{t}\boldsymbol\mu^{t:t-1}\\
+\text{Residual covariance: } & S_{t} = H_{t}P_{t:t-1}H_{t}^{T}+R_{t}\\
+\text{Kalman gain: } & K_{t} = P_{t:t-1}H_{t}^{T}S_{t}^{-1}\\
+\text{Updated state estimate: } & \boldsymbol\mu^{t} = \boldsymbol\mu^{t:t-1} + K_{t} \boldsymbol r_{t}\\
+\text{Updated estimate covariance: } & P_{t} = (I - K_{t}H_{t})P_{t:t-1}
+\end{array}
+\label{eq:update}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+Implementation and complexity
+\end_layout
+
+\begin_layout Standard
+
+Since the number of modes grows exponentially as the number of cells increases (see Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:modes"
+
+\end_inset
+
+), it is computationally expensive to store a matrix 
+\begin_inset Formula $A_{\boldsymbol m}$
+\end_inset
+
+ for each mode 
+\begin_inset Formula $\boldsymbol m$
+\end_inset
+
+. Fortunately, it is possible to compute the 
+\shape italic
+predicted state estimate
+\shape default
+ 
+\begin_inset Formula $\boldsymbol\mu^{t:t-1}$
+\end_inset
+
+ and the 
+\shape italic
+predicted covariance estimate
+\shape default
+ 
+\begin_inset Formula $P_{t:t-1}$
+\end_inset
+
+ in linear time and quadratic time respectively, without forming any dense matrix 
+\begin_inset Formula $A_{\boldsymbol m}$
+\end_inset
+
+. This relies on the tridiagonality of 
+\begin_inset Formula $A_{\boldsymbol m}$
+\end_inset
+
+ and the homogeneity of the segment of road considered, which requires to store only the seven possible modes at each cell
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotemark
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotetext{
+\end_layout
+
+\end_inset
+
+ In the case of a heterogeneous road (i.e. a different fundamental diagram for each cell), up to all nine possible local modes for each cell have to be stored, which is still bound by 
+\begin_inset Formula $9\times n$
+\end_inset
+
+, where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of cells. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+In particular, equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:underlyingSystemDN"
+
+\end_inset
+
+) gives a simple procedure to compute 
+\begin_inset Formula $\boldsymbol\mu^{t:t-1}$
+\end_inset
+
+ in linear time from 
+\begin_inset Formula $\boldsymbol\mu^{t-1}$
+\end_inset
+
+, 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+, 
+\begin_inset Formula $f_{0}$
+\end_inset
+
+, and 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+, by knowing 
+\begin_inset Formula $\boldsymbol m^{t-1}$
+\end_inset
+
+ alone. Similarly, the double product 
+\begin_inset Formula $A_{\boldsymbol m}P_{t-1}(A_{\boldsymbol m})^{T}$
+\end_inset
+
+ can be computed in quadratic time from 
+\begin_inset Formula $P_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+(A_{\boldsymbol m}P_{t-1})_{i,j} = \begin{cases}
+0 & \text{ if } i\in\{0,n+1\}\text{ or }j\in\{0,n+1\}\\
+L_{m_{i}}.\left( \begin{array}{c}
+p_{i-1,j}\\
+p_{i,j}\\
+p_{i+1,j}
+\end{array} \right) & \text{ if } (i,j)\in\{1,...,n\}^{2}
+\end{cases}
+\label{eq:predictedCovarianceComputation}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $L_{m_{i}}$
+\end_inset
+
+ is the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+-th line of 
+\begin_inset Formula $J_{DN}$
+\end_inset
+
+, 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ the 
+\begin_inset Formula $i$
+\end_inset
+
+-th entry of 
+\begin_inset Formula $\boldsymbol m^{t-1}$
+\end_inset
+
+, and 
+\begin_inset Formula $p_{i,j}$
+\end_inset
+
+ is the entry 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+-th entry of 
+\begin_inset Formula $P_{t-1}$
+\end_inset
+
+. And the computation of the second matrix multiplication is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+(A_{\boldsymbol m}P_{t-1}(A_{\boldsymbol m})^{T})_{i,j} = \begin{cases}
+0 & \text{ if } i\in\{0,n+1\}\text{ or }j\in\{0,n+1\}\\
+(q_{i,j-1}\quad q_{i,j}\quad q_{i,j+1}).L_{m_{j}}^{T} & \text{ if } (i,j)\in\{1,...,n\}^{2}
+\end{cases}
+\label{eq:predictedCovarianceComputation2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $q_{i,j}$
+\end_inset
+
+ is the entry 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+-th entry of 
+\begin_inset Formula $A_{\boldsymbol m}P_{t-1}$
+\end_inset
+
+. We can note that the first line and first column of 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ have only zero elements because the boundary condition 
+\begin_inset Formula $\rho^{t}_{0}=u^{t}$
+\end_inset
+
+ is deterministic (i.e. 
+\begin_inset Formula $\text{cov}(u^{t},\rho^{t}_{i})=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,...,n$
+\end_inset
+
+), and similarly the last line and last column of 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ are null since the boundary condition 
+\begin_inset Formula $\rho^{t}_{n+1}=d^{t}$
+\end_inset
+
+ is deteministic.
+\end_layout
+
+\begin_layout Standard
+
+The three equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:underlyingSystemDN"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:predictedCovarianceComputation"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:predictedCovarianceComputation2"
+
+\end_inset
+
+) show that both time complexity and space complexity of the 
+\shape italic
+prediction step
+\shape default
+ are 
+\begin_inset Formula $\bigcirc(n^{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Analysis
+\end_layout
+
+\begin_layout Standard
+
+TO DO: Not tuned because of the discontinuities in the derivative.
+\end_layout
+
+\begin_layout Section
+
+Reduced Multiple Mode Kalman filter
+\end_layout
+
+\begin_layout Subsection
+
+Motivation and definitions
+\end_layout
+
+\begin_layout Standard
+
+TO DO: write about intractibility and should select a goog sample of modes.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Faces of a polyhedron: 
+\series default
+A 
+\shape italic
+hyperplane
+\shape default
+ can be written as a linear equality:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+a_{1}x_{1} + a_{2}x_{2} + ... + a_{n}x_{n} = b
+\label{eq:hyperplane}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the dimension of the space. It divides the space in two half-spaces. And a supportive hyperplane of a closed convex set 
+\begin_inset Formula $C$
+\end_inset
+
+ is a hyperplane 
+\begin_inset Formula $H$
+\end_inset
+
+ such as 
+\begin_inset Formula $C\cap H\neq \emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $C\subseteq \bar{H}$
+\end_inset
+
+, where 
+\begin_inset Formula $\bar{H}$
+\end_inset
+
+ is one of the two half-spaces. Given a polyhedron 
+\begin_inset Formula $P$
+\end_inset
+
+, the inersection with any supportive hyperplane is a face of 
+\begin_inset Formula $P$
+\end_inset
+
+. Moreover, a vertex is a zero-dim face, an edge a one-dim face, and a facet is a face of dim 
+\begin_inset Formula $d-1$
+\end_inset
+
+ if 
+\begin_inset Formula $P$
+\end_inset
+
+ is of dim 
+\begin_inset Formula $d$
+\end_inset
+
+. For a full-dimensional polyhedron, a facet is of dimension 
+\begin_inset Formula $n-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Adjacent polyhedra: 
+\series default
+ TO DO: make research and give a definition.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Minimal H-representation: 
+\series default
+There exist infinitely many H-descriptions of a convex polytope. However, for a full-dimensional convex polytope, the minimal H-description is in fact unique and is given by the set of the facet-defining halfspaces 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Gruenbaum2003"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Remark: 
+\series default
+TO DO: Adjacent polyhedra, minimal H-representation, and polyhedral partition. We have a minimal H-representation of a polyhedron. When changing a half-space to its dual, we have a new polyhedron that is non-empty (CHECK). How is it compared to the polyhedral partition? In how many polyhedra of the polyhedral partition is it inculded?
+\end_layout
+
+\begin_layout Standard
+
+CHECK THIS PART As seen in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:formulation"
+
+\end_inset
+
+, 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}=\bigcap_{i=0}^{n} \textbf{Q}_{i}$
+\end_inset
+
+ where the polyhedron 
+\begin_inset Formula $\textbf{Q}_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula $\textbf{W}_{i}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}=w$
+\end_inset
+
+, 
+\begin_inset Formula $\textbf{L}_{i}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}=l$
+\end_inset
+
+, and 
+\begin_inset Formula $\textbf{D}_{i}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}=d$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Algorithm
+\end_layout
+
+\begin_layout Subsection
+
+Analysis
+\end_layout
+
+\begin_layout Section
+
+Conclusion and Future Work
+\end_layout
+
+\begin_layout Section
+
+Acknowledgement
+\end_layout
+
+\begin_layout Standard
+\noindent
+\start_of_appendix
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%dummy comment inserted by tex2lyx to ensure that this paragraph is not empty
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+Polyhedral partition of modes
+\end_layout
+
+\begin_layout Standard
+
+For an entire link with discrete state space indexed by 
+\begin_inset Formula $i = 1,...,n$
+\end_inset
+
+, and state 
+\begin_inset Formula $\boldsymbol\rho^{t} = (\rho_{0},\rho_{1},...,\rho_{n},\rho_{n+1})$
+\end_inset
+
+ a n+2 dimensional vector which describes the state of the link in the space 
+\begin_inset Formula $\mathcal{S} = [0,\rho_{j}]^{n+2}$
+\end_inset
+
+, we present a whole description of the space of 
+\begin_inset Quotes erd
+\end_inset
+
+modes
+\begin_inset Quotes erd
+\end_inset
+
+ along it, partitioned in different polyhedra. We can note that the ghost cells are included. Since there is always the entry 
+\begin_inset Formula $\rho_{i}$
+\end_inset
+
+ in common for successive pairs 
+\begin_inset Formula $(\rho_{i-1},\rho_{i})$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho_{i},\rho_{i+1})$
+\end_inset
+
+, a correlation propagates along the link, reducing the number of modes to a quantity smaller than 
+\begin_inset Formula $3^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Mode detection and minimal H-representation
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:polytope"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+H-representation of a polyhedron: 
+\series default
+A convex polyhedron (or polytope) may be defined as an intersection of a finite number of half-spaces. Such definition is called a 
+\shape italic
+half-space representation
+\shape default
+ or 
+\shape italic
+H-representation
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+A closed half-space can be written as a linear inequality:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+a_{1}x_{1} + a_{2}x_{2} + ... + a_{n}x_{n} \leq b
+\label{eq:halfSpace}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the dimension of the space containing the polytope under consideration. Hence, a 
+\shape italic
+convex polytope
+\shape default
+ may be regarded as the set of solutions to the system of linear inequalities:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{l}
+a_{11}x_{1} + a_{12}x_{2} + ... + a_{1n}x_{n} \leq b_{1}\\
+a_{21}x_{1} + a_{22}x_{2} + ... + a_{2n}x_{n} \leq b_{2}\\
+...\\
+a_{m1}x_{1} + a_{m2}x_{2} + ... + a_{mn}x_{n} \leq b_{m}
+\end{array}
+\label{eq:hRepresentation}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $m$
+\end_inset
+
+ is the number of half-spaces defining the polytope (the dimension here is not related to the dimension of the space 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+, and is used only for the definition). This can be concisely written as the matrix inequality:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+Ax \leq b
+\label{eq:matRepresentation}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\begin_inset Formula $A$
+\end_inset
+
+ is an 
+\begin_inset Formula $m\times n$
+\end_inset
+
+ matrix, 
+\begin_inset Formula $x$
+\end_inset
+
+ is an 
+\begin_inset Formula $n\times 1$
+\end_inset
+
+ column vector of variables, and 
+\begin_inset Formula $b$
+\end_inset
+
+ is an 
+\begin_inset Formula $m\times 1$
+\end_inset
+
+ column vector of constants. Here, we don't differentiate 
+\shape italic
+closed convex polyhedron
+\shape default
+ which are defined with large inequalities from 
+\shape italic
+open convex polyhedron
+\shape default
+ which are defined with strict inequalities. And the polyhedra 
+\begin_inset Formula $\textbf{W}_{i}, \textbf{L}_{i}, \textbf{D}_{i}$
+\end_inset
+
+ defined in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:regions3"
+
+\end_inset
+
+) for 
+\begin_inset Formula $i=0,...,n$
+\end_inset
+
+ in the space 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ are represented with a mix of large and strict inequalities to have a proper partition of the space.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hspace{}
+\length 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+Algorithm: 
+\series default
+Starting from 
+\begin_inset Formula $i=0$
+\end_inset
+
+, we evaluate 
+\begin_inset Formula $\alpha_{0}(\boldsymbol\rho)$
+\end_inset
+
+, 
+\begin_inset Formula $\beta_{0}(\boldsymbol\rho)$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma_{0}(\boldsymbol\rho)$
+\end_inset
+
+ and get 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+, or equivalently 
+\begin_inset Formula $Q_{i}$
+\end_inset
+
+, or the first two defining half-spaces of 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}$
+\end_inset
+
+. By construction, the intersection of these two half-spaces are the 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $Q_{0}$
+\end_inset
+
+. Now suppose we have evalued the indicator functions and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ sequentially for 
+\begin_inset Formula $i=1,...,k$
+\end_inset
+
+ and constructed the 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $\bigcap_{i=0}^{k} \textbf{Q}_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+Case 
+\begin_inset Formula $s_{k}=w$
+\end_inset
+
+: We have:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{l}
+w_{k}(\boldsymbol\rho)=\alpha_{k}(\boldsymbol\rho)\gamma_{k}(\boldsymbol\rho)=1\\
+\beta_{k+1}(\boldsymbol\rho)=\gamma_{k}(\boldsymbol\rho)=1\\
+w_{k+1}(\boldsymbol\rho)=\alpha_{k+1}(\boldsymbol\rho)\gamma_{k+1}(\boldsymbol\rho)\\
+l_{k+1}(\boldsymbol\rho)=1-\gamma_{k+1}(\boldsymbol\rho)\\
+d_{k+1}(\boldsymbol\rho)=0
+\end{array}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+This means that 
+\begin_inset Formula $s_{k+1}\in\{w,l\}$
+\end_inset
+
+ and evaluating 
+\begin_inset Formula $\gamma_{k+1}(\boldsymbol\rho)$
+\end_inset
+
+ suffices to find 
+\begin_inset Formula $s_{k+1}$
+\end_inset
+
+. It is also necessary to evaluate 
+\begin_inset Formula $\gamma_{k+1}(\boldsymbol\rho)$
+\end_inset
+
+ because its value is independent from the values of the indicator functions up to 
+\begin_inset Formula $i=k$
+\end_inset
+
+ (given that 
+\begin_inset Formula $s_{k}=w$
+\end_inset
+
+). Then 
+\begin_inset Formula $s_{k+1}$
+\end_inset
+
+ is exactly determined by one of the two half-spaces 
+\begin_inset Formula $H_{\gamma_{k+1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{H}_{\gamma_{k+1}}$
+\end_inset
+
+, and adding one of them to the 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $\bigcap_{i=0}^{k} \textbf{Q}_{i}$
+\end_inset
+
+ gives the 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $\bigcap_{i=0}^{k+1} \textbf{Q}_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+Case 
+\begin_inset Formula $s_{k}=l$
+\end_inset
+
+: We have:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{l}
+l_{i}(\boldsymbol\rho)=\beta_{i}(\boldsymbol\rho)(1-\gamma_{i}(\boldsymbol\rho))=1\\
+\beta_{k+1}(\boldsymbol\rho)=\gamma_{k}(\boldsymbol\rho)=0\\
+w_{k+1}(\boldsymbol\rho)=\alpha_{k+1}(\boldsymbol\rho)\gamma_{k+1}(\boldsymbol\rho)\\
+l_{k+1}(\boldsymbol\rho)=0\\
+d_{k+1}(\boldsymbol\rho)=1-\alpha_{k+1}(\boldsymbol\rho)
+\end{array}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+A similar analysis shows that adding 
+\begin_inset Formula $H_{\alpha_{k+1}}$
+\end_inset
+
+ or 
+\begin_inset Formula $\bar{H}_{\alpha_{k+1}}$
+\end_inset
+
+ gives the 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $\bigcap_{i=0}^{k+1} \textbf{Q}_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+Case 
+\begin_inset Formula $s_{k}=d$
+\end_inset
+
+: We have no prior information on 
+\begin_inset Formula $w_{k+1}(\boldsymbol\rho)$
+\end_inset
+
+, 
+\begin_inset Formula $l_{k+1}(\boldsymbol\rho)$
+\end_inset
+
+, and 
+\begin_inset Formula $d_{k+1}(\boldsymbol\rho)$
+\end_inset
+
+ and have to evaluate each one of them to find the two defining half-spaces that give the 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $\bigcap_{i=0}^{k+1} \textbf{Q}_{i}$
+\end_inset
+
+. when added to the set of surrent defining half-spaces.
+\end_layout
+
+\begin_layout Standard
+
+By recurrence, we have constructed a 
+\shape italic
+minimal H-representation
+\shape default
+ of 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}=\bigcap_{i=0}^{n} \textbf{Q}_{i}$
+\end_inset
+
+. Hence, each of the defining half-spaces is of dimension 
+\begin_inset Formula $n+1$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Gruenbaum2003"
+
+\end_inset
+
+ (recall that the space 
+\begin_inset Formula $\mathcal{S} = [0,\rho_{j}]^{n+2}$
+\end_inset
+
+ is of dimension 
+\begin_inset Formula $n+1$
+\end_inset
+
+), and seperate the polyhedron 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s}$
+\end_inset
+
+ from an 
+\begin_inset Formula $n+1$
+\end_inset
+
+-adjacent polyhedron 
+\begin_inset Formula $\textbf{P}_{\boldsymbol s'}$
+\end_inset
+
+ of the polyhedral partition of 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Number of modes and intractibility
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:modes"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Suppose that the pair 
+\begin_inset Formula $(\rho_{0},\rho_{1})$
+\end_inset
+
+ is in the region 
+\series bold
+W
+\series default
+, then the list of possible combinations in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:modes"
+
+\end_inset
+
+ shows that 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ can be either in 
+\series bold
+W
+\series default
+ or 
+\series bold
+L
+\series default
+. Similarly, if 
+\begin_inset Formula $(\rho_{0},\rho_{1})$
+\end_inset
+
+ is in the region 
+\series bold
+L
+\series default
+, 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ can be either in 
+\series bold
+W
+\series default
+ or 
+\series bold
+L
+\series default
+, and for 
+\begin_inset Formula $(\rho_{0},\rho_{1})$
+\end_inset
+
+ in 
+\series bold
+D
+\series default
+, 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ can be either in 
+\series bold
+W
+\series default
+, 
+\series bold
+L
+\series default
+, or 
+\series bold
+D
+\series default
+. As an example, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:threeLevelModes"
+
+\end_inset
+
+ describes all the possible sixteen combinations for the first three pairs 
+\begin_inset Formula $(\rho_{0},\rho_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+, and 
+\begin_inset Formula $(\rho_{2},\rho_{3})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float table
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% used for centering table
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="3" columns="17">
+<features tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(\rho_{0},\rho_{1})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+W
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+L
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+D
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+W
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+L
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+W
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+D
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+W
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+L
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+D
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $(\rho_{2},\rho_{3})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+L 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+D
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "table:threeLevelModes"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% is used to refer this table in the text
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+The sixteen possible modes for the first three pairs 
+\begin_inset Formula $(\rho_{0},\rho_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+, and 
+\begin_inset Formula $(\rho_{2},\rho_{3})$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+We can recursively compute the number of 
+\begin_inset Quotes erd
+\end_inset
+
+modes
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $M_{k}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $k$
+\end_inset
+
+, where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the number of cells of the discretized link. Let's denote by 
+\begin_inset Formula $w_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $l_{k}$
+\end_inset
+
+, and 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ the number of modes for which 
+\begin_inset Formula $(\rho_{k},\rho_{k+1})$
+\end_inset
+
+ is in 
+\series bold
+W
+\series default
+, 
+\series bold
+L
+\series default
+, and 
+\series bold
+D
+\series default
+ respectively. Then we have these equations:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+w_{0} = l_{0} = d_{0} = 1
+\label{eq:modes1}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{lllllll}
+w_{k+1} & = & w_{k} & + & l_{k} & + & d_{k}\\
+l_{k+1} & = & w_{k} & + & d_{k} & & \\
+d_{k+1} & = & l_{k} & + & d_{k} & &
+\end{array} \quad \text{for }k \geq 0
+\label{eq:modes2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+n_{k} = w_{k} + l_{k} + d_{k} \quad \text{for }k \geq 0
+\label{eq:modes3}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Using matrix notations, equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:modes2"
+
+\end_inset
+
+) reads:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[ \begin{array}{c}
+w_{k+1} \\
+l_{k+1} \\
+d_{k+1} \end{array} \right] = A \times 
+\left[ \begin{array}{c}
+w_{k} \\
+l_{k} \\
+d_{k} \end{array} \right]
+\quad\text{where}\quad A = \left[ \begin{array}{ccc}
+1 & 1 & 1 \\
+1 & 0 & 1 \\
+0 & 1 & 1 \end{array} \right]\label{eq:modes4}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Then
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[ \begin{array}{c}
+w_{k} \\
+l_{k} \\
+d_{k} \end{array} \right] = A^{k} \times 
+\left[ \begin{array}{c}
+w_{0} \\
+l_{0} \\
+d_{0} \end{array} \right]\label{eq:modes5}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+It is possible to compute 
+\begin_inset Formula $A^{k}$
+\end_inset
+
+ explicitly by diagonalizing the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+, to get an explicit expression for 
+\begin_inset Formula $w_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $l_{k}$
+\end_inset
+
+, and 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ in the form of 
+\begin_inset Formula $a.\beta^{k} + b.\gamma^{k} + c.\delta^{k}$
+\end_inset
+
+. However, this analytical expression is unwieldy, so we will just derive lower and upper bounds to 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+. It is easy to see that 
+\begin_inset Formula $d_{k} \leq n_{k}/2$
+\end_inset
+
+ for 
+\begin_inset Formula $k\geq 0$
+\end_inset
+
+, then we can prove recursively that 
+\begin_inset Formula $3.2^{k} \leq n_{k} \leq 3.(2.5)^{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float table
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% used for centering table
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="2" columns="6">
+<features tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+number of cells 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+number of modes 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+16 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+182 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+10426 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+34206521
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "table:numModes"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% is used to refer this table in the text
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+Number of modes for a homogeneous road.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Even if we have found the minimal polyhedral partition of the space, the number of modes grows exponentially as the number of cells increases, so it is difficult to store all the possible modes. However, at any time step, the mode of each cell can be determined among the 7 possible modes and constructed sequentially building up the general mode of the segment of road.
+\end_layout
+
+\begin_layout Section
+
+The heterogeneous case
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CDFD"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename godunovDiagram3.pdf
+	width 12cm
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Standard
+
+Values of 
+\begin_inset Formula $G(\rho_{1},\rho_{2})$
+\end_inset
+
+ in the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ for the Daganzo-Newell fundamental diagram with different capacities 
+\begin_inset Formula $q_{c1} < q_{c2}$
+\end_inset
+
+ for a) and 
+\begin_inset Formula $q_{c1} > q_{c2}$
+\end_inset
+
+ for b). Note that for illustration purposes we suppose 
+\begin_inset Formula $\rho_{c1}\leq\rho_{c2}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:godunovDiagram3"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+In this section, we study the CTM for a heterogeneous road, i.e. 
+\begin_inset Formula $\omega_{f}$
+\end_inset
+
+, 
+\begin_inset Formula $v_{f}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{j}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{c}$
+\end_inset
+
+ can vary along the link and we add the subscript 
+\begin_inset Formula $i$
+\end_inset
+
+: 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $\omega_{fi}$
+\end_inset
+
+, 
+\begin_inset Formula $v_{fi}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{ji}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{ci}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{ci}$
+\end_inset
+
+ for the parameters of the fundamental diagram 
+\begin_inset Formula $Q_{i}$
+\end_inset
+
+ at cell 
+\begin_inset Formula $i$
+\end_inset
+
+, and the associated sending and receiving flows 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+. Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram3"
+
+\end_inset
+
+ shows the explicit values taken by 
+\begin_inset Formula $G(\rho_{1},\rho_{2})$
+\end_inset
+
+ in different regions of the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ when 
+\begin_inset Formula $q_{c1} < q_{c2}$
+\end_inset
+
+. We note that the critical density 
+\begin_inset Formula $\rho_{c2}$
+\end_inset
+
+ is increased to the 
+\shape italic
+effective
+\shape default
+ critical value 
+\begin_inset Formula $\bar{\rho}_{c2}$
+\end_inset
+
+ for the receiving flow 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+, with 
+\begin_inset Formula $\bar{\rho}_{c2} = \bar{R}^{-1}_{2}(q_{c1})$
+\end_inset
+
+, and the 
+\shape italic
+effective
+\shape default
+ capacity is 
+\begin_inset Formula $\bar{q}_{c} = q_{c1}$
+\end_inset
+
+, which is the capacity of the sending flow 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+. And Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram3"
+
+\end_inset
+
+ also shows the explicit values taken by 
+\begin_inset Formula $G(\rho_{1},\rho_{2})$
+\end_inset
+
+ in different regions of the space 
+\begin_inset Formula $(\rho_{1},\rho_{2})$
+\end_inset
+
+ when 
+\begin_inset Formula $q_{c1} > q_{c2}$
+\end_inset
+
+. Similarly, the critical density 
+\begin_inset Formula $\rho_{c1}$
+\end_inset
+
+ is decreased to the 
+\shape italic
+effective
+\shape default
+ value 
+\begin_inset Formula $\bar{\rho}_{c1}$
+\end_inset
+
+ for the sending flow 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ with 
+\begin_inset Formula $\bar{\rho}_{c1} = \bar{S}^{-1}_{1}(q_{c2})$
+\end_inset
+
+, and the 
+\shape italic
+effective
+\shape default
+ capacity is 
+\begin_inset Formula $\bar{q}_{c} = q_{c2}$
+\end_inset
+
+, which is the capacity of the receiving flow 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+. The Godunov flux has a more general expression 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rhoGodunovFlux2"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+G(\rho_{1},\rho_{2}) = \begin{cases}
+R_{2}(\rho_{2}) & \text{if } (\rho_{1},\rho_{2}) \in \textbf{W}\\
+\bar{q}_{c} & \text{if } (\rho_{1},\rho_{2}) \in \textbf{L}\\
+S_{1}(\rho_{1}) & \text{if } (\rho_{1},\rho_{2}) \in \textbf{D}
+\end{cases}
+\label{eq:rhoGodunovFlux2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{lll}
+\textbf{W} & = \{(\rho_{1},\rho_{2}) \mid & \rho_{2} > F(\rho_{1}) \text{ ,   } \rho_{2} > \bar{\rho}_{c2}\}\\
+\textbf{L} & = \{(\rho_{1},\rho_{2}) \mid & \rho_{1} > \bar{\rho}_{c1} \text{ ,   } \rho_{2} \leq \bar{\rho}_{c2}\}\\
+\textbf{D} & = \{(\rho_{1},\rho_{2}) \mid & \rho_{2} \leq F(\rho_{1}) \text{ ,   } \rho_{1} \leq \bar{\rho}_{c1}\}
+\end{array}
+\label{eq:regionsHetero}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where the boundary between the white and grey regions follows the 
+\begin_inset Formula $(\rho_{1},\rho_{2})=(\rho_{1},F(\rho_{1}))$
+\end_inset
+
+ trajectory with 
+\begin_inset Formula $F(\rho_{1})= \bar{R}^{-1}_{2}(\bar{S}_{1}(\rho_{1}))$
+\end_inset
+
+ for 
+\begin_inset Formula $\rho_{1} \leq \rho_{c1}$
+\end_inset
+
+. 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{R}$
+\end_inset
+
+ denote the restrictions of the sending and receiving flows to the sub-regions 
+\begin_inset Formula $[0,\rho_{c})$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho_{c},\rho_{j}]$
+\end_inset
+
+ respectively, which also correspond to the left and right parts (w.r.t. 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+) of the fundamental diagram, as shown in the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:godunovDiagram3"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+When the velocity is the Daganzo-Newell function (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dnVelocity"
+
+\end_inset
+
+), the Godunov Flux 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rhoGodunovFlux2"
+
+\end_inset
+
+ becomes 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rhoGodunovFlux3"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:rhoGodunovFlux3a}
+G_{DN}(\rho_{1},\rho_{2}) = \begin{cases}
+-\omega_{f2} \left( \rho_{2} - \rho_{j2} \right) & \text{if } (\rho_{1},\rho_{2}) \in \textbf{W}\\
+\bar{q}_{c} & \text{if } (\rho_{1},\rho_{2}) \in \textbf{L}\\
+v_{f1} \rho_{1} & \text{if } (\rho_{1},\rho_{2}) \in \textbf{D}
+\end{cases}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+and the boundary between the white and dark-grey regions is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{eq:boundaryHetero}
+(\rho_{1},\rho_{2})=(\rho_{1},-\frac{v_{f1}}{\omega_{f2}}\rho_{1}+\rho_{j2})
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+And 
+\series bold
+W
+\series default
+, 
+\series bold
+L
+\series default
+, 
+\series bold
+D
+\series default
+ form a polyhedral partition of the space:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{lll}
+\textbf{W} & = \{(\rho_{1},\rho_{2}) \mid & \rho_{2} + \frac{v_{f1}}{\omega_{f2}}\rho_{1} > \rho_{j2} \text{ ,   } \rho_{2} > \bar{\rho}_{c2}\}\\
+\textbf{L} & = \{(\rho_{1},\rho_{2}) \mid & \rho_{1} > \bar{\rho}_{c1} \text{ ,   } \rho_{2} \leq \bar{\rho}_{c2}\}\\
+\textbf{D} & = \{(\rho_{1},\rho_{2}) \mid & \rho_{2} + \frac{v_{f1}}{\omega_{f2}}\rho_{1} \leq \rho_{j2} \text{ ,   } \rho_{1} \leq \bar{\rho}_{c1}\}
+\end{array}
+\label{eq:regions4}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+At cell 
+\begin_inset Formula $i$
+\end_inset
+
+, this implies the effective density 
+\begin_inset Formula $\bar{\rho}^{u}_{ci}$
+\end_inset
+
+ associated with the upstream boundary can be different from the effective density 
+\begin_inset Formula $\bar{\rho}^{d}_{ci}$
+\end_inset
+
+ associated with the downstream boundary, depending of the capacity drops at these boundaries. Hence, using the notations introduced in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:decompositionModes"
+
+\end_inset
+
+ all the combinations between 
+\begin_inset Formula $(\rho_{-},\rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $(\rho,\rho_{+})$
+\end_inset
+
+ can be possible so we have nine modes. Consequently, for a discretization in 
+\begin_inset Formula $n$
+\end_inset
+
+ cells, the number of possible modes is 
+\begin_inset Formula $3^{n+1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float table
+placement ht
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% used for centering table
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="2" columns="6">
+<features tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+number of cells 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+number of modes 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+9 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+27 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+729 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+177147 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $10^{10}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "table:numModes2"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% is used to refer this table in the text
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+Number of modes for a heterogeneous road.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+Kalman filtering-DRAFT
+\end_layout
+
+\begin_layout Standard
+
+and 
+\begin_inset Formula $F_{LH}[.]$
+\end_inset
+
+, have the same expression with 
+\begin_inset Formula $f_{DN}(.)$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{LH}(.)$
+\end_inset
+
+ respectively (as defined in Table. For instance, when we have a Daganzo-Newell fundamental diagram with update operator for the dynamic system 
+\begin_inset Formula $F_{DN}[.]$
+\end_inset
+
+ (i.e. 
+\begin_inset Formula $\boldsymbol\rho^{t} = F_{DN}[\boldsymbol\rho^{t-1}]$
+\end_inset
+
+), and suppose that the mode at 
+\begin_inset Formula $x=i$
+\end_inset
+
+ is three (
+\begin_inset Formula $m_{i}=3$
+\end_inset
+
+) then
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotemark
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+F_{i}[\boldsymbol\rho^{t-1}] = f_{DN,m_{i}}(\rho^{t-1}_{i_{-},i,i_{+}}) = f_{DN,3}(\rho^{t-1}_{i_{-},i,i_{+}}) = 
+\rho^{t-1}_{i} + \alpha \omega_{f}\rho^{t-1}_{i+1} - \alpha \omega_{f}\rho_{c}
+\label{eq:example}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+footnotetext{
+\end_layout
+
+\end_inset
+
+ As we have seen earlier, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, 
+\begin_inset Formula $\omega_{f}$
+\end_inset
+
+, 
+\begin_inset Formula $v_{f}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{j}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{c}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{c}$
+\end_inset
+
+ can vary along the link and a proper notation would be 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $\omega_{fi}$
+\end_inset
+
+, 
+\begin_inset Formula $v_{fi}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{ji}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{ci}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{ci}$
+\end_inset
+
+ for the parameters of the fundamental diagram at 
+\begin_inset Formula $x=i$
+\end_inset
+
+, so that: 
+\begin_inset Formula \[
+F_{i}[\rho^{t-1}] = f_{DN,m_{i}}(\rho^{t-1}_{i_{-},i,i_{+}}) = f_{DN,3}(\rho^{t-1}_{i_{-},i,i_{+}}) = 
+\rho^{t-1}_{i} + \alpha_{i} \omega_{fi}\rho^{t-1}_{i+1} - \alpha_{i} \omega_{fi}\rho_{ci}
+\]
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+In order to use the 
+\shape italic
+Extended Kalman filter
+\shape default
+ to estimate the state of the link given a sequence of noisy observations, we model the process in accordance with the framework of the 
+\shape italic
+Extended Kalman filter
+\shape default
+ by adding a white noise to the underlying dynamic system model. The 
+\begin_inset Quotes erd
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ state 
+\begin_inset Formula $\boldsymbol\rho^{t}$
+\end_inset
+
+ is then:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\boldsymbol\rho^{t} = F[\boldsymbol\rho^{t-1}] + \boldsymbol\eta^{t}
+\label{eq:underlyingSystem3}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $\boldsymbol\eta^{t}\sim N(0,Q_{t})$
+\end_inset
+
+ is the Gaussian zero-mean, white state noise with covariance 
+\begin_inset Formula $Q_{t}$
+\end_inset
+
+. The estimated state at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is denoted by 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t}$
+\end_inset
+
+ and the estimated covariance by 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+. The 
+\shape italic
+prediction step
+\shape default
+ gives the 
+\shape italic
+a priori
+\shape default
+ state estimate and covariance 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t:t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{t:t-1}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\text{Predicted state estimate: } & \hat{\boldsymbol\rho}^{t:t-1} = F[\hat{\boldsymbol\rho}^{t-1}]\\
+\text{Predicted covariance estimate: } & P_{t:t-1} = F_{t-1}P_{t-1}(F_{t-1})^{T} + Q_{t-1}
+\end{array}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $F_{t}$
+\end_inset
+
+ is the state transition defined to be the following Jacobian:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+F_{t} = \left(\frac{\partial F_{i}[\rho^{t}]}{\partial \rho^{t}_{j}}\right)_{i,j}
+\label{eq:jacobian2}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+The estimated mode 
+\begin_inset Formula $\hat{\boldsymbol m}^{t}$
+\end_inset
+
+ associated to the estimated vector state 
+\begin_inset Formula $\hat{\rho}^{t}$
+\end_inset
+
+ is defined from Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "table:modes"
+
+\end_inset
+
+. Specifically, in the context of our traffic model, the density at 
+\begin_inset Formula $x=i$
+\end_inset
+
+ only depends on the densities at the neighbor points 
+\begin_inset Formula $x=i-1,i,i+1$
+\end_inset
+
+. So 
+\begin_inset Formula $F_{t}$
+\end_inset
+
+ is a 
+\begin_inset Formula $(n+2)\times(n+2)$
+\end_inset
+
+ tridiagonal matrix, such that the diagonal elements are 
+\begin_inset Formula $\{0, J_{\hat{m}_{1},2},...,J_{\hat{m}_{n},2},0\}$
+\end_inset
+
+, the lower diagonal elements are 
+\begin_inset Formula $\{J_{\hat{m}_{1},1},J_{\hat{m}_{2},1},...,J_{\hat{m}_{n},1},0\}$
+\end_inset
+
+, and the upper diagonal elements are 
+\begin_inset Formula $\{0,J_{\hat{m}_{1},3},J_{\hat{m}_{2},3},...,J_{\hat{m}_{n},3}\}$
+\end_inset
+
+, where 
+\begin_inset Formula $J$
+\end_inset
+
+ is defined in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:jacobian"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+In the case of the Daganzo-Newell fundamental diagram, the operator 
+\begin_inset Formula $F_{DN}[.]$
+\end_inset
+
+ defined in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:underlyingSystem2"
+
+\end_inset
+
+) is 
+\shape italic
+linear
+\shape default
+ (from the linearity of 
+\begin_inset Formula $f_{DN}$
+\end_inset
+
+). Along with the assumption of a white state noise, the 
+\shape italic
+prediction step
+\shape default
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:predict"
+
+\end_inset
+
+) of the 
+\shape italic
+Extended Kalman filter
+\shape default
+ is actually identical to the regular 
+\shape italic
+Kalman filter
+\shape default
+, and it is known from the theory that the 
+\shape italic
+Kalman filter
+\shape default
+ is optimal 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Anderson2005"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+In the case of a linear-hyperbolic velocity function, the operator 
+\begin_inset Formula $F_{LH}[.]$
+\end_inset
+
+ is not linear if at some points of the discrete space the mode is between four and seven. Then the 
+\shape italic
+Extended Kalman filter
+\shape default
+ is 
+\shape italic
+near-optimal
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+
+We can note that the first line and first column of 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ have only zero elements because the boundary condition 
+\begin_inset Formula $\rho^{t}_{0}$
+\end_inset
+
+ is deterministic (i.e. 
+\begin_inset Formula $cov(\rho^{t}_{0},\rho^{t}_{i})=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,...,n$
+\end_inset
+
+), and similarly the last line and last column of 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ are null since the boundary condition 
+\begin_inset Formula $\rho^{t}_{n+1}$
+\end_inset
+
+ is deteministic. Additionally, the observation model for the link is given by:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\boldsymbol y^{t} = H_{t}\boldsymbol\rho^{t} + \boldsymbol\chi^{t}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+where 
+\begin_inset Formula $H_{t}\in \{ 0,1 \}^{p_{t}\times n}$
+\end_inset
+
+ is the linear observation observation matrix which encodes the 
+\begin_inset Formula $p_{t}$
+\end_inset
+
+ observations (each one of them being at a discrete cell on the highway) for which the density is observed during discrete time step 
+\begin_inset Formula $t$
+\end_inset
+
+, and 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of cells along the link. The last term in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:observation"
+
+\end_inset
+
+) is the white, zero mean observation noise 
+\begin_inset Formula $\boldsymbol\chi^{t} \sim N(0,R_{t})$
+\end_inset
+
+ with covariance matrix 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+. The 
+\shape italic
+update step
+\shape default
+ is:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+\text{Kalman gain: } & K_{t} = P_{t:t-1}H_{t}^{T}\left(H_{t}P_{t:t-1}H_{t}^{T}+R_{t}\right)^{-1}\\
+\text{Updated state estimate: } & \hat{\boldsymbol\rho}^{t} = \hat{\boldsymbol\rho}^{t:t-1} + K_{t}(\boldsymbol y^{t} - H_{t}\hat{\boldsymbol\rho}^{t:t-1})\\
+\text{Updated estimate covariance: } & P_{t} = (I - K_{t}H_{t})P_{t:t-1}
+\end{array}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+The Extended Kalman filter provides the distribution of 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t}$
+\end_inset
+
+ given the sequence of observations 
+\begin_inset Formula $\boldsymbol y^{0:t}$
+\end_inset
+
+, sequence of modes 
+\begin_inset Formula $\hat{\boldsymbol m}^{0:t} = \{\hat{\boldsymbol m}^{0},...,\hat{\boldsymbol m}^{t}\}$
+\end_inset
+
+, and sequence of control parameters 
+\begin_inset Formula $\boldsymbol u^{0:t}$
+\end_inset
+
+, which is exactly equal to the distribution of 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t}$
+\end_inset
+
+ since the sequence 
+\begin_inset Formula $\hat{\boldsymbol m}^{0:t}$
+\end_inset
+
+ is deterministic. Concretely, the vector of control parameters 
+\begin_inset Formula $\boldsymbol u^{t}$
+\end_inset
+
+ contain the vector of critical densities 
+\begin_inset Formula $\boldsymbol\rho_{c}$
+\end_inset
+
+, the vector of jam densities 
+\begin_inset Formula $\boldsymbol\rho_{j}$
+\end_inset
+
+, and the boundary conditions 
+\begin_inset Formula $\rho^{t}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho^{t}_{n+1}$
+\end_inset
+
+. Theoretically, the result is obtained by marginalizing the joint distribution of 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{\boldsymbol m}^{0:t}$
+\end_inset
+
+ as follows:
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ll}
+p(\hat{\boldsymbol\rho}^{t}|\boldsymbol y^{0:t},\boldsymbol u_{0:t}) & =
+\int_{\mathcal{M}_{n}} p(\hat{\boldsymbol\rho}^{t}|\boldsymbol y^{0:t},\boldsymbol u^{0:t},\boldsymbol m^{0:t})p(\boldsymbol m^{0:t}|\boldsymbol y^{0:t},\boldsymbol u^{0:t})
+d\boldsymbol m^{0:t}\\ 
+& = \int_{\mathcal{M}_{n}} p(\hat{\boldsymbol\rho}^{t}|\boldsymbol y^{0:t},\boldsymbol u^{0:t},\boldsymbol m^{0:t})\boldsymbol 1_{\hat{\boldsymbol m}^{0:t}}d\boldsymbol m^{0:t}\\[1ex]
+& = p(\hat{\boldsymbol\rho}^{t}|\boldsymbol y^{0:t},\boldsymbol u^{0:t},\hat{\boldsymbol m}^{0:t})
+\label{eq:marginalization}
+\end{array}
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+Implementation-DRAFT
+\end_layout
+
+\begin_layout Subsection
+
+Algorithm for the 
+\shape italic
+prediction step
+\shape default
+
+\end_layout
+
+\begin_layout Standard
+
+Algorithm using the structure of 
+\begin_inset Formula $F_{t}$
+\end_inset
+
+ and extension to a network
+\end_layout
+
+\begin_layout Standard
+
+From Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:modes"
+
+\end_inset
+
+, In (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:predict"
+
+\end_inset
+
+), the 
+\shape italic
+a priori
+\shape default
+ state estimate 
+\begin_inset Formula $\hat{\boldsymbol\rho}^{t:t-1}$
+\end_inset
+
+ is derived through the algorithm in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:underlyingSystem2"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+
+Accuracy
+\end_layout
+
+\begin_layout Standard
+
+For a Daganzo-Newell fundamental diagram, we can note that the decomposition in different modes in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:underlyingSystem2"
+
+\end_inset
+
+) is in fact a special case of 
+\shape italic
+Conditional Dynamic Linear Model
+\shape default
+ (CDLM) as described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Chen2000"
+
+\end_inset
+
+ with a discrete latent indicator that is deterministic. In this case, there is only one estimated deterministic sequence of modes 
+\begin_inset Formula $\hat{\boldsymbol m}^{0:t}$
+\end_inset
+
+ or latent indicators, hence there is no need to use a sequential Monte-Carlo method to sample an ensemble of trajectories of modes. The Mixture Kalman Filter 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Chen2000"
+
+\end_inset
+
+ reduces to a simple Kalman Filter. For non-triangular fundamental diagrams which have the characteristics 
+\series bold
+LWR1-6
+\series default
+, a first order Taylor Series expansion is applied. Such a linearization is a good approximation. Then the Extended Kalman filter can be applied to each mode.
+\end_layout
+
+\begin_layout Standard
+
+In our case, the estimated sequence of modes 
+\begin_inset Formula $\hat{\boldsymbol m}^{0:t}$
+\end_inset
+
+ is readily infered through the Godunov scheme, and at all the cells along the link, including those where there is no observation. Contrary to some previous models as in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Munoz2003"
+
+\end_inset
+
+, the modes are not directly sampled from density measurements along the highway. However, the mode is still indirectly infered from those measurements by assimilating the observations with the 
+\shape italic
+update state
+\shape default
+ of the Kalman filter. Besides, we rely on the accuracy of the estimation of the mode provided by the Godunov scheme when we apply the Kalman filter for each mode. Such an assumption that favors the mode provided by the Godunov scheme is yet another reason why the sequential Monte-Carlo method (with the resampling step) is not used in the algorithm, because we then suppose that our sequence of modes is the one with the largest likelihoods. (to develop, do a test of likelihood)
+\end_layout
+
+\begin_layout Subsection
+
+Complexity
+\end_layout
+
+\begin_layout Standard
+
+Comparison with the Extended Kalman filter and matlab simulations and results
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "myBiblio"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+bibliographystyle{plain}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,8 @@
+openfig('calibration_denflow1.fig')
+openfig('calibration_denflow2.fig')
+openfig('calibration_denflow3.fig')
+openfig('calibration_denflow4.fig')
+openfig('calibration_denvel1.fig')
+openfig('calibration_denvel2.fig')
+openfig('calibration_denvel3.fig')
+openfig('calibration_denvel4.fig')
