@@ -498,11 +498,11 @@ Additionally, the observation model for the link is given by:
 
 \noindent where $H_{t}\in \{ 0,1 \}^{p_{t}\times n}$ is the linear observation observation matrix which encodes the $p_{t}$ observations (each one of them being at a discrete cell on the highway) for which the density is observed during discrete time step $t$, and $n$ is the number of cells along the link. The last term in (\ref{eq:observation}) is the white, zero mean observation noise $\boldsymbol\chi^{t} \sim N(0,R_{t})$ with covariance matrix $R_{t}$.
 
-\noindent The \textit{prediction} step is:
+\noindent Let $\boldsymbol\mu^{t-1}$ and $P_{t-1}$ be the state estimate and the error covariance matrix at time $t-1$. Then the \textit{prediction} step is:
 \begin{equation}
 \begin{array}{ll}
 \text{Predicted state estimate: } & \boldsymbol\mu^{t:t-1} = A_{\boldsymbol m} \boldsymbol\mu^{t-1} + b_{\boldsymbol m} + c_{t}
-\quad\text{if}\quad\boldsymbol\rho^{t-1}\in\textbf{P}_{\boldsymbol m}\\
+\quad\text{if}\quad\boldsymbol\mu^{t-1}\in\textbf{P}_{\boldsymbol m}\\
 \text{Predicted covariance estimate: } & P_{t:t-1} = A_{\boldsymbol m}P_{t-1}(A_{\boldsymbol m})^{T} + Q_{t-1}
 \end{array}
 \label{eq:predict}
@@ -648,7 +648,7 @@ d_{j}=\frac{d(\rho,\partial\textbf{H}_{j})}{a^{T}_{j} P_{t} a_{j}}\text{ for }j=
 
 \noindent for which we only look at the adjacent modes for which $d_{j}$ is less than a given threshold $d$. Intuitively, when there is a high variance $a^{T}_{j} P_{t} a_{j}$ along the direction $a_{j}$ orthogonal to $\partial\textbf{H}_{j}$, there is a higher probability that the state at the next time step is in the half-space $\textbf{H}^{d}_{j}$, which is the dual of $\textbf{H}_{j}$, and therefore in the adjacent mode $\boldsymbol s_{j}$ with common supportive hyperplane $\partial\textbf{H}_{j}$. We note that this is an approximation since the projection of $\rho$ on $\partial\textbf{H}_{j}$ is not always on a facet of the adjacent mode $\boldsymbol s_{j}$.
 
-Given $j\in\{0,...,k\}$ such that $d_{j}\leq d$, there exists $i'\in\{0,...,n\}$ such that
+Given $j\in\{0,...,k\}$, there exists $i'\in\{0,...,n\}$ such that
 
 \begin{equation}
 \begin{array}{l}
@@ -732,7 +732,73 @@ As the example shows, only the i'-th and (i'+1)-th entries of $\boldsymbol s_{j}
 
 \subsection{Prior gaussian distribution}
 
-we get a mixture of gaussians that is approximates by a gaussian. comparison with the gaussian distribution given by the EnKF
+TO DO: we get a mixture of gaussians that is approximates by a gaussian. comparison with the gaussian distribution given by the EnKF. Add references on the IMM, justify the formula of the weights cf. formula (3, 4, 5) in the state estimation for hybrid systems: applications to aircraft tracking.
+
+Let $\boldsymbol\mu^{t-1}$ and $P_{t-1}$ be the state estimate and the error covariance matrix at time $t-1$, $\boldsymbol s$ the mode of $\boldsymbol\mu^{t-1}$ (i.e. $\boldsymbol\mu^{t-1}\in \textbf{P}_{\boldsymbol s}$), $\bigcap_{j=0}^{k} \textbf{H}_{j}$ the minimal H-representation of $\textbf{P}_{\boldsymbol s}$, $\boldsymbol s_{j}$ for $j\in\{0,...,k\}$ the adjacent modes defined by (\ref{eq:modeSearch1}, \ref{eq:modeSearch2}, \ref{eq:modeSearch3}), and $d_{j}$ the ratio defined in (\ref{eq:ratio}). We look at the adjacent modes such that $d_{j}\leq d$ where $d$ is a threshold and apply the Kalman filter to each one of them:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Predicted state estimate in mode $j$: } & \boldsymbol\mu_{j}(t:t-1) = A_{\boldsymbol s_{j}} \boldsymbol\mu^{t-1} + b_{\boldsymbol s_{j}} + c_{t}\\
+\text{Predicted covariance estimate in mode $j$: } & P_{j}(t:t-1) = A_{\boldsymbol s_{j}}P_{t-1}(A_{\boldsymbol s_{j}})^{T} + Q_{t-1}
+\end{array}
+\label{eq:mixture1}
+\end{equation}
+
+\noindent The distribution of the predicted state is modeled as a mixture of Gaussian distributions, where each component $x_{j}=\mathcal{N}(\boldsymbol\mu_{j}(t:t-1), \text{ }P_{j}(t:t-1))$ is the distribution of the predicted state in mode $j$:
+
+\begin{equation}
+x = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}x_{j}}
+\label{eq:mixture2}
+\end{equation}
+
+\noindent where $W_{t}=\sum_{j\mid d_{j}\leq d}{w_{j}^{t}}$, and the weights $w_{j}^{t}$ are the likelihood function fo mode $j$:
+
+\begin{equation}
+w_{j}^{t} = \mathcal{N}(\boldsymbol r_{j}(t); \text{ }0, \text{ }S_{j}(t))
+\label{eq:weightsMixture}
+\end{equation}
+
+\noindent and $\boldsymbol r_{j}(t)$ is the residual produced by the Kalman filter $j$, and $S_{j}(t)$ the corresponding residual covariance:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Measurement residual in mode $j$: } & \boldsymbol r_{j}(t) = \boldsymbol z^{t} - H_{t}\boldsymbol\mu_{j}(t:t-1)\\
+\text{Residual covariance in mode $j$: } & S_{j}(t) = H_{t}P_{j}(t:t-1)H_{t}^{T}+R_{t}
+\end{array}
+\label{eq:weightsMixture2}
+\end{equation}
+
+\noindent It follows that the mean is:
+
+\begin{equation}
+\boldsymbol \mu = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\boldsymbol\mu_{j}}
+\label{eq:mixture3}
+\end{equation}
+
+\noindent and the second moment is:
+
+\begin{equation}
+\boldsymbol \mu^{(2)} = E\left[xx^{T}\right]= \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}E\left[x_{j}x^{T}_{j}\right]} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\left(P_{j} + \boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j}\right)}
+\label{eq:mixture4}
+\end{equation}
+
+\noindent Then the covariance $\Sigma$ is
+
+\begin{equation}
+\Sigma = \boldsymbol\mu^{(2)} - \boldsymbol\mu \boldsymbol\mu^{T} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\left(P_{j} + \boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j}\right)} - \frac{1}{W^{2}_{t}}\sum_{j,j'\mid d_{j},d_{j'}\leq d}{w_{j}^{t}w_{j'}^{t}\boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j'}}
+\label{eq:mixture5}
+\end{equation}
+
+Finally, we assume that the distribution of the predicted state, which is the mixture of gaussians, is a single multivariate gaussian variable with mean $\boldsymbol \mu^{t:t-1}$ and covariance $P_{t:t-1}$ such that:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Predicted state: } & \boldsymbol \mu^{t:t-1} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\boldsymbol\mu_{j}}\\
+\text{Predicted covariance: } & P_{t:t-1} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\left(P_{j} + \boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j}\right)} - \frac{1}{W^{2}_{t}}\sum_{j,j'\mid d_{j},d_{j'}\leq d}{w_{j}^{t}w_{j'}^{t}\boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j'}}
+\end{array}
+\label{eq:mixture6}
+\end{equation}
+
 
 \subsection{Analysis}
 
