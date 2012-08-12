@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{I Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{II Traffic flow modelling}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{II-A The LWR Model}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{II-B Numerical Discretization}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{III A polyhedral piecewise affine model}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{III-A Decomposition in different ``modes''}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{III-B Polyhedral piecewise affine formulation}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{IV Extended Kalman filter}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{IV-A Mode detection}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{IV-B Kalman filter algorithm}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.3}{IV-C Implementation and complexity}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.4}{IV-D Analysis}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{V Reduced Multiple Mode Kalman filter}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{V-A Motivation and definitions}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{V-B Neighbor modes search}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{V-C Prior gaussian distribution}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.4}{V-D Analysis}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{VI Conclusion and Future Work}{}% 18
+\BOOKMARK [1][-]{section.7}{VII Acknowledgement}{}% 19
+\BOOKMARK [1][-]{section*.5}{Appendix}{}% 20
+\BOOKMARK [2][-]{subsection.Appendix.A.1}{A H-representation of a polyhedron}{section*.5}% 21
+\BOOKMARK [2][-]{subsection.Appendix.A.2}{B Algorithm to find the minimal H-representation}{section*.5}% 22
+\BOOKMARK [2][-]{subsection.Appendix.A.3}{C Proof of the exclusivity of all \(n+1\)-adjcacencies}{section*.5}% 23
+\BOOKMARK [2][-]{subsection.Appendix.A.4}{D Number of modes and intractibility}{section*.5}% 24
+\BOOKMARK [2][-]{subsection.Appendix.A.5}{E Algorithm for the prediction step}{section*.5}% 25
+\BOOKMARK [2][-]{subsection.Appendix.A.6}{F Accuracy}{section*.5}% 26
+\BOOKMARK [2][-]{subsection.Appendix.A.7}{G Complexity}{section*.5}% 27
+\BOOKMARK [1][-]{section*.10}{References}{}% 28

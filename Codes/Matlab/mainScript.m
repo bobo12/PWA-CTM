@@ -70,7 +70,7 @@ NID = 132;
 % Plot density?
 PLOT_FIG = true;
 
-ALGORITHM = 'EnKF';
+ALGORITHM = 'EKFmode';
 
 route = buildRoute(ROUTE_LINK_IDS, NID, START_TIME, END_TIME, ...
                     DIRECTION, RHO_MAX, START_HOUR, END_HOUR);

@@ -1,0 +1,146 @@
+\section{Extended Kalman filter}
+
+The Extended Kalman filter provides the state estimate $\hat{\boldsymbol\rho}^{t}$ as a gaussian distribution with mean $\boldsymbol\mu^{t}$ and covariance $P_{t}$ given the sequence of observations $\boldsymbol z^{0:t}$, and sequence of control parameters $c^{0:t}$. We present here an algorithm for the implementation of the Extended Kalman filter to the Cell Transmission Model with $n$ cells, which is a piecewise affine model we have seen earlier. Note that the state at time $t$ is $\boldsymbol\rho^{t} = (\rho^{t}_{0},\rho^{t}_{1},...,\rho^{t}_{n},\rho^{t}_{n+1})$, a vector of dimension $n+2$ that includes the two ghost cells $0$ and $n+1$ which are the boundary conditions. When the state is in mode $\boldsymbol m^{t}$, this boils down to applying the coresponding Kalman filter with the update matrix $A_{\boldsymbol m}$ defined in \ref{eq:matrixA}.
+
+
+\subsection{Mode detection}
+
+We present here a simple procedure to detect the mode of the state $\boldsymbol\rho$. It relies on the definition of polyhedra as a finite number of half-spaces (see Appendix \ref{sec:polytope}). For a state $\boldsymbol\rho = (\rho_{0},\rho_{1},...,\rho_{n},\rho_{n+1})$, a n+2 dimensional vector which describes the state of the link in the space $\mathcal{S} = [0,\rho_{j}]^{n+2}$, we present an algorithm that detects the mode of the state $\boldsymbol m$ (or $\boldsymbol s$) and provides a minimal H-representation of the polyhedron $P_{\boldsymbol m}$ (or $P_{\boldsymbol s}$). We first introduce the following indicator functions:
+
+\begin{equation}
+\begin{array}{l}
+\alpha_{i}(\boldsymbol\rho)=1_{\{\rho_{i+1} + \frac{v_{f}}{\omega_{f}}\rho_{i}>\rho_{\text{jam}}\}}\\
+\beta_{i}(\boldsymbol\rho)=1_{\{\rho_{i}>\rho_{c}\}}\\
+\gamma_{i}(\boldsymbol\rho)=1_{\{\rho_{i+1}>\rho_{c}\}}
+\end{array}
+\text{for }i=0,1,...,n
+\label{eq:indicators}
+\end{equation}
+
+\noindent and we note $\textbf{H}_{\alpha_{i}}$, $\textbf{H}_{\beta_{i}}$, and $\textbf{H}_{\gamma_{i}}$ the corresponding half-spaces. The dual half-spaces $\mathcal{S}\backslash \textbf{H}$ are denoted by $\textbf{H}^{d}_{\alpha_{i}}$, $\textbf{H}^{d}_{\beta_{i}}$, and $H^{d}_{\gamma_{i}}$ and the corresponding indicator functions are $1-\alpha_{i}(\boldsymbol\rho)$, $1-\beta_{i}(\boldsymbol\rho)$, and $1-\gamma_{i}(\boldsymbol\rho)$. We can notice that $\beta_{i+1}(\boldsymbol\rho)=\gamma_{i}(\boldsymbol\rho)$. Since we have:
+
+\begin{equation}
+\begin{array}{ll}
+\textbf{W}_{i}&=\textbf{H}_{\alpha_{i}}\cap \textbf{H}_{\gamma_{i}}\\
+\textbf{L}_{i}&=\textbf{H}_{\beta_{i}}\cap \textbf{H}^{d}_{\gamma_{i}}\\
+\textbf{D}_{i}&=\textbf{H}^{d}_{\alpha_{i}}\cap \textbf{H}^{d}_{\beta_{i}}
+\end{array}
+\label{eq:Hrepresentation3}
+\end{equation}
+
+\noindent for the polyhedra defined in (\ref{eq:regions3})), their indicator functions are:
+
+\begin{equation}
+\begin{array}{l}
+w_{i}(\boldsymbol\rho)=\alpha_{i}(\boldsymbol\rho)\gamma_{i}(\boldsymbol\rho)\\
+l_{i}(\boldsymbol\rho)=\beta_{i}(\boldsymbol\rho)(1-\gamma_{i}(\boldsymbol\rho))\\
+d_{i}(\boldsymbol\rho)=(1-\alpha_{i}(\boldsymbol\rho))(1-\beta_{i}(\boldsymbol\rho))
+\end{array}
+\text{for }i=0,1,...,n
+\label{eq:indicators2}
+\end{equation}
+
+Hence, evaluating the indicator functions $\alpha_{i}(\boldsymbol\rho)$, $\beta_{i}(\boldsymbol\rho)$, and $\gamma_{i}(\boldsymbol\rho)$ for $i=0,...,n$ gives the mode $\boldsymbol m$ of state $\boldsymbol\rho$. Equations (\ref{eq:Hrepresentation}, \ref{eq:Hrepresentation2}, \ref{eq:Hrepresentation3}) give an H-representation of $P_{\boldsymbol s}$ (see appendix \ref{sec:polytope} for a formal definition of an H-representation).
+
+
+\subsection{Kalman filter algorithm}
+
+In order to use the \textit{Kalman filter} to estimate the state of the link given a sequence of noisy observations, we model the process by adding a white noise to the underlying dynamic system model. The ``true'' state at time $t+1$, namely $\boldsymbol\rho^{t+1}$, is then:
+
+\begin{equation}
+\boldsymbol\rho^{t+1} = A_{\boldsymbol m} \boldsymbol\rho^{t} + b_{\boldsymbol m} + c_{t+1} + \boldsymbol\eta^{t+1} \quad\text{if}\quad\boldsymbol\rho^{t}\in\textbf{P}_{\boldsymbol m}
+\label{eq:underlyingSystemDN3}
+\end{equation}
+
+\noindent where $\boldsymbol\eta^{t}\sim N(0,Q_{t})$ is the Gaussian zero-mean, white state noise with covariance $Q_{t}$. To apply the \textit{control update} of the Kalman filter, it is then necessary to know the mode $\boldsymbol m$ of the state $\boldsymbol\rho^{t}$ (i.e. $\boldsymbol m$ such that $\textbf{P}_{\boldsymbol m}$).
+
+Additionally, the observation model for the link is given by:
+
+\begin{equation}
+\boldsymbol y^{t} = H_{t}\boldsymbol\rho^{t} + \boldsymbol\chi^{t}
+\label{eq:observation}
+\end{equation}
+
+\noindent where $H_{t}\in \{ 0,1 \}^{p_{t}\times n}$ is the linear observation observation matrix which encodes the $p_{t}$ observations (each one of them being at a discrete cell on the highway) for which the density is observed during discrete time step $t$, and $n$ is the number of cells along the link. The last term in (\ref{eq:observation}) is the white, zero mean observation noise $\boldsymbol\chi^{t} \sim N(0,R_{t})$ with covariance matrix $R_{t}$.
+
+\noindent Let $\boldsymbol\mu^{t}$ and $P_{t}$ be the state estimate and the error covariance matrix at time $t$. Then the \textit{prediction} step is:
+\begin{equation}
+\begin{array}{ll}
+\text{Predicted state estimate: } & \boldsymbol\mu^{t+1:t} = A_{\boldsymbol m} \boldsymbol\mu^{t} + b_{\boldsymbol m} + c_{t+1}
+\quad\text{if}\quad\boldsymbol\mu^{t}\in\textbf{P}_{\boldsymbol m}\\
+\text{Predicted covariance estimate: } & P_{t+1:t} = A_{\boldsymbol m}P_{t}(A_{\boldsymbol m})^{T} + Q_{t}
+\end{array}
+\label{eq:predict}
+\end{equation}
+
+\noindent The \textit{update} step is:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Measurement residual: } & \boldsymbol r_{t+1} = \boldsymbol z^{t+1} - H_{t+1}\boldsymbol\mu^{t+1:t}\\
+\text{Residual covariance: } & S_{t+1} = H_{t+1}P_{t+1:t}H_{t+1}^{T}+R_{t+1}\\
+\text{Kalman gain: } & K_{t+1} = P_{t+1:t}H_{t+1}^{T}S_{t+1}^{-1}\\
+\text{Updated state estimate: } & \boldsymbol\mu^{t+1} = \boldsymbol\mu^{t+1:t} + K_{t+1} \boldsymbol r_{t+1}\\
+\text{Updated estimate covariance: } & P_{t+1} = (I - K_{t+1}H_{t+1})P_{t+1:t}
+\end{array}
+\label{eq:update}
+\end{equation}
+
+\subsection{Implementation and complexity}\label{sec:implementation}
+
+Since the number of modes grows exponentially as the number of cells increase
+s (see Appendix \ref{sec:modes}), it is computationally expensive to store a matrix $A_{\boldsymbol m}$ for each mode $\boldsymbol m$. Fortunately, it is possible to compute the \textit{predicted state estimate} $\boldsymbol\mu^{t+1:t}$ and the \textit{predicted covariance estimate} $P_{t+1:t}$ in linear time and quadratic time respectively, without forming any dense matrix $A_{\boldsymbol m}$. This relies on the tridiagonality of $A_{\boldsymbol m}$ and the homogeneity of the segment of road considered, which requires to store only the seven possible modes at each cell\footnotemark.
+
+\footnotetext{
+In the case of a heterogeneous road (i.e. a different fundamental diagram for each cell), up to all nine possible local modes for each cell have to be stored, which is still bound by $9\times n$, where $n$ is the number of cells.
+}
+
+In particular, equation (\ref{eq:underlyingSystemDN}) gives a simple procedure to compute $\boldsymbol\mu^{t+1:t}$ in linear time from $\boldsymbol\mu^{t}$, $J_{DN}$, $w$, and $c_{t+1}$, by knowing $\boldsymbol m$ such that $\boldsymbol\mu^{t+1:t}\in\textbf{P}_{\boldsymbol m}$:
+
+\begin{equation}
+\rho^{t+1}_{i} = \begin{cases}
+L_{m_{i}}.\left( \begin{array}{c}
+\rho^{t}_{i-1}\\
+\rho^{t}_{i}\\
+\rho^{t}_{i+1}
+\end{array} \right)
++ w_{m_{i}} & \text{for}\quad i=1,...,n\\
+u^{t+1} & \text{for}\quad i=0\\
+d^{t+1} & \text{for}\quad i=n+1
+\end{cases}
+\label{eq:underlyingSystemDNcopy}
+\end{equation}
+
+\noindent Similarly, the double product $A_{\boldsymbol m}P_{t}(A_{\boldsymbol m})^{T}$ can be computed in quadratic time from $P_{t}$ and $J_{DN}$.
+
+\begin{equation}
+(A_{\boldsymbol m}P_{t})_{i,j} = \begin{cases}
+0 & \text{ if } i\in\{0,n+1\}\text{ or }j\in\{0,n+1\}\\
+L_{m_{i}}.\left( \begin{array}{c}
+p_{i-1,j}\\
+p_{i,j}\\
+p_{i+1,j}
+\end{array} \right) & \text{ if } (i,j)\in\{1,...,n\}^{2}
+\end{cases}
+\label{eq:predictedCovarianceComputation}
+\end{equation}
+
+\noindent where $L_{m_{i}}$ is the $m_{i}$-th line of $J_{DN}$, $m_{i}$ the $i$-th entry of $\boldsymbol m$, and $p_{i,j}$ is the entry $(i,j)$-th entry of $P_{t-1}$. And the computation of the second matrix multiplication is:
+
+\begin{equation}
+(A_{\boldsymbol m}P_{t}(A_{\boldsymbol m})^{T})_{i,j} = \begin{cases}
+0 & \text{ if } i\in\{0,n+1\}\text{ or }j\in\{0,n+1\}\\
+(q_{i,j-1}\quad q_{i,j}\quad q_{i,j+1}).L_{m_{j}}^{T} & \text{ if } (i,j)\in\{1,...,n\}^{2}
+\end{cases}
+\label{eq:predictedCovarianceComputation2}
+\end{equation}
+
+\noindent where $q_{i,j}$ is the entry $(i,j)$-th entry of $A_{\boldsymbol m}P_{t}$. We can note that the first line and first column of $P_{t}$ have only zero elements because the boundary condition $\rho^{t}_{0}=u^{t}$ is deterministic (i.e. $\text{cov}(u^{t},\rho^{t}_{i})=0$ for $i=1,\cdots,n$), and similarly the last line and last column of $P_{t}$ are null since the boundary condition $\rho^{t}_{n+1}=d^{t}$ is deteministic.
+
+The three equations (\ref{eq:underlyingSystemDNcopy}, \ref{eq:predictedCovarianceComputation}, \ref{eq:predictedCovarianceComputation2}) show that both time complexity and space complexity of the \textit{prediction step} are $O(n^{2})$.
+
+TO DO: complexity of the EKF vs the EnKF vs...
+
+\subsection{Analysis}
+
+TO DO: Not tuned because of the discontinuities in the derivative? But should perform well when the highway is in a mode for a long time.

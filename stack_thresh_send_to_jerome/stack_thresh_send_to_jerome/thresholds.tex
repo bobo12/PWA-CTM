@@ -1,0 +1,23 @@
+% !TEX root = stack-thresh.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Stackelberg threshold}
+\label{sec:threshold}
+
+Now that we have an exact analytical expression of the total cost of a Stackelberg equilibrium as a function of the compliance rate, it becomes easy to express the Stackelberg threshold, or the minimum compliance rate the leader needs to control in order to achieve a strict improvement.
+% By Theorem~\ref{thm:cost}, we know that this compliance rate is also the minimal rate such that the support of the induced equilibrium has strictly less links than the best Nash equilibrium of the total users.
+
+\begin{proposition}
+\label{prop:thresh}
+The Stackelberg threshold is equal to ${ 1 - \frac{\maxR{j_0-1}}{\demand} }$ where $k_{j_0} = k(0) = \min \{k | \demand \leq \demandMax{k}\}$.
+\end{proposition}
+
+\begin{proof}
+Let $\compRate^\star$ be the Stackelberg threshold. By definition, $\alpha^\star = \min \left\{ \compRate : C_{\mbox{NCF}}(\cR) < C_{\mbox{NCF}}(0) \right\} $.
+
+By Proposition~\ref{prop:j_0}, we have ${ 0 \in I_{j_0} }$, thus ${ C_{\mbox{NCF}}(0) = C_{j_0} }$. And if $\compRate \in I_j$, then $C_{\mbox{NCF}}(\compRate) = C_j$. Thus ${ \compRate^\star =  \min \left\{ \compRate \in I_j : C_j < C_{j_0} \right\} }$ and by Theorem~\ref{thm:cost},
+\[
+\compRate^\star = \min \left\{ \compRate \in I_{j_0 - 1} \right\}
+\]
+Therefore the Stackelberg threshold is simply given by the lower bound of interval $I_{j_0 - 1}$, i.e. $\compRate^\star = 1 - \frac{\maxR{j_0-1}}{\demand}$.
+\end{proof}

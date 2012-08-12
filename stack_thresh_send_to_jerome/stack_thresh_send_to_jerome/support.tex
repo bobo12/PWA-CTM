@@ -1,0 +1,143 @@
+% !TEX root = stack-thresh.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supports of equilibria induced by the NCF strategy}
+\label{sec:support}
+
+In this section, we show some properties of the supports of the non-compliant equilibrium and the Stackelberg equilibrium induced by the NCF strategy. We consider Stackelberg instances with a fixed number of links~$\NLinks$, a fixed demand~$\demand$, and a variable compliance rate~$\compRate$. Let $\sV^{(\cR)} = \stdStack \NCF$ be the NCF strategy as defined in equation~\eqref{eq:NCF}, $(\tV^{(\cR)}, \modeV^{(\cR)}) = (\tV(\sV^{(\cR)}), \modeV(\sV^{(\cR)}))$ the induced equilibrium of the non-compliant flow as defined in Equations~\eqref{eq:NCF-ncMode} and~\eqref{eq:NCF-ncFlow}, and $\flowV^{(\cR)} = \sV^{(\cR)} + \tV^{(\cR)}$ the total flow of the Stackelberg equilibrium as defined in equation~\eqref{eq:NCF-totalFlow}.
+
+\vspace{5pt}
+\begin{definition}
+We denote by $\lastStack{\cR}$ the last link in the support of the Stackelberg equilibrium induced by the NCF strategy\footnote{In fact, it is shown in~\cite{krichene12} that any optimal Stackelberg strategy induces the same Stackelberg equilibrium~$\flowV^{(\cR)}$ as the NCF strategy.}, i.e.
+\begin{equation}
+\lastStack{\cR} = \max \Supp{\flowV^{(\cR)}}
+\label{eq:lastStack}
+\end{equation}
+\end{definition}
+
+\vspace{5pt}
+\begin{definition}
+We denote by $\lastNC{\cR}$ the last link in the support of the non-compliant equilibrium induced by the NCF strategy, i.e.
+\begin{equation}
+\lastNC{\cR} = \max \Supp{\tV^{(\cR)}}
+\label{eq:lastNC}
+\end{equation}
+\end{definition}
+
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Properties of $\lastNC{\cR}$}
+
+By definition, $(\tV^{(\cR)}, \modeV^{(\cR)})$ is the best Nash equilibrium for the instance $(\NLinks, (1-\compRate)\demand)$. Thus by Proposition~\ref{prop:lastNash}, the last link in its support is also given by
+\begin{align}
+\lastNC{\cR}
+& = \min \left\{k: (1-\compRate)r \leq \demandMax{k} \right\}
+\label{eq:lastNC2}
+\end{align}
+
+\begin{remark}
+\label{rem:max}
+We observe that $\demandMax{\lastNC{\cR}} > \demandMax{\lastNC{\cR} - 1}$ (otherwise $\lastNC{\cR}$ would not be minimal and this would contradict equation~\eqref{eq:lastNC2}), therefore we also have
+\begin{equation}
+\demandMax{\lastNC{\cR}} = \flowMax_{\lastNC{\cR}} + \sum_{n=1}^{\lastNC{\cR}-1} \cFlow{n}{\lastNC{\cR}}\end{equation}
+\end{remark}
+
+\begin{proposition}
+\label{prop:lastNC_decreasing}
+For all compliance rates $\cR_1 \leq \cR_2$, the best Nash equilibrium of ${ (\NLinks,(1-\compRate_2)\demand) }$ uses at most as many links as the best Nash equilibrium of ${ (\NLinks, (1-\compRate_1)\demand) }$. In other words, $\compRate \mapsto \lastNC{\compRate}$ is non-increasing.
+\end{proposition}
+
+\begin{proof}
+Let $\cR_1 \leq \cR_2$. We have $\forall k$ such that $(1-\cR_1)\demand \leq \demandMax{k}$, $(1-\compRate_2)\demand \leq (1-\compRate_1)\demand \leq \demandMax{k} $. Thus
+\[
+\{k: (1-\cR_1)\demand \leq \demandMax{k}\} \subset \{k: (1-\cR_2)\demand \leq \demandMax{k}\}
+\] 
+Therefore using characterization~\eqref{eq:lastNC2}, we have $ \lastNC{\cR_2} \leq \lastNC{\cR_1}$.
+\end{proof}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Properties of $\lastStack{\cR}$}
+
+In the next two propositions, we show how the support~$\lastNC{\cR}$ of the non-compliant equilibrium affects the support $\lastStack{\cR}$ of the NCF strategy.
+
+\begin{proposition}
+\label{prop:lastStack_constant}
+For two given compliance rates, $\cR_1$ and~$\cR_2$, if the best Nash equilibria of the instances ${ (\NLinks,(1-\compRate_1)\demand) }$ and ${ (\NLinks, (1-\compRate_2)\demand) }$ have the same support, then the Stackelberg equilibria induced by the NCF strategy for the instances $(\NLinks, \demand, \compRate_1)$ and $(\NLinks, \demand, \compRate_2)$ have the same support. In other words,
+\[
+\lastNC{\cR_1} = \lastNC{\cR_2} \Rightarrow \lastStack{\cR_1}=\lastStack{\cR_2}
+\]
+Additionally, we have $\flowV^{(\cR_1)} = \flowV^{(\cR_2)}$.
+\end{proposition}
+
+\begin{proof}
+Let $\cR_1, \cR_2 \in [0,1]$ be two compliance rates such that $\lastNC{\cR_1} = \lastNC{\cR_2} = k$, and suppose by contradiction that $\lastStack{\cR_1} \neq \lastStack{\cR_2}$. We assume without loss of generality that $\lastStack{\cR_2} > \lastStack{\cR_1}$. The total flow assignments $\flowV^{(\cR_1)}$ and $\flowV^{(\cR_2)}$ both sum to $\demand$, thus we have from the expression~\eqref{eq:NCF-totalFlow} of the total flows
+\begin{align}
+\demand & = \demandMax{k} + \sum_{n=k+1}^{\lastStack{\cR_1}} \flowMax_n + \flow^{(\cR_1)}_{\lastStack{\cR_1}} \label{prop:lastStack_constant-1}\\
+ &= \demandMax{k} + \sum_{n = k+1}^{\lastStack{\cR_2}} \flowMax_n + \flow^{(\cR_2)}_{\lastStack{\cR_2}} \label{prop:lastStack_constant-2}
+\end{align}
+Substracting~\eqref{prop:lastStack_constant-1} from~\eqref{prop:lastStack_constant-2}, we have
+\[
+\left( \sum_{n = \lastStack{\cR_1}+1}^{\lastStack{\cR_2}-1} \flowMax_n \right) + \left( \flowMax_{\lastStack{\cR_1}} - \flow^{(\cR_1)}_{\lastStack{\cR_1}} \right) + \flow^{(\cR_2)}_{\lastStack{\cR_2}} = 0
+\]
+Since every term in the sum is non-negative, all terms are zero. In particular, $\flow^{(\cR_2)}_{\lastStack{\cR_2}} = 0$ which contradicts the definition of $\lastStack{\cR_2}$ as the last link in the support of the Stackelberg equilibrium.
+Therefore we have $\lastStack{\cR_2} = \lastStack{\cR_1}$. Finally, we observe from the expression~\eqref{eq:NCF-totalFlow} that~$\flowV^{(\cR)}$ is entirely determined by $\lastNC{\cR}$ and~$\lastStack{\cR}$. This proves that $\flowV^{(\cR_1)} = \flowV^{(\cR_2)}$.
+\end{proof}
+
+
+
+\begin{proposition}
+\label{prop:lastStack}
+Let $\cR_1, \cR_2 \in [0,1]$. Then we have
+\[
+\lastNC{\cR_1} > \lastNC{\cR_2} \Rightarrow \lastStack{\cR_1} \geq \lastStack{\cR_2}
+\]
+\end{proposition}
+
+\begin{proof}
+Let $\cR_1, \cR_2 \in [0,1]$ be two compliance rates such that $\lastNC{\cR_1} > \lastNC{\cR_2}$, and suppose by contradiction that $\lastStack{\cR_1} < \lastStack{\cR_2}$. The total flow assignments $\flowV^{(\cR_1)}$ and $\flowV^{(\cR_2)}$ are given by
+\begin{multline*}
+\flowV^{(\cR_1)} = \big( \cFlow{1}{\lastNC{\cR_1}}, \dots, \cFlow{\lastNC{\cR_1} - 1}{\lastNC{\cR_1}}, \\
+\flowMax_{\lastNC{\cR_1}}, \dots, \flowMax_{\lastStack{\cR_1} - 1}, 
+s_{\lastStack{\cR_1}}, 0, \dots, 0 \big)
+\end{multline*}
+\begin{multline*}
+\flowV^{(\cR_2)} = \big( \cFlow{1}{\lastNC{\cR_2}}, \dots, \cFlow{\lastNC{\cR_2} - 1}{\lastNC{\cR_2}}, \\
+\flowMax_{\lastNC{\cR_2}}, \dots, \flowMax_{\lastStack{\cR_2} - 1}, 
+s_{\lastStack{\cR_2}}, 0, \dots, 0 \big)
+\end{multline*}
+Since the congestion flow $\cFlow{n}{k}$ is a decreasing function of $k$, and since $\lastNC{\cR_1} > \lastNC{\cR_2}$, we have ${ \forall n \in \{ 1, \dots, \lastNC{\cR_2} - 1\} }$, ${ \cFlow{n}{\lastNC{\cR_1}} < \cFlow{n}{\lastNC{\cR_2}} }$, i.e.
+\begin{equation}
+\forall n \in \{ 1, \dots, \lastNC{\cR_2} - 1\}, \ \flow_n^{(\cR_1)} <  \flow_n^{(\cR_2)} 
+\label{eq:lastStack-proof-1}
+\end{equation}
+we also have $\forall n \in \{ \lastNC{\cR_2}, \dots, \lastStack{\cR_1} \}$, $\flow_n^{(\cR_2)} = \flowMax_n$, thus by definition of the maximum flow, 
+\begin{equation}
+\forall n \in \{ \lastNC{\cR_2}, \dots, \lastStack{\cR_1} \}, \ \flow_n^{(\cR_1)} \leq \flow_n^{(\cR_2)}
+\label{eq:lastStack-proof-2}
+\end{equation}
+Summing inequalities~\eqref{eq:lastStack-proof-1} and~\eqref{eq:lastStack-proof-2}, we have
+\[
+\sum_{n = 1}^{\lastStack{\cR_1}} \flow_n^{(\cR_1)} < \sum_{n = 1}^{\lastStack{\cR_1}} \flow_n^{(\cR_2)}
+\]
+but $\sum_{n = 1}^{\lastStack{\cR_1}} \flow_n^{(\cR_1)} = \demand$, and $\sum_{n = 1}^{\lastStack{\cR_1}} \flow_n^{(\cR_2)} \leq \sum_{n = 1}^{\lastStack{\cR_2}} \flow_n^{(\cR_2)} = \demand$. This leads to a contradiction and completes the proof.
+\end{proof}
+
+
+\begin{lemma}
+\label{lem:lastStack_decreasing}
+For all compliance rates $\cR_1 \leq \cR_2$, the Stackelberg equilibrium induced by~$\sV^{(\cR_2)}$ uses at most as many links as the Stackelberg equilibrium induced by~$\sV^{(\cR_1)}$. In other words, $\cR \mapsto \lastStack{\cR}$ is non-increasing.
+\end{lemma}
+\begin{proof}
+This follows from Propositions~\ref{prop:lastNC_decreasing},~\ref{prop:lastStack_constant}, and~\ref{prop:lastStack}.
+\end{proof}
+
+\begin{corollary}
+\label{corollary:StackVSNash}
+The best Stackelberg assignment uses at most as many links as the Best Nash equilibrium, i.e. ${ \lastStack{\cR} \leq \lastNC{0} }$, for any $\cR \in [0,1]$.
+\end{corollary}
+\begin{proof}
+In Stackelberg instance $(\NLinks, \demand, 0)$, since there is no compliant flow to assign, the last link in the support of the total flow $\flowV^{(0)}$ is the last link in the support of the non-compliant flow $\tV^{(0)}$, i.e. $\lastStack{0} = \lastNC{0}$, and since $\cR \geq 0$, we have $\lastStack{\cR} \leq \lastStack{0}$ by Lemma~\ref{lem:lastStack_decreasing}. This completes the proof.
+\end{proof}
+
+This corollary states that increasing the compliance rate not only improves the system-wide cost, but it may also allow the central coordinator to use less infrastructure.
+

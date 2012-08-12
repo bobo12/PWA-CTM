@@ -1,0 +1,116 @@
+%============================================================================================
+% Math symbols
+\newcommand \Rbb{\mathbb{R}}
+%\newcommand \coloneqq{:=} defined in mathtools package
+\newcommand \supp{\textup{supp}}
+\newcommand \Supp[1]{ \supp \left( #1 \right) }
+\newcommand \eqDef{\overset{\Delta}{=}}
+
+\newcommand \vect[1]{\boldsymbol #1}
+\newcommand \qed {\begin{flushright} $\blacksquare$ \end{flushright}}
+%============================================================================================
+% Variables 
+\newcommand \flow{x}
+\newcommand \flowV{\vect \flow}
+\newcommand \flowMax{\flow^{\max}}
+\newcommand \mode{m}
+\newcommand \modeV{\vect \mode}
+
+\newcommand \mass{\rho}
+\newcommand \massMax{\mass^{\max}}
+\newcommand \massCrit{\mass^{\text{crit}}}
+
+\newcommand \speedFF{v^{f}}
+\newcommand \speedCong{v^{c}}
+
+%============================================================================================
+% Parameters
+\newcommand \length{L}
+\newcommand \NLinks{N}
+\newcommand \compRate{\alpha}
+\newcommand \cR{\compRate}
+\newcommand \demand{r}
+\newcommand \demandMax[1]{\demand^{\textup{NE}} ( #1 ) }
+\newcommand \parA{a}
+
+%============================================================================================
+% Notation
+\newcommand \link{n}
+
+% Stackelberg thresholds notation
+\newcommand \lastNash[1]{b(#1)}
+\newcommand \lastStack[1]{l(#1)}
+\newcommand \lastNC[1]{k(#1)}
+\newcommand \selfish[1]{\demand_{#1}}
+\newcommand \cardNash{c}
+\newcommand \maxR[1]{\demandMax{k_{#1}}}
+% 
+
+\newcommand \cFlow[2]{ \hat{\flow}_{#1} ( #2 ) }
+\newcommand \ffNashMode[1]{ \modeV^{#1}}
+\newcommand \ffNashFlow[2]{\flowV^{#1,#2}}
+
+\newcommand \stackFlow{s}
+\newcommand \sV{\vect \stackFlow}
+\newcommand \respFlow{t}
+\newcommand \tV{\vect \respFlow}
+\newcommand \epsV{\vect \epsilon}
+
+
+\newcommand \latency{\ell}
+\newcommand \latencyMass{\latency^{\mass}}
+\newcommand \totalLatency{C}
+\newcommand \massCongFunc{\mass^{\text{cong}}}
+
+\newcommand \BNE[2]{\textup{BNE} (#1, #2) }
+\newcommand \NE[2]{\textup{NE} (#1, #2) }
+\newcommand \NEf[2]{\textup{NE}_\textup{f} (#1, #2) }
+\newcommand \NEc[2]{\textup{NE}_\textup{c} (#1, #2) }
+\newcommand \NCF[3]{\textup{NCF} (#1, #2, #3) }
+\newcommand \stackSet[3]{\textup{S} (#1, #2, #3) }
+\newcommand \stackSetOpt[3]{\textup{S}^\star (#1, #2, #3) }
+\newcommand \POS[3]{\textup{POS} (#1,#2, #3)}
+\newcommand \SO[2]{\textup{SO} (#1,#2)}
+
+\newcommand \std[1] {#1{\NLinks}{\demand}}
+\newcommand \stdStack[1]{#1{\NLinks}{\demand}{\compRate}}
+
+
+%============================================================================================
+% over braces and under braces
+\usepackage{mathtools}
+
+\newcommand \overbrac[3]{
+\overbracket{\vphantom{#1} #2}^{\mathclap{#3}}
+}
+\newcommand \underbrac[3]{
+\underbracket{\vphantom{#1} #2}_{\mathclap{#3}}
+}
+
+\newcommand \overbracBig[2]{
+\overbrac{\Big(}{#1}{#2}
+}
+\newcommand \underbracBig[2]{
+\underbrac{\Big(}{#1}{#2}
+}
+
+\newcommand \overbracbig[2]{
+\overbrac{\big(}{#1}{#2}
+}
+\newcommand \underbracbig[2]{
+\underbrac{\big(}{#1}{#2}
+}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+% some definitions for the table
+\newcommand{\vcell}[2][c]{
+\begin{tabular}[t]{@{}p{#1}@{}}
+#2
+\end{tabular}
+}
+
+\def \bul{$\centerdot$ }
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+

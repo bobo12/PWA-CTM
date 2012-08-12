@@ -1,0 +1,36 @@
+% !TEX root = stack-thresh.tex
+
+\begin{abstract}
+We study Stackelberg routing games on parallel networks with horizontal queues, in which a coordinator (leader) controls a fraction $\compRate$ of the total flow on the network, and the remaining players (followers) choose their routes selfishly. The objective of the coordinator is to minimize a system-wide cost function, the total travel-time, while anticipating the response of the followers. 
+
+Nash equilibria of the routing game (with zero control) are known to be inefficient in the sense that the total travel-time is sub-optimal. Increasing the \emph{compliance rate}~$\compRate$ improves the cost of the equilibrium, and we are interested in particular in the \emph{Stackelberg threshold}, i.e. the minimal compliance rate that achieves a \emph{strict} improvement. In this work, we derive the optimal Stackelberg cost as a function of the compliance rate~$\compRate$, and obtain, in particular, the expression of the Stackelberg threshold.
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{Motivation and related work}
+
+Non-cooperative network routing games model the interaction of selfish network users. Each player chooses a route that  minimizes their individual travel-time. A Nash equilibrium, or Wardrop equilibrium~\cite{wardrop1952some}, is a route assignment in which each player cannot improve their individual travel-time by unilaterally switching their route. The system-wide cost of a Nash equilibrium is, in general, sub-optimal, i.e. worse than the cost of the social optimum where a central coordinator assigns routes to every player in order to minimize the total cost \cite{roughgarden2002bad}.
+
+In order to \textit{cope with selfishness}, i.e. to reduce the cost of Nash equilibria, different tools have been studied, including congestion pricing~\cite{Ozdaglar2007}, capacity allocation~\cite{Korilis97capacityallocation} and Stackelberg routing~\cite{roughgarden2001stackelberg,aswani2011game,DBLP:conf/soda/Swamy07,Korilis97achievingnetwork}. In the Stackelberg routing game, a fraction~$\compRate$ of the players are assumed to be controlled by a central coordinator. This may be the case in several situations, for instance when some players are not selfish and care about the system-wide efficiency, or when they have external incentive to do so. The total flow of these players will be referred to as  \emph{compliant flow}, and their routes are assigned by the central coordinator. The objective of the coordinator is to minimize the total travel-time, while anticipating the response of the remaining players, referred to as \emph{non-compliant}. The solution reached in this case is a Stackelberg equilibrium.
+
+In a Stackelberg routing game, the system-wide cost is a non-increasing function of the compliance rate $\compRate$. When $\compRate = 0$, the coordinator has no control, and the equilibrium is simply a Nash equilibrium. The cost is then maximal. When $\compRate = 1$, the coordinator has total control, the cost is minimal, and the equilibrium is by definition, the social optimum.
+
+Although the cost of the equilibrium is a non-increasing function of $\compRate$, it may not be \emph{strictly decreasing}. In particular, if the fraction of controlled players is too small, there may be no improvement. This leads to the following question: what is the minimal compliance rate\footnote{We observe that the Stackelberg threshold is only defined when the cost of the social optimum is strictly less than the cost of a Nash equilibrium.} needed in order to achieve strict improvement in the total cost? This minimal fraction is called \textit{Stackelberg threshold} \cite{Sharma07stackelbergthresholds}. Computing Stackelberg thresholds is of practical importance in several situations, such as traffic planning and control~\cite{krichene12}.
+
+
+In this paper, we consider the same setting as in~\cite{krichene12}, i.e. parallel networks with horizontal queues. In this setting, the latency of each link is given by a function that satisfies the assumptions of the HQSF  latency class (horizontal queues, singled-valued in free-flow). This class is useful in modeling congestion due to horizontal queues, e.g. in a transportation network, as opposed to vertical queues, e.g. in a communication network.
+
+We derive the expression of optimal Stackelberg cost for the HQSF class on parallel networks. In particular, we obtain an expression for Stackelberg thresholds.
+
+%The main idea comes from the observation that the cost of a Nash equilibrium does not depend directly on the demand $r$, but on an effective demand that is denoted $\demandMax{\lastNash{r}}$. Thus, there is an actual improvement if and only if the amount of compliant users is enough to decrease the effective demand of selfish players. 
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Organization of the article}
+
+In Section~\ref{sec:previous}, we define the Stackelberg routing game, present the assumptions of the model (in particular the latency functions) and review previous results. In Section~\ref{sec:support}, we characterize the supports of Nash equilibria and Stackelberg equilibria, then derive in Section~\ref{sec:cost} the general expression of the optimal Stackelberg cost. This leads in particular to the expression of Stackelberg thresholds, given in Section~\ref{sec:threshold}. Finally, we present some numerical results in Section~\ref{sec:numerical}.
+
+

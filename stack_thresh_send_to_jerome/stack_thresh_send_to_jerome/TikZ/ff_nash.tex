@@ -1,0 +1,49 @@
+\input{TikZ_common.tex}
+
+%============================================================================================
+%Additional commands
+
+
+
+%============================================================================================
+\begin{document}
+%============================================================================================
+
+\def \latencyRange{3.5}
+\def \flowRange{3.5}
+\newcommand \scale{1.5}
+
+\begin{tikzpicture}[scale=\scale,domain=0:\flowRange]
+
+\coordinate (Z) at (0,0);
+\coordinate (xMax) at ({\flowRange},0);
+\coordinate (yMax) at (0,{\latencyRange});
+\draw[thick,color=lightgray,step=0.5cm] (Z) grid ($(xMax)+(yMax)$);
+\draw[->] (Z) -- ($(xMax)+(0.25,0)$) node[below] {$\flow_n$};
+\draw[->] (Z) -- ($(yMax)+(0,0.25)$) node[left] {$\latency_n$};
+
+\def\ffLat{1.5}
+\def\ffLink{3}
+\def\ffFlow{0.5}
+
+%\drawFFeq{2,2,10,1;1,2.5,5,2;0.67,2,5,3;0.5,2,4,4};
+
+
+%Link1
+\drawHQTriangularLatFunc{2}{1.7}{8}<1>;
+\drawcFlow{2}{1.7}{8}[$\cFlow{1}{\ffLink}$]
+\draw\LineDashedHor{{\triangularLatInvert{2}{1.7}{8}{\ffLat}}}{\ffLat}{};
+%Link2
+\drawHQTriangularLatFunc{1}{2.25}{5}<2>;
+\drawcFlow{1}{2.25}{5}[$\cFlow{2}{\ffLink}$]
+%Link3
+\drawHQTriangularLatFunc{0.67}{2}{5}<3>;
+\draw (\ffFlow, \ffLat) circle(2pt);
+\draw\LineDashedVer{\ffFlow}{\ffLat}{$\demand - \sum\limits_{n=1}^2\cFlow{n}{3}$};
+%Link4
+\drawHQTriangularLatFunc{0.5}{2}{4}<4>;
+
+\end{tikzpicture}
+
+
+\end{document}

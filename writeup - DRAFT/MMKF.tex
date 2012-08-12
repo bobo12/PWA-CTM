@@ -1,0 +1,223 @@
+\section{Reduced Multiple Mode Kalman filter}
+
+\subsection{Motivation and definitions}
+
+TO DO: write about intractibility and should select a good sample of modes. So we can choose the modes based on projections on the supporting hyperplanes of the minimal H-representation, or on the adjacent polyhedra. The estimate is the weighted sum of the state in each mode chosen, where the weight is a mix of likelihood with the residual mean and covariance of the kalman filters, and the distance divided by the covariance in one direction. And we can limit the number of modes selected by choosing the mode that are within a range, where the distance is the distance divided by the covariance in one direction. The heuristic in choosing the mode is that we choose a mode with only a few changes, because the state of the highway changes only locally for one time step (time step small from the CFL). And we suppose that the most likely modes are actually well represented by the adjacent ones, or the projected ones, and their linear combination. Adjacent polyhedra, minimal H-representation, and polyhedral partition. We have a minimal H-representation of a polyhedron. When changing a half-space to its dual, we have a new polyhedron that is non-empty (CHECK). How is it compared to the polyhedral partition? In how many polyhedra of the polyhedral partition is it inculded?
+
+\hspace{10mm}
+
+\noindent \textbf{Faces of a polyhedron: }A \textit{hyperplane} can be written as a linear equality:
+
+\begin{equation}
+a_{1}x_{1} + a_{2}x_{2} + ... + a_{n}x_{n} = b
+\label{eq:hyperplane}
+\end{equation}
+
+\noindent where $n$ is the dimension of the space. It divides the space in two half-spaces. And a supportive hyperplane of a closed convex set $C$ is a hyperplane $\partial H$ such as $C\cap\partial H\neq \emptyset$ and $C\subseteq H$, where $H$ is one  of the two half-spaces. Given a polyhedron $P$, the inersection with any supportive hyperplane is a face of $P$. Moreover, a vertex is a zero-dimension face, an edge a one-dimension face, and a facet is a face of dimension $d-1$ if $P$ is of dimension $d$. For a full-dimensional polyhedron, a facet is of dimension $n+1$ (recall that the space $\mathcal{S} = [0,\rho_{j}]^{n+2}$ is of dimension $n+1$).
+
+\hspace{10mm}
+
+\noindent \textbf{Minimal H-representation: }There exist infinitely many H-descriptions of a convex polytope. However, for a full-dimensional convex polytope, the minimal H-description is in fact unique and is given by the set of the facet-defining halfspaces \cite{Gruenbaum2003}. Appendix \ref{sec:minHrepresentation} gives an algorithm that finds the minimal H-representation of a polyhedron of the partition of $\mathcal{S}$ in our highway model.
+
+\hspace{10mm}
+
+\noindent The polyhedra are assumed closed in the following definitions.
+
+\hspace{10mm}
+
+\noindent \textbf{Adjacent polyhedra: } Two polyhedra $P$ and $P'$ in a polyhedral partition of the space $\mathcal{S}$ are said to be \textit{k-adjacent} if they have a face of dimension k ''in common''. Formally, this is when there exists a hyperplane $H$ in common between $P$ and $P'$ and the intersection of $P$, $P'$ and $H$ is of dimension k. 
+
+\hspace{10mm}
+
+\noindent \textbf{Exclusivity: } In a polyhedral partition of the space $\mathcal{S}$ of dimension $d$, and given two ($d-1$)-adjacent polyhedra of the partition $P$ and $P'$, their ($d-1$)-adjacency is \textit{exclusive} if they are the only two polyhedra sharing the facet. Formally, for $H$ the common supportive hyperplane of $P$ and $P'$, this is when $P\cap P'\subset H$ is of dimension $d-1$ and $P\cap P''\cap H$ and $P'\cap P''\cap H$ are both of dimension $<d-1$ for any other polyhedron $P''$ of the partition. In our highway model (recall that the space $\mathcal{S} = [0,\rho_{j}]^{n+2}$ is of dimension $n+1$) we note that all (n+1)-adjacencies in the polyhedral partition of $\mathcal{S}$ are exclusive (see appendix \ref{sec:adjacency} for a proof). Therefore, for all the hyperplanes $H$ in the minimal H-description of a polyhedron $P_{\boldsymbol s}$ of the partition of $\mathcal{S}$, $\partial H=\bar{H}\backslash H^{0}$ are supportive hyperplanes, where each corresponding facet seperates $P_{\boldsymbol s}$ from one and only one ($n+1$)-adjacent polyhedron $P_{\boldsymbol s'}$, and we say that $s'$ is an adjacent mode of $s$. Such a property enables to find easily all the adjacent polyhedra of $P_{\boldsymbol s}$ from its minimal H-description (see appendix \ref{sec:adjacency} for more details). TO DO: make research and check the definition.
+
+
+\subsection{Neighbor modes search}
+
+TO DO: heuristics based on projection or adjacency and comparison with classic methods in statistical learning 
+
+Given a state $\rho$, and the state covariance $P_{t}$, let $\boldsymbol s$ be the mode, $\textbf{P}_{\boldsymbol s}$ the associated polyhedron, $\bigcap_{i=0}^{n} \textbf{Q}_{i}$ its H-representation given by (\ref{eq:Hrepresentation}, \ref{eq:Hrepresentation2}, \ref{eq:Hrepresentation3}), and $\bigcap_{j=0}^{k} \textbf{H}_{j}$ its minimal H-representation, where the closed half-spaces $\bar{\textbf{H}}_{j}$ can be written:
+
+\begin{equation}
+\bar{\textbf{H}}_{j} = \{\rho \mid a_{j}.\rho-b_{j} \leq 0\} \text{ for }j=0,...,k
+\label{eq:halfSpace}
+\end{equation}
+
+\noindent The euclidian distance between $\rho$ and each of the facet $\textbf{F}_{j}=(\bigcap_{j'\neq j}\textbf{H}_{j'})\cap\partial\textbf{H}_{j}$ of $\textbf{P}_{\boldsymbol s}$ i.e.
+
+\begin{equation}
+d(\rho,\textbf{F}_{j}) = \text{min}_{\rho'\in \textbf{F}_{j}} ||\rho-\rho'|| \text{ for }j=0,...,k
+\label{eq:distance}
+\end{equation}
+
+\noindent is bounded on the left by the distance between $\rho$ and the hyperplane $\partial\textbf{H}_{j}$:
+
+\begin{equation}
+d(\rho,\textbf{F}_{j})\geq d(\rho,\partial\textbf{H}_{j})=\frac{|b_{j}-a_{j}.\rho|}{||a_{j}||} \text{ for }j=0,...,k
+\label{eq:lowerBound}
+\end{equation}
+
+\noindent and we define the ratio:
+
+\begin{equation}
+d_{j}=\frac{d(\rho,\partial\textbf{H}_{j})}{a^{T}_{j} P_{t} a_{j}}\text{ for }j=0,...,k
+\label{eq:ratio}
+\end{equation}
+
+\noindent for which we only look at the adjacent modes for which $d_{j}$ is less than a given threshold $d$. Intuitively, when there is a high variance $a^{T}_{j} P_{t} a_{j}$ along the direction $a_{j}$ orthogonal to $\partial\textbf{H}_{j}$, there is a higher probability that the state at the next time step is in the half-space $\textbf{H}^{d}_{j}$, which is the dual of $\textbf{H}_{j}$, and therefore in the adjacent mode $\boldsymbol s_{j}$ with common supportive hyperplane $\partial\textbf{H}_{j}$. We note that this is an approximation since the projection of $\rho$ on $\partial\textbf{H}_{j}$ is not always on a facet of the adjacent mode $\boldsymbol s_{j}$.
+
+Given $j\in\{0,...,k\}$, there exists $i'\in\{0,...,n\}$ such that
+
+\begin{equation}
+\begin{array}{l}
+\textbf{Q}_{i'}=\textbf{H}_{j}\cap \textbf{H}_{i'}\\
+\textbf{H}_{j}, \textbf{H}_{i'}\in \{\textbf{H}_{\alpha_{i'}}, \textbf{H}^{d}_{\alpha_{i'}}, \textbf{H}_{\beta_{i'}}, \textbf{H}^{d}_{\beta_{i'}}, \textbf{H}_{\gamma_{i'}}, \textbf{H}^{d}_{\gamma_{i'}}\}
+\end{array}
+\label{eq:modeSearch1}
+\end{equation}
+
+\noindent and we can see from figure \ref{fig:godunovDiagram} that there exists $\textbf{R}_{i'} \in \{\textbf{W}_{i'}, \textbf{L}_{i'}, \textbf{D}_{i'}\}$ defined in (\ref{eq:regions3}) different from $\textbf{Q}_{i'}$ such that
+
+\begin{equation}
+\textbf{H}^{d}_{j}\cap \textbf{H}_{i'}\subset \textbf{R}_{i'}
+\label{eq:modeSearch2}
+\end{equation}
+
+\noindent Let $\mathcal{I}_{j}$ be the set of all $i'\in\{0,...,n\}$ such that we have (\ref{eq:modeSearch1}, \ref{eq:modeSearch2}), then the only adjacent mode $\boldsymbol s_{j}$ with supportive hyperplane $\textbf{H}_{j}$ is: 
+
+\begin{equation}
+\textbf{P}_{\boldsymbol s_{j}}=(\bigcap_{i\notin \mathcal{I}_{j}} \textbf{Q}_{i})\cap (\bigcap_{i'\in\mathcal{I}_{j}}\textbf{R}_{i'})
+\label{eq:modeSearch3}
+\end{equation}
+
+\noindent The adjacent mode vector $\boldsymbol s_{j}$ is obtained by re-evaluating all the indicator functions $\delta_{i'}(\boldsymbol\rho)$ (defined in \ref{eq:indicators}) associated to $\textbf{H}_{j}$ for all $i'\in\mathcal{I}_{j}$.
+
+\hspace{10mm}
+
+\noindent\textbf{Example: }If $\textbf{H}_{j}=\textbf{H}_{\gamma_{i'}}=\textbf{H}_{\beta_{i'+1}}=\{\boldsymbol\rho\mid\rho_{i'+1}>\rho_{c}\}$ and $d_{j}\leq d$ then $\gamma_{i'}(\boldsymbol \rho)=1$ since $\boldsymbol\rho\in\textbf{P}_{\boldsymbol s}\subset\textbf{H}_{j}$. We have $\mathcal{I}_{j}=\{i',i'+1\}$ since $\textbf{Q}_{i'}$, $\textbf{Q}_{i'+1}$ are the \textit{only affected} polyhedra in the H-representation of $\textbf{P}_{\boldsymbol s}$ given by (\ref{eq:Hrepresentation}, \ref{eq:Hrepresentation2}, \ref{eq:Hrepresentation3}), when $\textbf{H}_{j}$ is changed to its dual $\textbf{H}^{d}_{j}=\mathcal{S}\backslash \textbf{H}_{j}$ in the definition of the adjacent polyhedron $\textbf{P}_{\boldsymbol s_{j}}$. For $\textbf{H}_{i'}\in\{\textbf{H}_{\alpha_{i'}}, \textbf{H}^{d}_{\alpha_{i'}}, \textbf{H}_{\beta_{i'}}, \textbf{H}^{d}_{\beta_{i'}}\}$, and $\textbf{H}_{i'+1}\in\{\textbf{H}_{\alpha_{i'+1}}, \textbf{H}^{d}_{\alpha_{i'+1}}, \textbf{H}_{\gamma_{i'+1}}, \textbf{H}^{d}_{\gamma_{i'+1}}\}$ such that $\textbf{Q}_{i'}$, $\textbf{Q}_{i'+1}$ can be decomposed in this way (following definitions (\ref{eq:Hrepresentation}, \ref{eq:Hrepresentation2}, \ref{eq:Hrepresentation3})):
+
+\begin{equation}
+\begin{array}{l}
+\textbf{Q}_{i'}=\textbf{H}_{i'}\cap\textbf{H}_{j}\\
+\textbf{Q}_{i'+1}=\textbf{H}_{i'+1}\cap\textbf{H}_{j}
+\end{array}
+\label{eq:modeSearch4}
+\end{equation}
+
+\noindent and the corresponding indicator functions take the values:
+
+\begin{equation}
+\begin{array}{l}
+w_{i'}(\boldsymbol\rho)=\alpha_{i'}(\boldsymbol\rho)\gamma_{i'}(\boldsymbol\rho)=\alpha_{i'}(\boldsymbol\rho)\\
+l_{i'}(\boldsymbol\rho)=\beta_{i'}(\boldsymbol\rho)(1-\gamma_{i'}(\boldsymbol\rho))=0\\
+l_{i'+1}(\boldsymbol\rho)=\beta_{i'+1}(\boldsymbol\rho)(1-\gamma_{i'+1}(\boldsymbol\rho))=1-\gamma_{i'+1}(\boldsymbol\rho)\\
+d_{i'+1}(\boldsymbol\rho)=(1-\alpha_{i'+1}(\boldsymbol\rho))(1-\beta_{i'+1}(\boldsymbol\rho))=0
+\end{array}
+\label{eq:modeSearch5}
+\end{equation}
+
+\noindent There exist $\textbf{R}_{i'} \in \{\textbf{W}_{i'}, \textbf{L}_{i'}, \textbf{D}_{i'}\}$ and $\textbf{R}_{i'+1} \in \{\textbf{W}_{i'+1}, \textbf{L}_{i'+1}, \textbf{D}_{i'+1}\}$ defined in (\ref{eq:regions3}) such that
+
+\begin{equation}
+\begin{array}{l}
+\textbf{H}^{d}_{j}\cap \textbf{H}_{i'}\subset \textbf{R}_{i'}\\
+\textbf{H}^{d}_{j}\cap \textbf{H}_{i'+1}\subset \textbf{R}_{i'+1}
+\end{array}
+\label{eq:modeSearch6}
+\end{equation}
+
+\noindent Then the adjacent polyhedron $\textbf{P}_{\boldsymbol s_{j}}$ is given by:
+
+\begin{equation}
+\textbf{P}_{\boldsymbol s_{j}}=(\bigcap_{i\notin\{i', i'+1\}} \textbf{Q}_{i})\cap (\textbf{R}_{i'}\cap\textbf{R}_{i'+1})
+\label{eq:modeSearch7}
+\end{equation}
+
+\noindent and the indicator functions of $\textbf{P}_{\boldsymbol s_{j}}$ have the same values as $\textbf{P}_{\boldsymbol s}$ except for these ones, where $\gamma_{i'}(\boldsymbol\rho)=\beta_{i'+1}(\boldsymbol\rho)=1$ is changed to $\gamma_{i'}(\boldsymbol\rho)=\beta_{i'+1}(\boldsymbol\rho)=0$:
+
+\begin{equation}
+\begin{array}{l}
+w_{i'}(\boldsymbol\rho)=\alpha_{i'}(\boldsymbol\rho)\gamma_{i'}(\boldsymbol\rho)=0\\
+l_{i'}(\boldsymbol\rho)=\beta_{i'}(\boldsymbol\rho)(1-\gamma_{i'}(\boldsymbol\rho))=\beta_{i'}(\boldsymbol\rho)\\
+l_{i'+1}(\boldsymbol\rho)=\beta_{i'+1}(\boldsymbol\rho)(1-\gamma_{i'+1}(\boldsymbol\rho))=0\\
+d_{i'+1}(\boldsymbol\rho)=(1-\alpha_{i'+1}(\boldsymbol\rho))(1-\beta_{i'+1}(\boldsymbol\rho))=1-\alpha_{i'+1}(\boldsymbol\rho)
+\end{array}
+\label{eq:modeSearch8}
+\end{equation}
+
+As the example shows, only the i'-th and (i'+1)-th entries of $\boldsymbol s_{j}$ differ from those of $\boldsymbol s$, and only two consecutive entries differ between two adjacent modes $\boldsymbol s$ and $\boldsymbol s'$ in the general case.
+
+
+\subsection{Prior gaussian distribution}
+
+TO DO: we get a mixture of gaussians that is approximates by a gaussian. comparison with the gaussian distribution given by the EnKF. Add references on the IMM, justify the formula of the weights cf. formula (3, 4, 5) in the state estimation for hybrid systems: applications to aircraft tracking.
+
+Let $\boldsymbol\mu^{t-1}$ and $P_{t-1}$ be the state estimate and the error covariance matrix at time $t-1$, $\boldsymbol s$ the mode of $\boldsymbol\mu^{t-1}$ (i.e. $\boldsymbol\mu^{t-1}\in \textbf{P}_{\boldsymbol s}$), $\bigcap_{j=0}^{k} \textbf{H}_{j}$ the minimal H-representation of $\textbf{P}_{\boldsymbol s}$, $\boldsymbol s_{j}$ for $j\in\{0,...,k\}$ the adjacent modes defined by (\ref{eq:modeSearch1}, \ref{eq:modeSearch2}, \ref{eq:modeSearch3}), and $d_{j}$ the ratio defined in (\ref{eq:ratio}). We look at the adjacent modes such that $d_{j}\leq d$ where $d$ is a threshold and apply the Kalman filter to each one of them:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Predicted state estimate in mode $j$: } & \boldsymbol\mu_{j}(t:t-1) = A_{\boldsymbol s_{j}} \boldsymbol\mu^{t-1} + b_{\boldsymbol s_{j}} + c_{t}\\
+\text{Predicted covariance estimate in mode $j$: } & P_{j}(t:t-1) = A_{\boldsymbol s_{j}}P_{t-1}(A_{\boldsymbol s_{j}})^{T} + Q_{t-1}
+\end{array}
+\label{eq:mixture1}
+\end{equation}
+
+\noindent The distribution of the predicted state is modeled as a mixture of Gaussian distributions, where each component $x_{j}=\mathcal{N}(\boldsymbol\mu_{j}(t:t-1), \text{ }P_{j}(t:t-1))$ is the distribution of the predicted state in mode $j$:
+
+\begin{equation}
+x = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}x_{j}}
+\label{eq:mixture2}
+\end{equation}
+
+\noindent where $W_{t}=\sum_{j\mid d_{j}\leq d}{w_{j}^{t}}$, and the weights $w_{j}^{t}$ are the likelihood function fo mode $j$:
+
+\begin{equation}
+w_{j}^{t} = \mathcal{N}(\boldsymbol r_{j}(t); \text{ }0, \text{ }S_{j}(t))
+\label{eq:weightsMixture}
+\end{equation}
+
+\noindent and $\boldsymbol r_{j}(t)$ is the residual produced by the Kalman filter $j$, and $S_{j}(t)$ the corresponding residual covariance:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Measurement residual in mode $j$: } & \boldsymbol r_{j}(t) = \boldsymbol z^{t} - H_{t}\boldsymbol\mu_{j}(t:t-1)\\
+\text{Residual covariance in mode $j$: } & S_{j}(t) = H_{t}P_{j}(t:t-1)H_{t}^{T}+R_{t}
+\end{array}
+\label{eq:weightsMixture2}
+\end{equation}
+
+\noindent It follows that the mean is:
+
+\begin{equation}
+\boldsymbol \mu = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\boldsymbol\mu_{j}}
+\label{eq:mixture3}
+\end{equation}
+
+\noindent and the second moment is:
+
+\begin{equation}
+\boldsymbol \mu^{(2)} = E\left[xx^{T}\right]= \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}E\left[x_{j}x^{T}_{j}\right]} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\left(P_{j} + \boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j}\right)}
+\label{eq:mixture4}
+\end{equation}
+
+\noindent Then the covariance $\Sigma$ is
+
+\begin{equation}
+\Sigma = \boldsymbol\mu^{(2)} - \boldsymbol\mu \boldsymbol\mu^{T} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\left(P_{j} + \boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j}\right)} - \frac{1}{W^{2}_{t}}\sum_{j,j'\mid d_{j},d_{j'}\leq d}{w_{j}^{t}w_{j'}^{t}\boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j'}}
+\label{eq:mixture5}
+\end{equation}
+
+Finally, we assume that the distribution of the predicted state, which is the mixture of gaussians, is a single multivariate gaussian variable with mean $\boldsymbol \mu^{t:t-1}$ and covariance $P_{t:t-1}$ such that:
+
+\begin{equation}
+\begin{array}{ll}
+\text{Predicted state: } & \boldsymbol \mu^{t:t-1} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\boldsymbol\mu_{j}}\\
+\text{Predicted covariance: } & P_{t:t-1} = \frac{1}{W_{t}}\sum_{j\mid d_{j}\leq d}{w_{j}^{t}\left(P_{j} + \boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j}\right)} - \frac{1}{W^{2}_{t}}\sum_{j,j'\mid d_{j},d_{j'}\leq d}{w_{j}^{t}w_{j'}^{t}\boldsymbol\mu_{j} \boldsymbol\mu^{T}_{j'}}
+\end{array}
+\label{eq:mixture6}
+\end{equation}
+
+
+\subsection{Analysis}
+
+time and space complexities and accuracy

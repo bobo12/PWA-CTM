@@ -1,4 +1,4 @@
-function [rho,vel] = pCTM(route, vff, rho_max, rho_c, dt, ...
+function [rho,vel] = pCTM(route, vff, rhoJ, rhoC, dt, ...
                           nbEnsembles, useEfficientEnKF, plotFig, algorithm)
 
 % p-CTM on a fixed route for one day of Pems data
@@ -7,7 +7,7 @@ if nargin == 0
     route = buildRoute2;
     %get fundamental diagrams by defining rho_max and v
     vff=28.13;%cf gunes
-    rho_max=1/7;%cf gunes
+    rhoJ=1/7;%cf gunes
 
     %hardcoded (it satisfies the CLF condition for our route    
     useEfficientEnKF = false;
@@ -20,10 +20,9 @@ tic
 nbTimeSteps = floor(route.totalSec/dt);
 
 %initialize rho    
-rho_initial=0.01*zeros(route.nbCells,1);    
-%%Boundary conditions
-rho_a = zeros(1,nbTimeSteps);
-rho_b = zeros(1,nbTimeSteps);
+rho_initial = 0.01*zeros(route.nbCells + 2, 1);
+up = zeros(1,nbTimeSteps);
+dn = zeros(1,nbTimeSteps);
 
 %% solving using the godunov scheme :: No Kalman Filter
 %
@@ -33,18 +32,16 @@ rho_b = zeros(1,nbTimeSteps);
 %Assuming the measurements are given by the analytical solution, we
 %build the 'measures' vector
 
-% initializing rho
-rho = zeros(length(rho_initial),nbTimeSteps);
-rho(:,1) = rho_initial;
-rho(1,:) = rho_a;
-rho(length(rho_initial),:) = rho_b;
-
 switch algorithm
     case 'EnKF'
         rho = pCTMEnKF(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
-            vff, rho_max, rho_c, useEfficientEnKF);
-    case 'EKF'
-        error('EKF not yet inplemented')
+            vff, rhoJ, rhoC, useEfficientEnKF, up, dn);
+    case 'EnKFmode'
+        rho = pCTMEnKFMode(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
+            vff, rhoJ, rhoC, useEfficientEnKF, up, dn);
+    case 'EKFmode'
+        rho = pCTMEKFMode(rho_initial, nbTimeSteps, dt, route, ...
+            vff, rhoJ, rhoC, up, dn);
         
 end
 
@@ -53,8 +50,8 @@ if plotFig
     surf(rho(2:end-1,:),'Linestyle','None');
     view(2)
     figure(2)
-    vel = vff*(1-rho/rho_max);
-    vel(find(vel<1e-2))=0;
+    vel = vff*(1-rho/rhoJ);
+    vel(vel<1e-2)=0;
     surf(vel(2:end-1,:),'Linestyle','None');
     view(2)
     cmap = colormap;

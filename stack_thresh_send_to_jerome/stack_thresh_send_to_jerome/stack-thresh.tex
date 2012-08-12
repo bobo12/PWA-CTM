@@ -1,0 +1,58 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  
+\usepackage{amsfonts, amssymb}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{multirow}
+%\usepackage{float} 
+\usepackage{subcaption}
+\input{common/commands.tex}
+
+
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+% environments and commands
+
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\author{Yasser Jebbari \and Walid Krichene \and Jack D. Reilly \and Alexandre M. Bayen}% <-this % stops a space
+\title{Stackelberg Thresholds on Parallel Networks with Horizontal Queues}
+
+\maketitle
+
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{intro.tex}
+
+\input{previous.tex}
+
+\input{support.tex}
+
+\input{cost.tex}
+
+\input{thresholds.tex}
+
+\input{numerical.tex}
+
+\input{conclusion.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+\bibliography{common/bibliography}
+
+
+\end{document}

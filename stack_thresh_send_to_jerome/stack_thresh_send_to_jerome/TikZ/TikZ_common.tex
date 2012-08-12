@@ -1,0 +1,120 @@
+\documentclass[10pt]{article}
+\usepackage{calc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{lightgray}{gray}{0.9}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xparse}
+\usepackage{etoolbox}
+\usepackage[graphics, tightpage, active]{preview}
+\usepackage{amsmath}
+
+
+\usetikzlibrary{decorations.pathreplacing}
+
+
+\setlength{\PreviewBorder}{2pt}
+\PreviewEnvironment{tikzpicture}
+
+
+\input{../common/commands.tex}
+%============================================================================================
+
+\newcommand \trim[4]{
+\renewcommand \PreviewBbAdjust{#1 #2 #3 #4}
+}
+
+% global variables and commands
+\def \latencyRange{1}
+\def \flowRange{1}
+\def \massRange{1}
+
+\newcommand \LineDashedVer[3]{
+[dashed] (#1,#2) -- (#1,0) node[below] {#3};
+}
+\newcommand \LineDashedHor[3]{
+[dashed] (#1,#2) -- (0,#2) node[left] {#3};
+}
+\newcommand \BraceHorAbove[4]{
+[decorate,decoration=brace,yshift=2pt] (#1,#3) -- (#2,#3)node[above,midway]{#4}
+}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+\newcommand \NWHashedRectangle[4]{
+ (#1,#2) rectangle (#3,#4);
+\begin{scope}
+\path (#1,#2) coordinate (c0);
+\path (#3,#4) coordinate (c1);
+\path (-\latencyRange,0) coordinate (p0);
+\path (\flowRange+\latencyRange,0) coordinate (p1);
+\clip (c0) rectangle (c1);
+\draw [rotate around=(45:($(c0)!0.5!(c1)$)),xstep=0.1cm,ystep=2cm,yshift=-5cm] (p0) grid (p1);
+\end{scope}
+}
+
+\newcommand \NEHashedRectangle[4]{
+ (#1,#2) rectangle (#3,#4);
+\begin{scope}
+\path (#1,#2) coordinate (c0);
+\path (#3,#4) coordinate (c1);
+\path (-\latencyRange,0) coordinate (p0);
+\path (\flowRange+\latencyRange,0) coordinate (p1);
+\clip (c0) rectangle (c1);
+\draw [rotate around=(-45:($(c0)!0.5!(c1)$)),xstep=0.1cm,ystep=10cm,yshift=-5cm] (p0) grid (p1);
+\end{scope}
+}
+
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+% Triangular
+% Length is assumed to be 1. The parameters are:
+% -free-flow speed
+% -critical density
+% -jam density
+\newcommand{\drawHQTriangularFlux}[3]{
+\draw (0,0) -- (#2,#1*#2) -- (#3, 0)node[below]{$\massMax_n$};
+\draw\LineDashedHor{#2}{#1*#2}{$\massCrit_n$};
+\draw\LineDashedVer{#2}{#1*#2}{$\flowMax_n$};
+}
+\newcommand \drawHQTriangularDensityLat[3]{
+\draw (0,1/#1)node[left]{$\parA_n$} -- +(#2,0);
+\draw\LineDashedVer{#2}{1/#1}{$\massCrit_n$};
+\draw\LineDashedVer{#3}{\latencyRange}{$\massMax_n$};
+\begin{scope} %scope for clipping (cropping) the function
+\clip (0,0) rectangle (\massRange, \latencyRange); 
+\draw plot[domain=#2:#3] function{x/(x-#3)*(#2-#3)/(#1*#2)};
+\end{scope} 
+}
+
+\newcommand{\drawHQTriangularLat}[3]{
+\drawHQTriangularLatFunc{#1}{#2}{#3}
+\drawHQTriangularLatFlowMax{#1}{#2}{#3}
+}
+
+%------------------------------------------------------------------------------
+\NewDocumentCommand \drawHQTriangularLatFunc{mmmD<>{n}}{
+\draw (0,1/#1)node[left]{$\parA_#4$} -- (#1*#2,1/#1);
+\begin{scope} 
+\clip (0,0) rectangle (\flowRange, \latencyRange); 
+\draw plot[domain=0:#1*#2] function{#3/x + 1.*(#2-#3)/(#1*#2)}; 
+\end{scope}
+}
+\NewDocumentCommand{\drawHQTriangularLatFlowMax}{mmmD<>{n}}{
+\draw\LineDashedVer{#1*#2}{1/#1}{$\flowMax_#4$};
+}
+
+%------------------------------------------------------------------------------
+\NewDocumentCommand\drawcFlow{mmmo}{
+\newdimen \tmp; \tmp=#1cm;
+\ifdimcomp{\ffLat\tmp}{>}{1.01cm}
+{
+\draw ({\triangularLatInvert{#1}{#2}{#3}{\ffLat}}, \ffLat) circle (2pt);
+\IfNoValueTF{#4}{}{\draw\LineDashedVer{{\triangularLatInvert{#1}{#2}{#3}{\ffLat}}}{\ffLat}{#4}}
+}{};
+}
+\newcommand{\triangularLatInvert}[4]{%4rth parameter is the value to invert
+#3/(#4-1.*(#2-#3)/(#1*#2))
+}
+
+

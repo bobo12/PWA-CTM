@@ -1,10 +1,17 @@
-function rho_next = godunov_scheme(rho,dt,dx,vf,rhoJam,rhoC)
+function rho_next = godunov_scheme(rho,dt,dx,vf,rhoJam,rhoC,up,dn)
 %depending on the number of inputs in the function
 %note that dx is a vector containing the ith cell's length
 
-r = dt./dx;
-rho_next = rho - r.*q_Godunov(rho,vf,rhoJam,rhoC);
+%r = dt./[dx(1);dx;dx(end)];
+r = dt/mean(dx);
+%size(rho)
+%size(r)
+%size(q_Godunov(rho,vf,rhoJam,rhoC))
 
+%rho_next = rho - r.*q_Godunov(rho,vf,rhoJam,rhoC);
+rho_next = rho - r * q_Godunov(rho,vf,rhoJam,rhoC);
+rho_next(1) = up;
+rho_next(end) = dn;
 %TODO: reecrire le code pour rho_next without using q_Godunov
 
 rho_next = max(min(rhoJam,rho_next),0);% just because we don't want negative values

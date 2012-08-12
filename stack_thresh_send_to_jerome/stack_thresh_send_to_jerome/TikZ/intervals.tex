@@ -1,0 +1,59 @@
+\input{TikZ_common.tex}
+\usetikzlibrary{decorations.pathreplacing}
+
+%============================================================================================
+%Additional commands
+
+\newcommand \scale{7}
+\newcommand \bound[1]{\Big(1 - \frac{\maxR{#1}}{r} \Big)}
+\newcommand \tick[2]{
+(#2, #1) -- (#2, -#1)
+}
+
+\newcommand \smalltick[1]{\tick{0.01}{#1}}
+\newcommand \largetick[1]{[line width=1pt]\tick{0.02}{#1}}
+
+
+%============================================================================================
+\begin{document}
+%============================================================================================
+
+
+\begin{tikzpicture}[scale=\scale,domain=0:1]
+
+\def \xkOne {.83}
+\def \xkTwo {.53}
+\def \xkJmOne {.2}
+\def \xkJ {-.12}
+\coordinate (yshift) at (0,.03);
+
+
+\draw[->] (-0.2,0) -- (1.05,0) node[below] {$\compRate$};
+
+\draw \largetick{1} node[below]{1};
+\draw \largetick{0} node[below]{0};
+
+
+\coordinate (kj0) at (\xkJ,0);
+\coordinate (kj01) at (\xkJmOne,0);
+\coordinate (k2) at (\xkTwo,0);
+\coordinate (k1) at (\xkOne,0);
+\coordinate (k0) at (1,0);
+
+\draw \smalltick{\xkJ}node[below,xshift=-.4cm]{$\bound{j_0}$};
+\draw \smalltick{\xkJmOne}node[below]{$\bound{j_0-1}$};
+\draw \smalltick{\xkTwo}node[below]{$\bound{3}$};
+\draw \smalltick{\xkOne}node[below]{$\bound{2}$};
+
+\draw[decorate,decoration={brace, amplitude=6pt}] ($(kj0)+(yshift)$) -- ($(kj01)+(yshift)$) node[above,midway,yshift=6pt]{$I_{j_0}$};
+
+\draw ($(kj01)!0.5!(k2)$) node[above,yshift=12pt]{$\dots$};
+
+\draw[decorate,decoration={brace, amplitude=6pt}] ($(k2)+(yshift)$) -- ($(k1)+(yshift)$) node[above,midway,yshift=6pt]{$I_2$};
+
+\draw[decorate,decoration={brace, amplitude=6pt}] ($(k1)+(yshift)$) -- ($(k0)+(yshift)$) node[above,midway,yshift=6pt]{$I_1$};
+
+\end{tikzpicture}
+
+
+\end{document}

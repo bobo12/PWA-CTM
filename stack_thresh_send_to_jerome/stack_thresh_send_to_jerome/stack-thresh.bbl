@@ -1,0 +1,60 @@
+\begin{thebibliography}{10}
+
+\bibitem{aswani2011game}
+A.~Aswani and C.~Tomlin.
+\newblock {Game-theoretic routing of GPS-assisted vehicles for energy
+  efficiency}.
+\newblock In {\em American Control Conference (ACC), 2011}, pages 3375--3380.
+  IEEE, 2011.
+
+\bibitem{Korilis97achievingnetwork}
+Y.~A. Korilis, A.~A. Lazar, and A.~Orda.
+\newblock Achieving network optima using stackelberg routing strategies.
+\newblock {\em IEEE/ACM Transactions on Networking}, 5:161--173, 1997.
+
+\bibitem{Korilis97capacityallocation}
+Y.~A. Korilis, A.~A. Lazar, and A.~Orda.
+\newblock Capacity allocation under noncooperative routing.
+\newblock {\em IEEE Transactions on Automatic Control}, 42:309--325, 1997.
+
+\bibitem{krichene12}
+W.~Krichene, J.~Reilly, S.~Amin, and A.~M. Bayen.
+\newblock Stackelberg routing on parallel networks with horizontal queues,
+  http://www.eecs.berkeley.edu/\textasciitilde{}walid/publications/stack-tac.pdf.
+\newblock {\em In review, IEEE Transactions on Automatic Control}, 2012.
+
+\bibitem{Ozdaglar2007}
+A.~Ozdaglar and R.~Srikant.
+\newblock {Incentives and Pricing in Communication Networks}.
+\newblock In {\em Algorithmic Game Theory, N. Nisan, T. Roughgarden, E. Tardos,
+  and V. Vazirani}. Cambridge University Press, 2007.
+
+\bibitem{roughgarden2001stackelberg}
+T.~Roughgarden.
+\newblock {Stackelberg scheduling strategies}.
+\newblock In {\em Proceedings of the thirty-third annual ACM symposium on
+  Theory of computing}, pages 104--113. ACM, 2001.
+
+\bibitem{roughgarden2002bad}
+T.~Roughgarden and E.~Tardos.
+\newblock {How bad is selfish routing?}
+\newblock {\em Journal of the ACM (JACM)}, 49(2):236--259, 2002.
+
+\bibitem{Sharma07stackelbergthresholds}
+Yogeshwer Sharma and David~P. Williamson.
+\newblock Stackelberg thresholds in network routing games or the value of
+  altruism, 2007.
+
+\bibitem{DBLP:conf/soda/Swamy07}
+C.~Swamy.
+\newblock The effectiveness of stackelberg strategies and tolls for network
+  congestion games.
+\newblock In {\em SODA}, pages 1133--1142, 2007.
+
+\bibitem{wardrop1952some}
+J.~G. Wardrop.
+\newblock {Some Theoretical Aspects of Road Traffic Research}.
+\newblock {\em Proceedings of the Institution of Civil Engineers}, 1:325--378,
+  1952.
+
+\end{thebibliography}

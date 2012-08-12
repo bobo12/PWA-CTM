@@ -1,0 +1,17 @@
+% !TEX root = stack-thresh.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion and Concluding remarks}
+\label{sec:conclusion}
+
+We studied Stackelberg routing games on parallel networks with the HQSF latency class, and we studied, in particular, how the optimal Stackelberg cost depends on the compliance rate $\compRate$. We proved that it is a non-increasing, piecewise constant function, with discontinuities at specific points described in Theorem~\ref{thm:cost}. As a consequence, we obtained an expression for the Stackelberg threshold, i.e. the minimal compliance rate needed to achieve a strict improvement in the cost. These results were illustrated using an example network for which we numerically computed the optimal Stackelberg cost and the Stackelberg thresholds. These results can be useful for efficient planning and control, for example on traffic networks. If a traffic planner can estimate the total demand on a parallel network, they can compute, given a model of latency on each route\footnote{In a traffic setting, it is possible to derive latency functions that satisfy the assumptions of the HQSF class, by considering a triangular fundamental diagram of traffic for example. For a discussion on this topic, see~\cite{krichene12}.}, the compliance rate needed to strictly improve the cost. This Stackelberg threshold can inform the planner whether Stackelberg routing is practical for the network considered.
+
+While these results can be applicable in some scenarios of traffic, the simple topology of parallel networks limits applicability to a small subset of real networks. An immediate question is whether these results extend to more general topologies, and in particular, whether it is simple to characterize an optimal Stackelberg strategy for these topologies (similar to the NCF strategy in the parallel case). A second question is reachability of the equilibria: the analysis presented here gives existence results of static equilibria. Assuming one defines a dynamic model of response of the players to a Stackelberg strategy, a natural question is: which equilibria are reachable, and what are the optimal Stackelberg strategies in the dynamic case?
+
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.

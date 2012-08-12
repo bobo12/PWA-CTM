@@ -1,0 +1,36 @@
+\input{TikZ_common.tex}
+\usetikzlibrary{arrows}
+
+%============================================================================================
+%Additional commands
+
+
+
+%============================================================================================
+\begin{document}
+%============================================================================================
+
+\newcommand \scale{0.8}
+
+\trim{0pt}{2pt}{0pt}{-1pt}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{tikzpicture}[scale=\scale,looseness=1]
+
+\coordinate (arrowLength) at (1.5,0);
+
+\node (O) at (0,0) [circle,draw,line width=1pt] {$O$};
+\node (D) at (3,0) [circle,draw, line width=1pt] {$D$};
+
+\draw[->] ($(O)-(arrowLength)$) -- node[above]{$\demand$} (O);
+\draw[->] (O) to [bend left=50] node[above]{$1$} (D);
+\draw[->] (O) to [bend left=20] node[above]{$2$} (D);
+\draw ($(O)!0.5!(D)$) node[yshift=1pt]{$\vdots$};
+\draw[->] (O) to [bend right=50] node[above]{$\NLinks$} (D);
+\draw[->] (D) -- node[above]{$\demand$} ($(D)+(arrowLength)$);
+
+\end{tikzpicture}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\end{document}

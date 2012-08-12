@@ -1,8 +1,5 @@
 function  rho_next = EnKF_aposteriori(rho,rhoMeasured,H,rhoJam,percentErrorMeasured)
 
-% 
-% 
-% 
 [m,K] = size(rho);
 % Compute apriori covariance
 covAPriori = cov(rho')';%corresponds to Pj+1
