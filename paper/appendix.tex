@@ -72,7 +72,7 @@ d_{k+1}(\boldsymbol\rho)=1-\alpha_{k+1}(\boldsymbol\rho)
 
 Case $s_{k}=d$: We have no prior information on $w_{k+1}(\boldsymbol\rho)$, $l_{k+1}(\boldsymbol\rho)$, and $d_{k+1}(\boldsymbol\rho)$ and have to evaluate each one of them to find the two defining half-spaces that give the \textit{minimal H-representation} of $\bigcap_{i=0}^{k+1} \textbf{Q}_{i}$, when added to the set of current defining half-spaces.
 
-By recurrence, we have constructed a \textit{minimal H-representation} of $\textbf{P}_{\boldsymbol s}=\bigcap_{i=0}^{n} \textbf{Q}_{i}$, namely
+By recurrence, we have constructed a \emph{minimal H-representation} of $\textbf{P}_{\boldsymbol s}=\bigcap_{i=0}^{n} \textbf{Q}_{i}$, namely
 
 \begin{equation}
 \begin{array}{l}
@@ -104,21 +104,25 @@ Given a polyhedron $\textbf{P}_{\boldsymbol s}$ of the partition of $\mathcal{S}
 \label{eq:adjacency2}
 \end{equation}
 
-\noindent Let $\mathcal{I}$ be the set of all $i'\in\{0,...,n\}$ such that we have (\ref{eq:adjacency1}, \ref{eq:adjacency2}), then $(\bigcap_{i\notin \mathcal{I}} \textbf{Q}_{i})\cap (\bigcap_{i'\in\mathcal{I}}\textbf{R}_{i'})$ is a polyhedron of the partition. Let's denote its associated mode $\boldsymbol s''$.
+\noindent Let $\mathcal{I}$ be the set of all $i'\in\{0,...,n\}$ such that we have (\ref{eq:adjacency1}, \ref{eq:adjacency2}), then $(\bigcap_{i\notin \mathcal{I}} \textbf{Q}_{i})\cap (\bigcap_{i'\in\mathcal{I}}\textbf{R}_{i'})$ is a polyhedron of the partition. Let us denote its associated mode $\boldsymbol s''$.
 
 \begin{equation}
-\bar{\textbf{P}}_{\boldsymbol s}\cap \partial \textbf{H}_{j}=(\bigcap_{i\notin \mathcal{I}} \bar{\textbf{Q}}_{i})\cap(\bigcap_{i'\in \mathcal{I}}\bar{\textbf{H}}_{i'})\cap\partial \textbf{H}_{j}\subset (\bigcap_{i\notin \mathcal{I}} \bar{\textbf{Q}}_{i})\cap (\bigcap_{i'\in \mathcal{I}}\bar{\textbf{R}}_{i'})=\bar{\textbf{P}}_{\boldsymbol s''}
+\begin{array}{ll}
+\bar{\textbf{P}}_{\boldsymbol s}\cap \partial \textbf{H}_{j} & =(\bigcap_{i\notin \mathcal{I}} \bar{\textbf{Q}}_{i})\cap(\bigcap_{i'\in \mathcal{I}}\bar{\textbf{H}}_{i'})\cap\partial \textbf{H}_{j}\\
+ & \subset (\bigcap_{i\notin \mathcal{I}} \bar{\textbf{Q}}_{i})\cap (\bigcap_{i'\in \mathcal{I}}\bar{\textbf{R}}_{i'})\\
+ & =\bar{\textbf{P}}_{\boldsymbol s''}
+\end{array}
 \label{eq:adjacency3}
 \end{equation}
 
 \noindent Moreover, $\textbf{P}_{\boldsymbol s'}$ is seperated from $\textbf{P}_{\boldsymbol s}$ by $\partial \textbf{H}_{j}$, so:
 
 \begin{equation}
-(\bigcap_{i\notin \mathcal{I}} \bar{\textbf{Q}}_{i})\cap(\bigcap_{i'\in \mathcal{I}}\bar{\textbf{H}}_{i'})\cap\bar{\textbf{H}}^{d}_{j}\cap \bar{\textbf{P}}_{\boldsymbol s'} \text{ is of full dimension and a subset of }\bar{\textbf{P}}_{\boldsymbol s''}\\
+(\bigcap_{i\notin \mathcal{I}} \bar{\textbf{Q}}_{i})\cap(\bigcap_{i'\in \mathcal{I}}\bar{\textbf{H}}_{i'})\cap\bar{\textbf{H}}^{d}_{j}\cap \bar{\textbf{P}}_{\boldsymbol s'}\subset\bar{\textbf{P}}_{\boldsymbol s''}
 \label{eq:adjacency4}
 \end{equation}
 
-\noindent Since the closures of two polyhedra of the polyhedral partition are either equal or have an intersection at most a hyperplane, we have:
+\noindent and the polyhedron above is of full dimension. Since the closures of two polyhedra of the polyhedral partition are either equal or have an intersection at most a hyperplane, we have:
 
 \begin{equation}
 \begin{array}{l}
@@ -138,22 +142,14 @@ Given a polyhedron $\textbf{P}_{\boldsymbol s}$ of the partition of $\mathcal{S}
 
 \subsubsection{Number of modes and intractibility}\label{sec:modes}
 
-Suppose that the pair $(\rho_{0},\rho_{1})$ is in the region \textbf{W}, then the list of possible combinations in Table \ref{table:modes} shows that $(\rho_{1},\rho_{2})$ can be either in \textbf{W} or \textbf{L}. Similarly, if $(\rho_{0},\rho_{1})$ is in the region \textbf{L}, $(\rho_{1},\rho_{2})$ can be either in \textbf{W} or \textbf{L}, and for $(\rho_{0},\rho_{1})$ in \textbf{D}, $(\rho_{1},\rho_{2})$ can be either in \textbf{W}, \textbf{L}, or \textbf{D}. As an example, Table \ref{table:threeLevelModes} describes all the possible sixteen combinations for the first three pairs $(\rho_{0},\rho_{1})$, $(\rho_{1},\rho_{2})$, and $(\rho_{2},\rho_{3})$.
+Suppose that the pair $(\rho_{0},\rho_{1})$ is in the region \textbf{W}, then the list of possible combinations in Table \ref{table:modes} shows that $(\rho_{1},\rho_{2})$ can be either in \textbf{W} or \textbf{L}. Similarly, if $(\rho_{0},\rho_{1})$ is in the region \textbf{L}, $(\rho_{1},\rho_{2})$ can be either in \textbf{W} or \textbf{L}, and for $(\rho_{0},\rho_{1})$ in \textbf{D}, $(\rho_{1},\rho_{2})$ can be either in \textbf{W}, \textbf{L}, or \textbf{D}. As an example, figure \ref{fig:threeLevelModes} describes all the possible sixteen combinations for the first three pairs $(\rho_{0},\rho_{1})$, $(\rho_{1},\rho_{2})$, and $(\rho_{2},\rho_{3})$.
 
-\begin{table}[ht]
-\centering % used for centering table
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-  \hline
-  $(\rho_{0},\rho_{1})$ & \multicolumn{4}{|c|}{W} & \multicolumn{5}{|c|}{L} & \multicolumn{7}{|c|}{D}\\
-  \hline
-  $(\rho_{1},\rho_{2})$ & \multicolumn{2}{|c|}{W} & \multicolumn{2}{|c|}{L} & \multicolumn{2}{|c|}{W} & \multicolumn{3}{|c|}{D} & \multicolumn{2}{|c|}{W} & \multicolumn{2}{|c|}{L} & \multicolumn{3}{|c|}{D}\\
-  \hline
-  $(\rho_{2},\rho_{3})$ & W & L & W & D & W & L & W & L & D & W & L & W & D & W & L & D\\
-  \hline
-\end{tabular}
-\caption{The sixteen possible modes for the first three pairs $(\rho_{0},\rho_{1})$, $(\rho_{1},\rho_{2})$, and $(\rho_{2},\rho_{3})$.}
-\label{table:threeLevelModes} % is used to refer this table in the text
-\end{table}
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=8cm]{figures/threeLevelModes.pdf}
+    \caption{The sixteen possible modes for the first three pairs $(\rho_{0},\rho_{1})$, $(\rho_{1},\rho_{2})$, and $(\rho_{2},\rho_{3})$.}
+    \label{fig:threeLevelModes}
+\end{figure}
 
 We can recursively compute the number of ''modes'' $M_{k}$ with respect to $k$, where $k$ is the number of cells of the discretized link. Let's denote by $w_{k}$, $l_{k}$, and $d_{k}$ the number of modes for which $(\rho_{k},\rho_{k+1})$ is in \textbf{W}, \textbf{L}, and \textbf{D} respectively. Then we have these equations: 
 
@@ -187,10 +183,17 @@ d_{k+1} \end{array} \right] = A \times
 w_{k} \\
 l_{k} \\
 d_{k} \end{array} \right]
-\quad\text{where}\quad A = \left[ \begin{array}{ccc}
+\label{eq:modes4}
+\end{equation}
+
+\noindent where
+
+\begin{equation}
+A = \left[ \begin{array}{ccc}
 1 & 1 & 1 \\
 1 & 0 & 1 \\
-0 & 1 & 1 \end{array} \right]\label{eq:modes4}
+0 & 1 & 1 \end{array} \right]
+\label{eq:modes5}
 \end{equation}
 
 Then 
@@ -203,7 +206,8 @@ d_{k} \end{array} \right] = A^{k} \times
 \left[ \begin{array}{c}
 w_{0} \\
 l_{0} \\
-d_{0} \end{array} \right]\label{eq:modes5}
+d_{0} \end{array} \right]
+\label{eq:modes6}
 \end{equation}
 
 It is possible to compute $A^{k}$ explicitly by diagonalizing the matrix $A$, to obtain an explicit expression for $w_{k}$, $l_{k}$, and $d_{k}$ in the form of $a.\beta^{k} + b.\gamma^{k} + c.\delta^{k}$. However, this analytical expression is unwieldy, so we will just derive lower and upper bounds to $n_{k}$. It is easy to see that $d_{k} \leq n_{k}/2$ for $k\geq 0$, then we can prove recursively that $3\cdot2^{k} \leq n_{k} \leq 3\cdot(2.5)^{k}$.
@@ -299,6 +303,8 @@ At cell $i$, this implies the effective density $\bar{\rho}^{u}_{ci}$ associated
 \caption{Number of modes for a heterogeneous road.}
 \end{table}
 
+\begin{comment}
+
 \subsection{Kalman filtering-DRAFT}
 
 and $F_{LH}[.]$, have the same expression with $f_{DN}(.)$ and $f_{LH}(.)$ respectively (as defined in Table. For instance, when we have a Daganzo-Newell fundamental diagram with update operator for the dynamic system $F_{DN}[.]$ (i.e. $\boldsymbol\rho^{t} = F_{DN}[\boldsymbol\rho^{t-1}]$), and suppose that the mode at $x=i$ is three ($m_{i}=3$) then\footnotemark: 
@@ -392,3 +398,5 @@ In our case, the estimated sequence of modes $\hat{\boldsymbol m}^{0:t}$ is read
 \subsubsection{Complexity}
 
 Comparison with the Extended Kalman filter and matlab simulations and results
+
+\end{comment}

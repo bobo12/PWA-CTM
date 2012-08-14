@@ -24,7 +24,7 @@ START_HOUR = 7;
 % Every day will "end" at this hour (anything after this hour will
 % be ignored - NOTE: the hour is inclusive, e.g. in this case, the
 % last time sample considered is 20:59:30)
-END_HOUR = 20;
+END_HOUR = 8;
 
 % Direction of the route
 %I880 Bluetooth first deployment

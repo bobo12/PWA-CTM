@@ -1,4 +1,4 @@
-function  rhoNext = EnKFaprioriMode(rho, percentStateNoise, J, f, d, rhoJ, up, dn)
+function  rhoNext = EnKFaprioriMode(rho, percentStateNoise, J, w, d, rhoJ, up, dn)
 %
 % rho is an ensemble of vectors of the densities on the road at time j
 %
@@ -13,7 +13,7 @@ stateNoise = mvnrnd(zeros(m,1)',stateNoiseCov,K)'; % state noise ensemble
 rhoNext = zeros(m,K);
 
 for l=1:K
-    rhoNext(:,l) = godunovSchemeMode(rho(:,l), J, f, d, up, dn)+stateNoise(:,l);
+    rhoNext(:,l) = godunovSchemeMode(rho(:,l), J, w, d, up, dn)+stateNoise(:,l);
     rhoNext(:,l) = max(min(rhoNext(:,l),rhoJ),0);
 end
 end

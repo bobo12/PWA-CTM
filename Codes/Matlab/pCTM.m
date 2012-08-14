@@ -20,9 +20,10 @@ tic
 nbTimeSteps = floor(route.totalSec/dt);
 
 %initialize rho    
-rho_initial = 0.01*zeros(route.nbCells + 2, 1);
+rho_initial = 0.01*ones(route.nbCells + 2, 1);
 up = zeros(1,nbTimeSteps);
 dn = zeros(1,nbTimeSteps);
+dn(floor(nbTimeSteps/2):nbTimeSteps) = rhoJ * ones(nbTimeSteps-floor(nbTimeSteps/2)+1,1);
 
 %% solving using the godunov scheme :: No Kalman Filter
 %

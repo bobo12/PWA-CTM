@@ -1,4 +1,4 @@
-function  [rhoNext, Pnext] = EKFaprioriMode(rho, P, percentStateNoise, J, f, d, rhoJ, up, dn)
+function  [rhoNext, Pnext] = EKFaprioriMode(rho, P, percentStateNoise, J, w, d, rhoJ, up, dn)
 %
 % rho is an ensemble of vectors of the densities on the road at time j
 %
@@ -11,7 +11,7 @@ m = zeros(nExt-2, 1);
 rhoNext = zeros(nExt, 1);
 rhoNext(1) = up;
 rhoNext(nExt) = dn;
-
+dn
 Pnext = zeros(nExt, nExt);
 
 for i=1:nExt-1
@@ -30,8 +30,10 @@ for i=1:nExt-2
 end
 
 for i=2:nExt-1
-    rhoNext(i) = J(m(i-1),:) * [rho(i-1); rho(i); rho(i+1)] + f(m(i-1));
+    rhoNext(i) = J(m(i-1),:) * [rho(i-1); rho(i); rho(i+1)] + w(m(i-1));
 end
+
+rhoNext = max(min(rhoNext,rhoJ),0);
 
 for i=2:nExt-1
     for j=2:nExt-1

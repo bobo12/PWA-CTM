@@ -65,10 +65,13 @@ v_{f} & \text{if } \rho \leq \rho_{c} \\
 \noindent and the corresponding flux function is:
 
 \begin{equation}\label{eq:dnFlux}
-Q_{DN}(\rho) = \rho V_{DN}(\rho) = \begin{cases}
+\begin{array}{ll}
+Q_{DN}(\rho) & = \rho V_{DN}(\rho)\\
+ & = \begin{cases}
 v_{f} \rho & \text{if } \rho \leq \rho_{c} \\
 -\omega_{f} \left( \rho - \rho_{\text{jam}} \right) & \text{if } \rho > \rho_{c}
 \end{cases}
+\end{array}
 \end{equation}
 
 \noindent where $\omega_{f}=v_{f}\rho_{c}/(\rho_{\text{jam}}-\rho_{c})$ is the backwards propagation wave speed.

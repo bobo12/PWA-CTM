@@ -21,7 +21,7 @@ USE_EFFICIENT_ENKF = false;
 % Plot density?
 PLOT_FIG = true;
 
-ALGORITHM = 'EnKFmode';
+ALGORITHM = 'EKFmode';
 
 route = struct();
 route.cellLength = 200 * ones(1,100);

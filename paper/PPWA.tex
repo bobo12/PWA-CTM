@@ -1,6 +1,6 @@
 \section{A polyhedral piecewise affine model}
 
-In the Godunov scheme (\ref{eq:rhoGodunov}), the update of the density $\rho^{t+1}_{i}$ at cell $i$ depends on the triplet $(\rho^{t}_{i-1}, \rho^{t}_{i}, \rho^{t}_{i+1})$. In this section, we will refer to the fraction $\frac{\Delta t}{\Delta x}$ as $\alpha$. Recall the Godunov scheme reads as:
+In the Godunov scheme (\ref{eq:rhoGodunov}), the update of the density $\rho^{t+1}_{i}$ at cell $i$ depends on the triplet $(\rho^{t}_{i-1}, \rho^{t}_{i}, \rho^{t}_{i+1})$. With $\frac{\Delta t}{\Delta x}=\alpha$, the Godunov scheme reads as:
 
 \begin{equation} \label{eq:rhoGodunov2}
 \rho^{t+1}_{i} = \rho^{t}_{i} - \alpha\left(G(\rho^{t}_{i},\rho^{t}_{i+1})-G(\rho^{t}_{i-1},\rho^{t}_{i})\right)
@@ -26,7 +26,7 @@ Mode & $(\rho^{t}_{i-1}, \rho^{t}_{i})$ & $(\rho^{t}_{i}, \rho^{t}_{i+1})$ & $f(
 7 & D & D & $\rho^{t}_{i} - \alpha(S(\rho^{t}_{i})-S(\rho^{t}_{i-1}))$ \\ [1ex]% [1ex] adds vertical space
 \hline %inserts single line
 \end{tabular}
-\caption{Different values of $\rho^{t+1}_{i} = f(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ depending on the values of $G(\rho^{t}_{i-1},\rho^{t}_{i})$ and $G(\rho^{t}_{i},\rho^{t}_{i+1})$ in the space $(\rho_{1},\rho_{2})$.}
+\caption{Different modes of $\rho^{t+1}_{i} = f(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ depending on the values of $G(\rho^{t}_{i-1},\rho^{t}_{i})$ and $G(\rho^{t}_{i},\rho^{t}_{i+1})$ in the space $(\rho_{1},\rho_{2})$.}
 \label{table:modes} % is used to refer this table in the text
 \end{table}
 
@@ -47,14 +47,14 @@ Mode & $f_{DN}(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ \\ [0.5ex]% inserts 
 \hline %inserts single line
 \end{tabular}
 \label{table:modesDN} % is used to refer this table in the text
-\caption{Different values of $\rho^{t+1}_{i} = f(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ depending on the values of $G(\rho^{t}_{i-1},\rho^{t}_{i})$ and $G(\rho^{t}_{i},\rho^{t}_{i+1})$ in the space $(\rho_{1},\rho_{2})$.}
+\caption{Different values of $\rho^{t+1}_{i} = f_{DN}(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ for a Daganzo-Newell fundamental diagram.}
 \end{table}
 
-For instance, for the first mode, $(\rho^{t}_{i-1}, \rho^{t}_{i})$ and $(\rho^{t}_{i}, \rho^{t}_{i+1})$ are both in \textbf{W} (see Figure \ref{fig:godunovDiagram}), thus $G(\rho^{t}_{i-1}, \rho^{t}_{i}) = R(\rho^{t}_{i})$ and $G(\rho^{t}_{i}, \rho^{t}_{i+1}) = R(\rho^{t}_{i+1})$, and then $\rho^{t+1} = f_{1}(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1}) = \rho^{t}_{i} - \alpha(R_{+}(\rho^{t}_{i+1})-R(\rho^{t}_{i}))$, where $f_{1}$ is the first entry of $f$. By extending this result to an entire link with discrete state space indexed by $i = 1,\cdots,n$, where $n$ is the number of space steps, we have a whole description of the space of ''modes'' along the link. 
+For instance, for the first mode, $(\rho^{t}_{i-1}, \rho^{t}_{i})$ and $(\rho^{t}_{i}, \rho^{t}_{i+1})$ are both in \textbf{W} (see Figure \ref{fig:godunovDiagram}), thus $G(\rho^{t}_{i-1}, \rho^{t}_{i}) = R(\rho^{t}_{i})$ and $G(\rho^{t}_{i}, \rho^{t}_{i+1}) = R(\rho^{t}_{i+1})$, and then $\rho^{t+1} = f_{1}(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1}) = \rho^{t}_{i} - \alpha(R_{+}(\rho^{t}_{i+1})-R(\rho^{t}_{i}))$, where $f_{1}$ is the first entry of $f$. By extending this result to an entire link with discrete state space indexed by $i = 1,\cdots,n$, where $n$ is the number of space steps, we have an exhaustive description of the space of ``modes'' along the link. 
 
 \hspace{10mm}
 
-\noindent \textbf{Remark:} A priori, the number of modes in Table \ref{table:modes} renders the approach of mode decomposition for estimation untractable: for $n$ cells, the number of possible modes at any given time is technically $7^{n}$. Since there is a correlation between two consecutive indices $i$ and $i+1$, the number of modes for the entire link reduces from $3^{n}$ to an expression in the form of $a\cdot\beta^{n} + b\cdot\gamma^{n} + c\cdot\delta^{n}$ which lower and upper bounds are proved to be $3\cdot 2^{n}$ and $3\cdot (2.5)^{n}$ respectively (for full details, see Appendix \ref{sec:modes}). And we will see later in section \ref{sec:implementation} that the implementation of the Kalman filter in each mode has $O(n^{2})$ time complexity and $O(n)$ space complexity.
+\noindent \textbf{Remark:} A priori, the number of modes in Table \ref{table:modes} renders the approach of mode decomposition for estimation untractable: for $n$ cells, the number of possible modes at any given time is technically $7^{n}$. Since there is a correlation between two consecutive indices $i$ and $i+1$, the number of modes for the entire link reduces from $7^{n}$ to an expression in the form of $a\cdot\beta^{n} + b\cdot\gamma^{n} + c\cdot\delta^{n}$ which lower and upper bounds are proved to be $3\cdot 2^{n}$ and $3\cdot (2.5)^{n}$ respectively (for full details, see Appendix \ref{sec:modes}). And we will see later in section \ref{sec:implementation} that the implementation of the Kalman filter in each mode has $O(n^{2})$ time complexity and $O(n)$ space complexity.
 
 \hspace{10mm}
 
@@ -113,9 +113,14 @@ Let us consider a link with discrete time step indexed by $t\geq 0$ and discrete
 The values of $\rho^{t}_{0}$ and $\rho^{t}_{n+1}$ are given by the prescibed boundary conditions to be imposed on the in left and right side of the domain respectively. Note that these boundary values do not always affect the physical domain because of the nonlinear operator \ref{eq:rhoGodunovFlux3}, which causes the boundary conditions to be implemented in the weak sense. For more details, see \cite{Strub2006}.
 }
 
-\hspace{10mm}
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=8cm]{figures/modes.pdf}
+    \caption{An illustration of the vectors $\boldsymbol \rho\in[0,\rho_{\text{jam}}]^{n+2}$, $\boldsymbol s\in\tilde{\mathcal{M}}_{n}\subset\{\text{w,l,d}\}^{n+1}$, and $\boldsymbol m\in\mathcal{M}_{n}\subset\{1,\cdots,7\}^{n}$ for $n$ cells.}
+    \label{fig:modes}
+\end{figure}
 
-\noindent\textbf{Definition of the space of modes:} Let us denote by $\mathcal{M}_{n}$ the space of modes ($\mathcal{M}_{n}\subset\{1,\cdots,7\}^{n}$). For $\boldsymbol m \in \mathcal{M}_{n}$, $\boldsymbol m$ is a vector of dimension $n$ for which the $i$-th entry $m_{i}\in\{1,\cdots,7\}$ is the mode at cell $i$. Equivalently, each element of $\mathcal{M}_{n}$ can be described as a sequence of regions in which the pair $(\rho_{i},\rho_{i+1})$ is, for $i=0,\cdots,n$. Hence, we define the equivalent space of modes $\tilde{\mathcal{M}}_{n}\subset\{\text{w,l,d}\}^{n+1}$, and for $\boldsymbol s \in \tilde{\mathcal{M}}_{n}$, $\boldsymbol s$ is a vector of dimension $n+1$ for which the $i$-th entry $s_{i}\in\{\text{w,l,d}\}$ is the region of the pair $(\rho_{i},\rho_{i+1})$, for $i=0,\cdots,n$. As we will see later, this second definition gives a description of the \emph{partition of the space} $\mathcal{S}$ \emph{into different polyhedra} $\textbf{P}_{\boldsymbol m}$ \emph{in which the mode is} $\boldsymbol m$.
+\noindent\textbf{Definition of the space of modes:} Let us denote by $\mathcal{M}_{n}$ the space of modes ($\mathcal{M}_{n}\subset\{1,\cdots,7\}^{n}$). For $\boldsymbol m \in \mathcal{M}_{n}$, $\boldsymbol m$ is a vector of dimension $n$ for which the $i$-th entry $m_{i}\in\{1,\cdots,7\}$ is the mode at cell $i$. Equivalently, each element of $\mathcal{M}_{n}$ can be described as a sequence of regions in which the pair $(\rho_{i},\rho_{i+1})$ is, for $i=0,\cdots,n$. Hence, we define the equivalent space of modes $\tilde{\mathcal{M}}_{n}\subset\{\text{w,l,d}\}^{n+1}$, and for $\boldsymbol s \in \tilde{\mathcal{M}}_{n}$, $\boldsymbol s$ is a vector of dimension $n+1$ for which the $i$-th entry $s_{i}\in\{\text{w,l,d}\}$ is the region of the pair $(\rho_{i},\rho_{i+1})$, for $i=0,\cdots,n$. As we will see later, this second definition gives a description of the \emph{partition of the space} $\mathcal{S}$ \emph{into different polyhedra} $\textbf{P}_{\boldsymbol m}$ \emph{in which the mode is} $\boldsymbol m$. See Figure \ref{fig:modes} for an illustration.
 
 \hspace{10mm}
 
@@ -126,7 +131,7 @@ The $n$-dimensional vector $\boldsymbol m\in\mathcal{M}_{n}$ describes the mode 
 \label{eq:underlyingSystem1}
 \end{equation}
 
-\noindent with $F[\cdot]$ a n+2 dimensional function vector. When $\boldsymbol\rho^{t}\in \boldsymbol P_{\boldsymbol m}$ (i.e. the mode at time $t$ is $\boldsymbol m$), the $i$-th entry $\rho^{t+1}_{i}=F_{i}[\boldsymbol\rho^{t}]$ is:
+\noindent with $F[\cdot]$ a n+2 dimensional function vector. When $\boldsymbol\rho^{t}\in \boldsymbol P_{\boldsymbol m}$ (i.e. the mode at time $t$ is $\boldsymbol m$), and the boundary conditions upstream and downstream at time step $t+1$ are $u^{t+1}$ and $d^{t+1}$, the $i$-th entry $\rho^{t+1}_{i}=F_{i}[\boldsymbol\rho^{t}]$ is:
 
 \begin{equation}
 \rho^{t+1}_{i} = \begin{cases}
@@ -137,7 +142,7 @@ d^{t+1} & \text{for}\quad i=n+1
 \label{eq:underlyingSystem2}
 \end{equation}
 
-\noindent where $m_{i}$ denotes the $i$-th entry of $\boldsymbol m \in\mathcal{M}_{n}$, i.e. the mode of cell $i$ at time step $t$, $u^{t+1}$ and $d^{t+1}$ the boundary conditions upstream and downstream at time step $t+1$. $f_{m_{i}}(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ is the $m_{i}$-th entry of the function vector $f$ evaluated in $(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$. We note that $\rho^{t+1}_{0}=u^{t+1}$ and $\rho^{t+1}_{n+1}=d^{t+1}$, which means that the ghost cells are the boundary conditions of the CTM. For a Daganzo-Newell fundamental diagram the update operator of the dynamical system is:
+\noindent where $m_{i}$ denotes the $i$-th entry of $\boldsymbol m \in\mathcal{M}_{n}$, i.e. the mode of cell $i$ at time step $t$. $f_{m_{i}}(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$ is the $m_{i}$-th entry of the function vector $f$ evaluated in $(\rho^{t}_{i-1},\rho^{t}_{i},\rho^{t}_{i+1})$. We note that $\rho^{t+1}_{0}=u^{t+1}$ and $\rho^{t+1}_{n+1}=d^{t+1}$, which means that the ghost cells are the boundary conditions of the CTM. For a Daganzo-Newell fundamental diagram, with $L_{m_{i}}$ the $m_{i}$-th line of $J_{DN}$ and $w_{m_{i}}$ the $m_{i}$-th entry of $w$, the update operator of the dynamical system is:
 
 \begin{equation}
 \begin{array}{l}
@@ -156,14 +161,7 @@ d^{t+1} & \text{for }i=n+1
 \label{eq:underlyingSystemDN}
 \end{equation}
 
-\noindent Where $L_{m_{i}}$ is the $m_{i}$-th line of $J_{DN}$ and $w_{m_{i}}$ the $m_{i}$-th entry of $w$. With matrix notations:
-
-\begin{equation}
-\boldsymbol\rho^{t+1} = A_{\boldsymbol m} \boldsymbol\rho^{t} + b_{\boldsymbol m} + c_{t+1} \quad\text{if}\quad\boldsymbol\rho^{t}\in\textbf{P}_{\boldsymbol m}
-\label{eq:underlyingSystemDN2}
-\end{equation}
-
-\noindent Where $A_{\boldsymbol m}$ is a tridiagonal matrix of size $(n+2)\times(n+2)$, such that the diagonal elements are $\{0, J_{m_{1},2},...,J_{m_{n},2},0\}$, the lower diagonal elements are $\{J_{m_{1},1},J_{m_{2},1},...,J_{m_{n},1},0\}$, and the upper diagonal elements are $\{0,J_{m_{1},3},J_{m_{2},3},...,J_{m_{n},3}\}$ where $J$ (or $J_{DN}$) are defined in equations (\ref{eq:jacobian}), (\ref{eq:jacobianDN}). Equivalently:
+\noindent When $\boldsymbol\rho^{t}\in\textbf{P}_{\boldsymbol m}$, the $(n+2)\times(n+2)$-dimensional state-transition matrix $A_{\boldsymbol m}$ is tridiagonal with diagonal elements $\{0, J_{m_{1},2},...,J_{m_{n},2},0\}$, lower diagonal elements $\{J_{m_{1},1},J_{m_{2},1},...,J_{m_{n},1},0\}$, and upper diagonal elements $\{0,J_{m_{1},3},J_{m_{2},3},...,J_{m_{n},3}\}$ where $J$ (or $J_{DN}$) are defined in equations (\ref{eq:jacobian}), (\ref{eq:jacobianDN}). Equivalently:
 
 \begin{equation}\label{eq:matrixA}
  A_{\boldsymbol m} =
@@ -176,7 +174,14 @@ L_{m_{1}} & & \\
 \end{pmatrix}
 \end{equation}
 
-\noindent $b_{\boldsymbol m}$ and $c_{t+1}$ are two vectors of dimension $(n+2)$ with entries $\{0,w_{m^{t}_{1}},\cdots,w_{m^{t}_{n}},0\}$ and $\{u^{t+1},0,\cdots,$ $0,d^{t+1}\}$ repectively, and $\textbf{P}_{\boldsymbol m}$ is the subset of space $\mathcal{S}$ where the mode is $\boldsymbol m$. We provide now a description of the partition of the space into the polyhedra $\textbf{P}_{\boldsymbol m}$ in which the mode is $\boldsymbol m$. See appendix \ref{sec:polytope} for details on polyhedra and their representation.
+\noindent Let us denote $b_{\boldsymbol m}$ and $c_{t+1}$ the two vectors of dimension $(n+2)$ with entries $\{0,w_{m^{t}_{1}},\cdots,w_{m^{t}_{n}},0\}$ and $\{u^{t+1},0,\cdots,$ $0,d^{t+1}\}$ repectively, and $\textbf{P}_{\boldsymbol m}$ the subset of space $\mathcal{S}$ where the mode is $\boldsymbol m$. The update operator of the dynamical system is \emph{piecewise affine}:
+
+\begin{equation}
+\boldsymbol\rho^{t+1} = A_{\boldsymbol m} \boldsymbol\rho^{t} + b_{\boldsymbol m} + c_{t+1} \quad\text{if}\quad\boldsymbol\rho^{t}\in\textbf{P}_{\boldsymbol m}
+\label{eq:underlyingSystemDN2}
+\end{equation}
+
+\noindent We provide now a description of the partition of the space into the polyhedra $\textbf{P}_{\boldsymbol m}$ in which the mode is $\boldsymbol m$. See appendix \ref{sec:polytope} for details on polyhedra and their representation.
 
 \hspace{10mm}
 

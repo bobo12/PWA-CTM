@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.15)  12 AUG 2012 16:13
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.15)  12 AUG 2012 23:20
 entering extended mode
 **C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/paper.tex
 (C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/paper.tex
@@ -267,8 +267,14 @@ LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 373.
 Package: cite 2010/09/10  v 5.3
 )
-** ATTENTION: Overriding command lockouts (line 26).
-** ATTENTION: Overriding IEEE standard margins (line 27).
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks24
+\verbatim@line=\toks25
+\verbatim@in@stream=\read1
+)
+** ATTENTION: Overriding command lockouts (line 28).
+** ATTENTION: Overriding IEEE standard margins (line 29).
 \c@definition=\count108
 \c@lemma=\count109
 \c@theorem=\count110
@@ -276,18 +282,18 @@ Package: cite 2010/09/10  v 5.3
 \c@corollary=\count112
 \c@remark=\count113
 (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\paper.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
 
 (C:\Users\Jerome\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -296,12 +302,12 @@ LaTeX Font Info:    ... okay on input line 42.
 \scratchbox=\box29
 \nofMPsegments=\count115
 \nofMParguments=\count116
-\everyMPshowfont=\toks24
+\everyMPshowfont=\toks26
 \MPscratchCnt=\count117
 \MPscratchDim=\dimen139
 \MPnumerator=\count118
 \makeMPintoPDFobject=\count119
-\everyMPtoPDFconversion=\toks25
+\everyMPtoPDFconversion=\toks27
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
@@ -333,7 +339,7 @@ File: figures/fundamentalDiagramSR.pdf Graphic file (type pdf)
 
 <use figures/fundamentalDiagramSR.pdf>
 Package pdftex.def Info: figures/fundamentalDiagramSR.pdf used on input line 14
-0.
+3.
 (pdftex.def)             Requested size: 227.62204pt x 179.33676pt.
  [2 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/figures/fundamentalDiagram
 2.pdf>]
@@ -341,7 +347,7 @@ Package pdftex.def Info: figures/fundamentalDiagramSR.pdf used on input line 14
 File: figures/godunovDiagram.pdf Graphic file (type pdf)
 
 <use figures/godunovDiagram.pdf>
-Package pdftex.def Info: figures/godunovDiagram.pdf used on input line 179.
+Package pdftex.def Info: figures/godunovDiagram.pdf used on input line 182.
 (pdftex.def)             Requested size: 227.62204pt x 122.80225pt.
 )
 (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\PPWA.tex
@@ -361,24 +367,31 @@ s de-note by
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
+[]\OT1/ptm/m/n/10 TABLE III.2: |Dif-fer-ent val-ues of $\OML/cmm/m/it/10 [] \O
+T1/cmr/m/n/10 =
+ []
+
+
+Underfull \hbox (badness 1975) in paragraph at lines 50--50
+\OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 []; []; []\OT1/cmr/m/n
+/10 )$ \OT1/ptm/m/n/10 for a Daganzo-Newell fun-da-men-tal
+ []
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/figures/fundamentalDiagramS
 R.pdf> <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/figures/godunovDiagram.
-pdf>] [4]
-Underfull \hbox (badness 5711) in paragraph at lines 166--167
-\OT1/ptm/m/n/10 Where $\OML/cmm/m/it/10 A[]$ \OT1/ptm/m/n/10 is a tridi-ag-o-na
-l ma-trix of size $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 +
- []
+pdf>] <figures/modes.pdf, id=82, 510.1188pt x 113.09854pt>
+File: figures/modes.pdf Graphic file (type pdf)
 
-
-Underfull \hbox (badness 3118) in paragraph at lines 166--167
-\OT1/cmr/m/n/10 2) \OMS/cmsy/m/n/10  \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/
-cmr/m/n/10 + 2)$\OT1/ptm/m/n/10 , such that the di-ag-o-nal el-e-ments are
- []
-
-) (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\EKF.tex [5] [6])
-(C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\MMKF.tex [7]
+<use figures/modes.pdf>
+Package pdftex.def Info: figures/modes.pdf used on input line 118.
+(pdftex.def)             Requested size: 227.62204pt x 50.46588pt.
+ [4 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/figures/modes.pdf>]) (C:\U
+sers\Jerome\Documents\PWA-CTM\PWA-CTM\paper\EKF.tex
+[5] [6]) (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\MMKF.tex [7]
 Underfull \hbox (badness 5970) in paragraph at lines 119--120
 \OT1/ptm/m/n/10 There ex-ist $[][] \OMS/cmsy/m/n/10 2 f[][]\OML/cmm/m/it/10 ; [
 ][]; [][]\OMS/cmsy/m/n/10 g$ \OT1/ptm/m/n/10 and $[][] \OMS/cmsy/m/n/10 2
@@ -395,70 +408,27 @@ Underfull \hbox (badness 2521) in paragraph at lines 75--76
 i-mal H-
  []
 
+<figures/threeLevelModes.pdf, id=118, 558.24962pt x 113.61044pt>
+File: figures/threeLevelModes.pdf Graphic file (type pdf)
 
-Overfull \hbox (28.39574pt too wide) detected at line 112
-[][] \OMS/cmsy/m/n/10 \ \OML/cmm/m/it/10 @[][] \OT1/cmr/m/n/10 = ([] [][]) \OMS
-/cmsy/m/n/10 \ \OT1/cmr/m/n/10 ([] [][]) \OMS/cmsy/m/n/10 \ \OML/cmm/m/it/10 @[
-][] \OMS/cmsy/m/n/10  \OT1/cmr/m/n/10 ([] [][]) \OMS/cmsy/m/n/10 \ \OT1/cmr/m/
-n/10 ([] [][]) = [][]
- []
-
-
-Overfull \hbox (43.07649pt too wide) detected at line 119
-\OT1/cmr/m/n/10 ([] [][]) \OMS/cmsy/m/n/10 \ \OT1/cmr/m/n/10 ([] [][]) \OMS/cms
-y/m/n/10 \ [][] \ [][][][][][] 
- []
-
-
-Overfull \hbox (93.3172pt too wide) in paragraph at lines 145--154
+<use figures/threeLevelModes.pdf>
+Package pdftex.def Info: figures/threeLevelModes.pdf used on input line 149.
+(pdftex.def)             Requested size: 227.62204pt x 46.324pt.
+ [10 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/figures/threeLevelModes.p
+df>]
+Overfull \hbox (4.90529pt too wide) in paragraph at lines 217--227
  [][] 
  []
 
-
-Overfull \hbox (4.90529pt too wide) in paragraph at lines 213--223
- [][] 
- []
-
-[10] <figures/godunovDiagram3.pdf, id=107, 573.94908pt x 632.41623pt>
+<figures/godunovDiagram3.pdf, id=131, 573.94908pt x 632.41623pt>
 File: figures/godunovDiagram3.pdf Graphic file (type pdf)
 
 <use figures/godunovDiagram3.pdf>
-Package pdftex.def Info: figures/godunovDiagram3.pdf used on input line 233.
+Package pdftex.def Info: figures/godunovDiagram3.pdf used on input line 237.
 (pdftex.def)             Requested size: 227.62204pt x 250.81009pt.
- [11 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paper/figures/godunovDiagram3.p
-df>]
-Overfull \hbox (60.9018pt too wide) detected at line 310
-\OML/cmm/m/it/10 F[]\OT1/cmr/m/n/10 [[][]] = \OML/cmm/m/it/10 f[]\OT1/cmr/m/n/1
-0 (\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 
-(\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 +
- \OML/cmm/m/it/10 ![][] \OMS/cmsy/m/n/10   \OML/cmm/m/it/10 ![][]
- []
-
-
-Overfull \hbox (42.70471pt too wide) detected at line 318
-\OML/cmm/m/it/8 F[]\OT1/cmr/m/n/8 [\OML/cmm/m/it/8 []\OT1/cmr/m/n/8 ] = \OML/c
-mm/m/it/8 f[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 []\OT1/cmr/m/n/8 ) = \OML/cmm/m/i
-t/8 f[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 []\OT1/cmr/m/n/8 ) = \OML/cmm/m/it/8 [
-] \OT1/cmr/m/n/8 + \OML/cmm/m/it/8 []![][] \OMS/cmsy/m/n/8   \OML/cmm/m/it/8 
-[]![][]
- []
-
-
-Overfull \hbox (48.87987pt too wide) detected at line 334
-[]
- []
-
-
-Overfull \hbox (61.53949pt too wide) detected at line 363
-[]
- []
-
-
-Overfull \hbox (53.20973pt too wide) detected at line 376
-[]
- []
-
-[12]) (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\paper.bbl
+)
+(C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\paper.bbl [11 <C:/Users/Jerome
+/Documents/PWA-CTM/PWA-CTM/paper/figures/godunovDiagram3.pdf>]
 Missing character: There is no ü in font ptmr7t!
 Missing character: There is no ä in font ptmr7t!
 )
@@ -473,45 +443,46 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[13] (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\paper.aux) ) 
+[12
+
+] (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paper\paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4077 strings out of 494045
- 61840 string characters out of 3145965
- 132321 words of memory out of 3000000
- 7304 multiletter control sequences out of 15000+200000
+ 4111 strings out of 494045
+ 62505 string characters out of 3145965
+ 130794 words of memory out of 3000000
+ 7334 multiletter control sequences out of 15000+200000
  45451 words of font info for 96 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  42i,18n,40p,1524b,287s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files (x86)/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmmib10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cmextra/cmmib7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pf
-b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (13 pages, 402719 bytes).
+{C:/Program File
+s (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmmib10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cmextra/cmmib7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cms
+y5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (12 pages, 392247 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
+ 224 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
