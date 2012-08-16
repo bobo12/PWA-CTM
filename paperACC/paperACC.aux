@@ -1,0 +1,161 @@
+\relax 
+\citation{Lighthill1955,Richards1956}
+\citation{Lebacque1996,LeVeque1992,Strub2006}
+\citation{Daganzo1994,Daganzo1995}
+\citation{Chen2005}
+\citation{Hoh2008}
+\citation{Herrera2009}
+\citation{Work2008,Work2008a}
+\citation{Work2008,Work2008a}
+\citation{Munoz2003}
+\citation{Chen2000}
+\citation{Daganzo1995}
+\citation{Lighthill1955}
+\citation{Greenshields1934}
+\citation{Greenshields1934}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Traffic flow modelling}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-A}The LWR Model}{1}}
+\newlabel{eq:LWRmodel1}{{II.1}{1}}
+\newlabel{eq:LWRmodel2}{{II.2}{1}}
+\newlabel{eq:LWRmodel3}{{II.3}{1}}
+\newlabel{eq:greenshieldsVelocity}{{II.4}{1}}
+\newlabel{eq:greenshieldsFlux}{{II.5}{1}}
+\newlabel{eq:dnVelocity}{{II.6}{1}}
+\citation{Agyemang-Duah1991,Cassidy1999,Hall1991}
+\citation{Godlewski1996,Godunov1959}
+\citation{LeVeque1992}
+\citation{Garavello2006}
+\citation{Agyemang-Duah1991,Cassidy1999,Hall1991}
+\citation{Daganzo1994}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.1}{\ignorespaces Speed and flow relationships (fundamental diagrams) for Greenshields (a), Daganzo-Newell (b), and discontinuous (c).\relax }}{2}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:fundamentalDiagram}{{II.1}{2}}
+\newlabel{eq:dnFlux}{{II.7}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-B}Numerical Discretization}{2}}
+\newlabel{eq:rhoGodunov}{{II.8}{2}}
+\newlabel{eq:rhoGodunovFlux1}{{II.10}{2}}
+\newlabel{eq:sendingFlow1}{{II.11}{2}}
+\newlabel{eq:receivingFlow1}{{II.12}{2}}
+\newlabel{eq:sendingFlow2}{{II.13}{2}}
+\newlabel{eq:receivingFlow2}{{II.14}{2}}
+\newlabel{eq:rhoGodunovFluxGeneral}{{II.9}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.2}{\ignorespaces Sending and receiving flows for Greenshields (a), Daganzo-Newell (b), and discontinous (c) velocity functions.\relax }}{3}}
+\newlabel{fig:fundamentalDiagramSR}{{II.2}{3}}
+\newlabel{eq:rhoGodunovFlux}{{II.15}{3}}
+\newlabel{eq:regions}{{II.16}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.3}{\ignorespaces Values of $G(\rho _{1},\rho _{2})$ in the space $(\rho _{1},\rho _{2})$.\relax }}{3}}
+\newlabel{fig:godunovDiagram}{{II.3}{3}}
+\newlabel{eq:rhoGodunovFlux3}{{II.17}{3}}
+\newlabel{eq:boundary}{{II.18}{3}}
+\newlabel{eq:regions2}{{II.19}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}A polyhedral piecewise affine model}{3}}
+\newlabel{eq:rhoGodunov2}{{III.1}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Decomposition in different ``modes''}{3}}
+\newlabel{sec:decompositionModes}{{III-A}{3}}
+\citation{Strub2006}
+\@writefile{lot}{\contentsline {table}{\numberline {III.1}{\ignorespaces Different modes of $\rho ^{t+1}_{i} = f(\rho ^{t}_{i-1},\rho ^{t}_{i},\rho ^{t}_{i+1})$ depending on the values of $G(\rho ^{t}_{i-1},\rho ^{t}_{i})$ and $G(\rho ^{t}_{i},\rho ^{t}_{i+1})$ in the space $(\rho _{1},\rho _{2})$.\relax }}{4}}
+\newlabel{table:modes}{{III.1}{4}}
+\newlabel{table:modesDN}{{\caption@xref {table:modesDN}{ on input line 49}}{4}}
+\@writefile{lot}{\contentsline {table}{\numberline {III.2}{\ignorespaces Different values of $\rho ^{t+1}_{i} = f_{DN}(\rho ^{t}_{i-1},\rho ^{t}_{i},\rho ^{t}_{i+1})$ for a Daganzo-Newell fundamental diagram.\relax }}{4}}
+\newlabel{eq:jacobian}{{III.2}{4}}
+\newlabel{eq:jacobianDN}{{III.3}{4}}
+\newlabel{eq:jacobianDN2}{{III.4}{4}}
+\newlabel{eq:fDN}{{III.5}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Polyhedral piecewise affine formulation}{4}}
+\newlabel{sec:formulation}{{III-B}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {III.1}{\ignorespaces An illustration of the vectors $\boldsymbol  \rho \in [0,\rho _{\text  {jam}}]^{n+2}$, $\boldsymbol  s\in \mathaccentV {tilde}07E{\mathcal  {M}}_{n}\subset \{\text  {w,l,d}\}^{n+1}$, and $\boldsymbol  m\in \mathcal  {M}_{n}\subset \{1,\cdots  ,7\}^{n}$ for $n$ cells.\relax }}{4}}
+\newlabel{fig:modes}{{III.1}{4}}
+\newlabel{eq:underlyingSystem1}{{III.6}{5}}
+\newlabel{eq:underlyingSystem2}{{III.7}{5}}
+\newlabel{eq:underlyingSystemDN}{{III.8}{5}}
+\newlabel{eq:matrixA}{{III.9}{5}}
+\newlabel{eq:underlyingSystemDN2}{{III.10}{5}}
+\newlabel{eq:regions3}{{III.11}{5}}
+\newlabel{eq:Hrepresentation}{{III.12}{5}}
+\newlabel{eq:Hrepresentation2}{{III.13}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}A Kalman filter in each mode}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Mode detection}{6}}
+\newlabel{eq:indicators}{{IV.1}{6}}
+\newlabel{eq:Hrepresentation3}{{IV.2}{6}}
+\newlabel{eq:indicators2}{{IV.3}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Kalman filter algorithm}{6}}
+\newlabel{eq:underlyingSystemDN3}{{IV.4}{6}}
+\newlabel{eq:observation}{{IV.5}{6}}
+\newlabel{eq:predict}{{IV.6}{6}}
+\newlabel{eq:update}{{IV.7}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Implementation and complexity}{6}}
+\newlabel{sec:implementation}{{IV-C}{6}}
+\newlabel{eq:underlyingSystemDNcopy}{{IV.8}{6}}
+\newlabel{eq:predictedCovarianceComputation}{{IV.9}{7}}
+\newlabel{eq:predictedCovarianceComputation2}{{IV.10}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Analysis}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Conclusion and Future Work}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Acknowledgement}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Appendix}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-A}Polyhedral partition of modes}{7}}
+\newlabel{sec:polytope}{{VII-A.1}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {VII-A.1}H-representation of a polyhedron}{7}}
+\newlabel{eq:closedHalfSpace}{{VII.1}{7}}
+\newlabel{eq:hRepresentation}{{VII.2}{7}}
+\newlabel{eq:matRepresentation}{{VII.3}{7}}
+\newlabel{sec:minHrepresentation}{{VII-A.2}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {VII-A.2}Algorithm to find the minimal H-representation}{7}}
+\citation{Gruenbaum2003}
+\newlabel{eq:minRepresentation}{{VII.6}{8}}
+\newlabel{sec:adjacency}{{VII-A.3}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {VII-A.3}Proof of the exclusivity of all (n+1)-adjcacencies}{8}}
+\newlabel{eq:adjacency1}{{VII.7}{8}}
+\newlabel{eq:adjacency2}{{VII.8}{8}}
+\newlabel{eq:adjacency3}{{VII.9}{8}}
+\newlabel{eq:adjacency4}{{VII.10}{8}}
+\newlabel{eq:adjacency5}{{VII.11}{8}}
+\newlabel{eq:adjacency6}{{VII.12}{8}}
+\newlabel{sec:modes}{{VII-A.4}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {VII-A.4}Number of modes and intractibility}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {VII.1}{\ignorespaces The sixteen possible modes for the first three pairs $(\rho _{0},\rho _{1})$, $(\rho _{1},\rho _{2})$, and $(\rho _{2},\rho _{3})$.\relax }}{8}}
+\newlabel{fig:threeLevelModes}{{VII.1}{8}}
+\newlabel{eq:modes1}{{VII.13}{8}}
+\newlabel{eq:modes2}{{VII.14}{8}}
+\newlabel{eq:modes3}{{VII.15}{8}}
+\newlabel{eq:modes4}{{VII.16}{8}}
+\newlabel{eq:modes5}{{VII.17}{8}}
+\newlabel{eq:modes6}{{VII.18}{8}}
+\bibstyle{plain}
+\bibdata{common/myBiblio}
+\bibcite{Agyemang-Duah1991}{1}
+\bibcite{Cassidy1999}{2}
+\bibcite{Chen2005}{3}
+\bibcite{Chen2000}{4}
+\bibcite{Daganzo1994}{5}
+\newlabel{table:numModes}{{\caption@xref {table:numModes}{ on input line 226}}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {VII.1}{\ignorespaces Number of modes for a homogeneous road.\relax }}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-B}The heterogeneous case}{9}}
+\newlabel{sec:CDFD}{{VII-B}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {VII.2}{\ignorespaces Values of $G(\rho _{1},\rho _{2})$ in the space $(\rho _{1},\rho _{2})$ for the Daganzo-Newell fundamental diagram with different capacities $q_{c1} < q_{c2}$ for a) and $q_{c1} > q_{c2}$ for b). Note that for illustration purposes we suppose $\rho _{c1}\leq \rho _{c2}$.\relax }}{9}}
+\newlabel{fig:godunovDiagram3}{{VII.2}{9}}
+\newlabel{eq:rhoGodunovFlux2}{{VII.19}{9}}
+\newlabel{eq:regionsHetero}{{VII.20}{9}}
+\newlabel{eq:rhoGodunovFlux3a}{{VII.21}{9}}
+\newlabel{eq:boundaryHetero}{{VII.22}{9}}
+\newlabel{eq:regions4}{{VII.23}{9}}
+\newlabel{table:numModes2}{{\caption@xref {table:numModes2}{ on input line 302}}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {VII.2}{\ignorespaces Number of modes for a heterogeneous road.\relax }}{9}}
+\@writefile{toc}{\contentsline {section}{References}{9}}
+\bibcite{Daganzo1995}{6}
+\bibcite{Garavello2006}{7}
+\bibcite{Godlewski1996}{8}
+\bibcite{Godunov1959}{9}
+\bibcite{Greenshields1934}{10}
+\bibcite{Gruenbaum2003}{11}
+\bibcite{Hall1991}{12}
+\bibcite{Herrera2009}{13}
+\bibcite{Hoh2008}{14}
+\bibcite{Lebacque1996}{15}
+\bibcite{LeVeque1992}{16}
+\bibcite{Lighthill1955}{17}
+\bibcite{Munoz2003}{18}
+\bibcite{Richards1956}{19}
+\bibcite{Strub2006}{20}
+\bibcite{Work2008}{21}
+\bibcite{Work2008a}{22}

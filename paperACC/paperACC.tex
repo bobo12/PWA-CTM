@@ -1,0 +1,74 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  
+\usepackage{amsfonts, amssymb}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{multirow}
+%\usepackage{float} 
+\usepackage{subcaption}
+%\input{common/commands.tex}
+
+%\usepackage{fullpage}
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+\usepackage{amsmath}
+%\usepackage[bookmarks=true,bookmarksnumbered=true,colorlinks=false,pdfborder={0 0 0}]{hyperref}
+%\usepackage{picinpar, wrapfig}
+\usepackage{hhline,tabularx}
+
+\usepackage{cite}
+
+\usepackage{verbatim}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+% environments and commands
+
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\author{Jerome Thai}% <-this % stops a space
+\title{Polyhedral hybrid systems and applications to the Cell Transmission Model}
+
+\maketitle
+
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{intro.tex}
+
+\input{traffic.tex}
+
+\input{PPWA.tex}
+
+\input{EKF.tex}
+
+\section{Conclusion and Future Work}
+
+\section{Acknowledgement}
+
+\input{Appendix.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+\bibliography{common/myBiblio}
+
+
+\end{document}
