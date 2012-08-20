@@ -20,7 +20,7 @@ tic
 nbTimeSteps = floor(route.totalSec/dt);
 
 %initialize rho    
-rho_initial=0.01*zeros(route.nbCells,1);    
+rho_initial=0.01*zeros(route.nbCells + 2,1);    
 %%Boundary conditions
 rho_a = zeros(1,nbTimeSteps);
 rho_b = zeros(1,nbTimeSteps);

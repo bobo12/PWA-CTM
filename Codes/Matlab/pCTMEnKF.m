@@ -30,6 +30,7 @@ for j=1:nbTimeSteps
         if(nbRows~=0)
             Hj = route.observationMatrix(...
                 route.activeSensors{counterEnkfSteps},:);
+            Hj = [zeros(size(Hj,1),1), Hj, zeros(size(Hj,1),1)];
             %             update = EnKF_V3(A, HA, invR, N, m)
             if(useEfficientEnKF)
                 HA = Hj*ens_rho_j;
@@ -47,7 +48,7 @@ for j=1:nbTimeSteps
                 % ens_eps = mvnrnd(zeros(1,nbRows),Rj,nbEnsembles)';
                 %         without noise ens_eps = 0*mvnrnd(zeros(1,nbRows),Rj,nbEnsembles)';
                 %Update using measurements
-                ens_rho_j = EnKF_aposteriori(ens_rho_j,Hj*route.densityMeasured(:,counterEnkfSteps),Hj,rho_max,percent_dev_meas);% a posteriori
+                ens_rho_j = EnKF_aposteriori(ens_rho_j,Hj*[0;route.densityMeasured(:,counterEnkfSteps);0],Hj,rho_max,percent_dev_meas);% a posteriori
                 %             display('mean_rho');
                 %             disp(mean(ens_rho_j,2));
                 %store rho
