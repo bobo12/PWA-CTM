@@ -1,5 +1,5 @@
 function rho = pCTMEKFMode(rho_initial, nbTimeSteps, dt, route, ...
-    vff, rhoJ, rhoC, up, dn)
+    vff, rhoJ, rhoC)
 
 rho = zeros(length(rho_initial),nbTimeSteps);
 rhoEKF = rho_initial;
@@ -37,7 +37,7 @@ nbTimeSteps
 for j=1:nbTimeSteps
     j
     %Forecast step
-    [rhoEKF, P] = EKFaprioriMode(rhoEKF, P, percent_dev_state, J, w, d, rhoJ, up(j), dn(j));% a priori
+    [rhoEKF, P] = EKFaprioriMode(rhoEKF, P, percent_dev_state, J, w, d, rhoJ);% a priori
     if(mod(j-1,6)==0)
         %     if(mod(j-1,12)==0)
         counterEnkfSteps = counterEnkfSteps+1;

@@ -23,7 +23,7 @@ nbTimeSteps = floor(route.totalSec/dt);
 rho_initial = 0.01*ones(route.nbCells + 2, 1);
 up = zeros(1,nbTimeSteps);
 dn = zeros(1,nbTimeSteps);
-dn(floor(nbTimeSteps/2):nbTimeSteps) = rhoJ * ones(nbTimeSteps-floor(nbTimeSteps/2)+1,1);
+%dn(floor(nbTimeSteps/2):nbTimeSteps) = rhoJ * ones(nbTimeSteps-floor(nbTimeSteps/2)+1,1);
 
 %% solving using the godunov scheme :: No Kalman Filter
 %
@@ -33,16 +33,21 @@ dn(floor(nbTimeSteps/2):nbTimeSteps) = rhoJ * ones(nbTimeSteps-floor(nbTimeSteps
 %Assuming the measurements are given by the analytical solution, we
 %build the 'measures' vector
 
+rho = zeros(length(rho_initial),nbTimeSteps);
+rho(:,1) = rho_initial;
+rho(1,:) = up;
+rho(length(rho_initial),:) = dn;
+
 switch algorithm
     case 'EnKF'
         rho = pCTMEnKF(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
-            vff, rhoJ, rhoC, useEfficientEnKF, up, dn);
+            vff, rhoJ, rhoC, useEfficientEnKF);
     case 'EnKFmode'
         rho = pCTMEnKFMode(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
             vff, rhoJ, rhoC, useEfficientEnKF, up, dn);
     case 'EKFmode'
         rho = pCTMEKFMode(rho_initial, nbTimeSteps, dt, route, ...
-            vff, rhoJ, rhoC, up, dn);
+            vff, rhoJ, rhoC);
         
 end
 

@@ -1,5 +1,5 @@
 function rho = pCTMEnKF(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
-            vff, rho_max, rho_c, useEfficientEnKF, up, dn)
+            vff, rho_max, rho_c, useEfficientEnKF)
 
 % Generate the initial ensemble
 percent_dev_ens = 0.05; % percentage of deviation of the initial values
@@ -22,7 +22,7 @@ nbTimeSteps
 for j=1:nbTimeSteps
     j
     %Forecast step
-    ens_rho_j = EnKF_apriori(ens_rho_j, percent_dev_state, dt, route.cellLength', vff, rho_max, rho_c, up(j), dn(j));% a priori
+    ens_rho_j = EnKF_apriori(ens_rho_j, percent_dev_state, dt, route.cellLength', vff, rho_max, rho_c);% a priori
     if(mod(j-1,6)==0)
 %     if(mod(j-1,12)==0)
         counterEnkfSteps = counterEnkfSteps+1;
