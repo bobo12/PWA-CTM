@@ -1,17 +1,16 @@
 function rho = pCTMEnKFMode(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
-            vff, rhoJ, rhoC, useEfficientEnKF, up, dn)
+            vff, rhoJ, rhoC, useEfficientEnKF)
 
-rho = zeros(length(rho_initial),nbTimeSteps);
 % Generate the initial ensemble
 percent_dev_ens = 0.05; % percentage of deviation of the initial values
-ens_rho_initial = ...
+
+%Initialize
+ensRhoJ = ...
     mvnrnd(rho_initial',...
            percent_dev_ens^2 * eye(length(rho_initial)),...
            nbEnsembles)';...
 %assuming a 5% error on the knowledge of the initial conditon
 
-%Initialize
-ensRhoJ = ens_rho_initial;
 %Simulate state noise
 % Noises
 percent_dev_meas = 0.05; % percentage of deviation of the measurements values
@@ -45,7 +44,7 @@ nbTimeSteps
 for j=1:nbTimeSteps
     j
     %Forecast step
-    ensRhoJ = EnKFaprioriMode(ensRhoJ, percent_dev_state, J, w, d, rhoJ, up(j), dn(j));% a priori
+    ensRhoJ = EnKFaprioriMode(ensRhoJ, percent_dev_state, J, w, d, rhoJ);% a priori
     if(mod(j-1,6)==0)
 %     if(mod(j-1,12)==0)
         counterEnkfSteps = counterEnkfSteps+1;

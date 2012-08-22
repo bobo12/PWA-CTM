@@ -3,10 +3,10 @@ function rho = pCTMEKFMode(rho_initial, nbTimeSteps, dt, route, ...
 
 rho = zeros(length(rho_initial),nbTimeSteps);
 rhoEKF = rho_initial;
-percent_dev_state = 0.01;
-P = 0.05^2 * eye(length(rho_initial));
+percent_dev_state = 0.1;
+P = percent_dev_state^2 * eye(length(rho_initial));
 
-percent_dev_meas = 100; % percentage of deviation of the measurements values
+percent_dev_meas = 0.05; % percentage of deviation of the measurements values
 counterEnkfSteps = 0;
 
 alpha = dt / mean(route.cellLength);

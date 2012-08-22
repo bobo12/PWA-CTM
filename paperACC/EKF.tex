@@ -6,7 +6,7 @@ The Kalman filter provides the state estimate $\hat{\boldsymbol\rho}^{t}$ as a g
 
 \subsection{Mode detection}
 
-We present here a simple procedure to detect the mode of the state $\boldsymbol\rho$. It relies on the definition of polyhedra as a finite number of half-spaces (see Appendix \ref{sec:polytope}). For a state $\boldsymbol\rho = (\rho_{0},\rho_{1},...,\rho_{n},\rho_{n+1})$, a n+2 dimensional vector which describes the state of the link in the space $\mathcal{S} = [0,\rho_{j}]^{n+2}$, we present an algorithm that detects the mode of the state $\boldsymbol m$ (or $\boldsymbol s$) and provides a minimal H-representation of the polyhedron $P_{\boldsymbol m}$ (or $P_{\boldsymbol s}$). We first introduce the following indicator functions:
+We present here a simple procedure to detect the mode of the state $\boldsymbol\rho$. It relies on the definition of polyhedra as a finite number of half-spaces. For a state $\boldsymbol\rho = (\rho_{0},\rho_{1},...,\rho_{n},\rho_{n+1})$, a n+2 dimensional vector which describes the state of the link in the space $\mathcal{S} = [0,\rho_{j}]^{n+2}$, we present an algorithm that detects the mode of the state $\boldsymbol m$ (or $\boldsymbol s$) and provides a minimal H-representation of the polyhedron $P_{\boldsymbol m}$ (or $P_{\boldsymbol s}$). We first introduce the following indicator functions:
 
 \begin{equation}
 \begin{array}{l}
@@ -41,7 +41,7 @@ d_{i}(\boldsymbol\rho)=(1-\alpha_{i}(\boldsymbol\rho))(1-\beta_{i}(\boldsymbol\r
 \label{eq:indicators2}
 \end{equation}
 
-Hence, evaluating the indicator functions $\alpha_{i}(\boldsymbol\rho)$, $\beta_{i}(\boldsymbol\rho)$, and $\gamma_{i}(\boldsymbol\rho)$ for $i=0,...,n$ gives the mode $\boldsymbol m$ of state $\boldsymbol\rho$. Equations (\ref{eq:Hrepresentation}, \ref{eq:Hrepresentation2}, \ref{eq:Hrepresentation3}) give an H-representation of $P_{\boldsymbol s}$ (see appendix \ref{sec:polytope} for a formal definition of an H-representation).
+Hence, evaluating the indicator functions $\alpha_{i}(\boldsymbol\rho)$, $\beta_{i}(\boldsymbol\rho)$, and $\gamma_{i}(\boldsymbol\rho)$ for $i=0,...,n$ gives the mode $\boldsymbol m$ of state $\boldsymbol\rho$. Equations (\ref{eq:Hrepresentation}, \ref{eq:Hrepresentation2}, \ref{eq:Hrepresentation3}) give an H-representation of $P_{\boldsymbol s}$.
 
 
 \subsection{Kalman filter algorithm}

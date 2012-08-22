@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.15)  16 AUG 2012 11:07
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.15)  21 AUG 2012 10:38
 entering extended mode
 **C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paperACC/paperACC.tex
 (C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paperACC/paperACC.tex
@@ -391,34 +391,28 @@ Package pdftex.def Info: figures/modes.pdf used on input line 118.
 (pdftex.def)             Requested size: 227.62204pt x 50.46588pt.
  [4 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paperACC/figures/modes.pdf>])
 (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paperACC\EKF.tex [5] [6])
-(C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paperACC\Appendix.tex [7]
-Underfull \hbox (badness 2521) in paragraph at lines 75--76
-[]\OT1/ptm/m/n/10 By re-cur-rence, we have con-structed a \OT1/ptm/m/it/10 min-
-i-mal H-
- []
-
-<figures/threeLevelModes.pdf, id=112, 558.24962pt x 113.61044pt>
+(C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paperACC\Appendix.tex
+<figures/threeLevelModes.pdf, id=108, 558.24962pt x 113.61044pt>
 File: figures/threeLevelModes.pdf Graphic file (type pdf)
 
 <use figures/threeLevelModes.pdf>
-Package pdftex.def Info: figures/threeLevelModes.pdf used on input line 149.
+Package pdftex.def Info: figures/threeLevelModes.pdf used on input line 9.
 (pdftex.def)             Requested size: 227.62204pt x 46.324pt.
 
-Overfull \hbox (4.90529pt too wide) in paragraph at lines 217--227
+Overfull \hbox (4.90529pt too wide) in paragraph at lines 77--87
  [][] 
  []
 
-[8 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paperACC/figures/threeLevelModes.
-pdf>] <figures/godunovDiagram3.pdf, id=125, 573.94908pt x 632.41623pt>
+<figures/godunovDiagram3.pdf, id=109, 573.94908pt x 632.41623pt>
 File: figures/godunovDiagram3.pdf Graphic file (type pdf)
 
 <use figures/godunovDiagram3.pdf>
-Package pdftex.def Info: figures/godunovDiagram3.pdf used on input line 237.
+Package pdftex.def Info: figures/godunovDiagram3.pdf used on input line 96.
 (pdftex.def)             Requested size: 227.62204pt x 250.81009pt.
-)
-(C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paperACC\paperACC.bbl [9 <C:/Users/J
+ [7 <C:/Users/Jerome/Documents/PWA-CTM/PWA-CTM/paperACC/figures/threeLevelModes
+.pdf>])
+(C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paperACC\paperACC.bbl [8 <C:/Users/J
 erome/Documents/PWA-CTM/PWA-CTM/paperACC/figures/godunovDiagram3.pdf>]
-Missing character: There is no ü in font ptmr7t!
 Missing character: There is no ä in font ptmr7t!
 )
 
@@ -432,14 +426,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[10
+[9
 
 ] (C:\Users\Jerome\Documents\PWA-CTM\PWA-CTM\paperACC\paperACC.aux) ) 
 Here is how much of TeX's memory you used:
- 4086 strings out of 494045
- 62170 string characters out of 3145965
- 130519 words of memory out of 3000000
- 7313 multiletter control sequences out of 15000+200000
+ 4071 strings out of 494045
+ 61908 string characters out of 3145965
+ 130338 words of memory out of 3000000
+ 7298 multiletter control sequences out of 15000+200000
  44344 words of font info for 95 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  42i,18n,40p,1530b,287s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -469,9 +463,9 @@ y7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files 
 (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paperACC.pdf (10 pages, 372573 bytes).
+Output written on paperACC.pdf (9 pages, 363205 bytes).
 PDF statistics:
- 218 PDF objects out of 1000 (max. 8388607)
+ 215 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

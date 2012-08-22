@@ -14,7 +14,7 @@ ens_rho_j = ...
 %Simulate state noise
 % Noises
 percent_dev_meas = 0.05; % percentage of deviation of the measurements values
-percent_dev_state = 0.01; % percentage of deviation of the state values
+percent_dev_state = 0.1; % percentage of deviation of the state values
 
 counterEnkfSteps = 0;
 

@@ -44,7 +44,7 @@ switch algorithm
             vff, rhoJ, rhoC, useEfficientEnKF);
     case 'EnKFmode'
         rho = pCTMEnKFMode(rho_initial, nbEnsembles, nbTimeSteps, dt, route, ...
-            vff, rhoJ, rhoC, useEfficientEnKF, up, dn);
+            vff, rhoJ, rhoC, useEfficientEnKF);
     case 'EKFmode'
         rho = pCTMEKFMode(rho_initial, nbTimeSteps, dt, route, ...
             vff, rhoJ, rhoC);

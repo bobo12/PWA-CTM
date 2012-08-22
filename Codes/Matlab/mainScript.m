@@ -54,6 +54,8 @@ ROUTE_LINK_IDS = [186836 315387 1238 150305 233028 97544 47187 ...
                   129730 83134 151055 101004 278401 150937 150944 155637 ...
                   259138];%ids of model graph links
 
+ROUTE_LINK_IDS =  ROUTE_LINK_IDS(1:30);
+              
 % %I15 Bluetooth second deployment
 % ROUTE_LINK_IDS = [290983,272019,272009,...
 %     19940,12032,176773,215609,153957,153949,317341,108776,...
@@ -70,10 +72,12 @@ NID = 132;
 % Plot density?
 PLOT_FIG = true;
 
-ALGORITHM = 'EnKF';
+ALGORITHM = 'EKFmode';
 
 route = buildRoute(ROUTE_LINK_IDS, NID, START_TIME, END_TIME, ...
                     DIRECTION, RHO_MAX, START_HOUR, END_HOUR);
 
 [rho,vel] = pCTM(route, VFF, RHO_MAX, RHO_C, DT, NUM_ENSEMBLES, ...
                  USE_EFFICIENT_ENKF, PLOT_FIG, ALGORITHM);
+             
+route.nbCells
